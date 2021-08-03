@@ -2,18 +2,27 @@
 
  a- Recomendación de contenido:
 	
-	Este resulta uno de los usos más frecuentes de la inteligencia artificial, ya que lo vemos presente en cualquiera de las plataformas que visitemos, desde Youtube hasta Spotify, como también Netflix. La idea detrás es la de implementar técnicas y algoritmos de Inteligencia Artificial para que estos vayan aprendiendo del contenido que consume el usuario, haciendo posible recomendar contenido similar al que ya se está consumiendo y maximizar la cantidad de tiempo que la persona se encuentra consumiendo contenido en la plataforma, así como también ayudar al usuario a decidir que contenido consumir cuando éste se encuentra indeciso. A cada usuario le corresponde su respectivo conjunto de datos (compuesto por el contenido que éste ha consumido recientemente), es decir, cada cuenta tendrá su propio “sesgo” de contenido.
-	Se utilizan principalmente algoritmos de clasificación, entre los cuales encontramos k-vecinos más cercanos, algunos incluso implementan redes neuronales.
+  Este resulta uno de los usos más frecuentes de la inteligencia artificial, ya que lo vemos presente en cualquiera de las plataformas que visitemos, desde Youtube hasta
+Spotify, como también Netflix. La idea detrás es la de implementar técnicas y algoritmos de Inteligencia Artificial para que estos vayan aprendiendo del contenido que
+consume el usuario, haciendo posible recomendar contenido similar al que ya se está consumiendo y maximizar la cantidad de tiempo que la persona se encuentra consumiendo
+contenido en la plataforma, así como también ayudar al usuario a decidir que contenido consumir cuando éste se encuentra indeciso. A cada usuario le corresponde su
+respectivo conjunto de datos (compuesto por el contenido que éste ha consumido recientemente), es decir, cada cuenta tendrá su propio “sesgo” de contenido.
+Se utilizan principalmente algoritmos de clasificación, entre los cuales encontramos k-vecinos más cercanos, algunos incluso implementan redes neuronales.
 
 b- Conducción automática en vehículos inteligentes:
 	
-	En tiempos recientes, las compañías de automóviles han estado experimentando con inteligencia artificial para entrenar algoritmos que sean capaces de reconocer el terreno por el que se está conduciendo, mediante diversos sensores (cámaras, entre ellos), logrando que el vehículo reconozca a todo momento que debe hacer para seguir adelante y llegar a destino. Cabe destacar que la tecnología no se encuentra del todo desarrollada y los algoritmos no son infalibles, por lo que hoy en día se lo considera como conducción asistida, pero aún requiere la atención del conductor, debido a diversos accidentes registrados por fallos de cálculo de los algoritmos. Esta aplicación a causado un poco de controversia, y tiene mucho que ver con diversos dilemas morales que corresponden mas al campo de la ética y la filosofía que al de las Ciencias de la Computación, aún así, resulta una aplicación interesante de los algoritmos de Inteligencia Artificial y se encuentra en constante evolución
+  En tiempos recientes, las compañías de automóviles han estado experimentando con inteligencia artificial para entrenar algoritmos que sean capaces de reconocer el
+terreno por el que se está conduciendo, mediante diversos sensores (cámaras, entre ellos), logrando que el vehículo reconozca a todo momento que debe hacer para seguir
+adelante y llegar a destino. Cabe destacar que la tecnología no se encuentra del todo desarrollada y los algoritmos no son infalibles, por lo que hoy en día se lo
+considera como conducción asistida, pero aún requiere la atención del conductor, debido a diversos accidentes registrados por fallos de cálculo de los algoritmos. Esta
+aplicación a causado un poco de controversia, y tiene mucho que ver con diversos dilemas morales que corresponden mas al campo de la ética y la filosofía que al de las
+Ciencias de la Computación, aún así, resulta una aplicación interesante de los algoritmos de Inteligencia Artificial y se encuentra en constante evolución
 	
 
 
 2)¿Qué se entiende por inteligencia artificial?
 
-La inteligencia artificial (IA) es, en informática, la inteligencia expresada por máquinas, sus procesadores y sus softwares, que serían los análogos al cuerpo, el cerebro y la mente, respectivamente, a diferencia de la inteligencia natural demostrada por humanos y ciertos animales con cerebros complejos.[3]
+  La inteligencia artificial (IA) es, en informática, la inteligencia expresada por máquinas, sus procesadores y sus softwares, que serían los análogos al cuerpo, el cerebro y la mente, respectivamente, a diferencia de la inteligencia natural demostrada por humanos y ciertos animales con cerebros complejos.[3]
 La Inteligencia Artificial es la combinación de algoritmos planteados con el propósito de crear máquinas que presenten las mismas capacidades que el ser humano. Una tecnología que todavía nos resulta lejana y misteriosa, pero que desde hace unos años está presente en nuestro día a día a todas horas.[1]
 Los expertos en ciencias de la computación Stuart Russell y Peter Norvig diferencian varios tipos de inteligencia artificial:
   Sistemas que piensan como humanos:
@@ -29,9 +38,10 @@ La IA trata mucho más sobre el proceso y la capacidad de pensamiento superpoder
 
 3) ¿Qué se entiende por Inteligencia?
 
-La inteligencia se ha definido de muchas maneras, incluyendo: la capacidad de lógica, comprensión, autoconciencia, aprendizaje, conocimiento emocional, razonamiento, planificación, creatividad, pensamiento crítico y resolución de problemas. En términos más generales, se puede describir como la capacidad de percibir o inferir información, y retenerla como conocimiento para aplicarlo a comportamientos adaptativos dentro de un entorno o contexto.
+  La inteligencia se ha definido de muchas maneras, incluyendo: la capacidad de lógica, comprensión, autoconciencia, aprendizaje, conocimiento emocional, razonamiento, planificación, creatividad, pensamiento crítico y resolución de problemas. En términos más generales, se puede describir como la capacidad de percibir o inferir información, y retenerla como conocimiento para aplicarlo a comportamientos adaptativos dentro de un entorno o contexto.
+  
 Tipos de inteligencia:
-Howard Gardner, psicólogo norteamericano de la Universidad de Harvard, escribió en 1983 “Las estructuras de la mente”, un trabajo en el que consideraba el concepto de inteligencia como un potencial que cada ser humano posee en mayor o menor grado, planteando que ésta no podía ser medida por instrumentos normalizados en test de cociente de inteligencia (CI).24​ y ofreció criterios, no para medirla, sino para observarla y desarrollarla.
+  Howard Gardner, psicólogo norteamericano de la Universidad de Harvard, escribió en 1983 “Las estructuras de la mente”, un trabajo en el que consideraba el concepto de inteligencia como un potencial que cada ser humano posee en mayor o menor grado, planteando que ésta no podía ser medida por instrumentos normalizados en test de cociente de inteligencia (CI).24​ y ofreció criterios, no para medirla, sino para observarla y desarrollarla.
 Según Howard Gardner, creador de la teoría de las inteligencias múltiples, la inteligencia es la capacidad para resolver problemas o elaborar productos que puedan ser valorados en una determinada cultura. Propuso varios tipos de inteligencia, igualmente importantes:
 Inteligencia lingüística: capacidad de usar las palabras de manera adecuada. Caracteriza a escritores y poetas. Implica la utilización de ambos hemisferios cerebrales.
 Inteligencia lógica-matemática: capacidad que permite resolver problemas de lógica y matemática. Es fundamental en científicos y filósofos. Al utilizar este tipo de inteligencia se hace uso del hemisferio lógico. Era la predominante en la antigua concepción unitaria de "inteligencia".
