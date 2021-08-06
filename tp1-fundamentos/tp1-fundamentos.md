@@ -15,7 +15,7 @@
   debe actuar como humano, debe pensar y no actuar de manera arbitraria", a esto se lo define "Inteligencia Artificial Fuerte" y representa algo mucho mas profundo que un mero 
   comportamiento aparentemente inteligente, pretende que una computadora sea consciente, que entienda sus actos y que pueda reflexionar al respecto de los mismos.
 
-# Inteligencia Artifical Débil
+# Inteligencia Artificial Débil
 
   Resulta relativamente evidente que este tipo de Inteligencia Articial resulta la mas plausible, y de hecho, es la que mas evolución ha tenido a lo largo de los años,
   ya que los algoritmos no pretenden algo tan abstracto como la conciencia, si no, que solo pretenden replicar exitosamente tareas humanas que requieren de algún tipo de criterio.
@@ -45,3 +45,24 @@
   de hecho, tenemos aun un largo camino por recorrer, según los mismos autores del libro.
 
 # Inteligencia Artificial Fuerte
+
+En la sección anterior, se trataron únicamente aquellos algoritmos pensados para replicar comportamientos inteligentes, que suelen ser inherentemente humanos.
+Sin embargo, no buscabamos nada mas allá de una simple imitación de lo que es el verdadero razonamiento humano, es decir, no estamos hablando en términos de conciencia,
+creatividad o pensamiento.
+
+Una gran cantidad de filósofos han planteado el hecho de que si una máquina pasa el test de Turing, esta no dejaría de ser una máquina actuando de manera arbitraria,
+sin tener en cuenta el porque de las cosas que realiza a todo momento, o de los cálculos que realiza, en general, se puede decir que no tiene ningún tipo de autopercepción. No
+solo se critica el hecho de que no sean máquinas conscientes, si no que también se remontan a otras cuestiones faltantes como es el caso de los sentimientos, las emociones, la 
+intencionalidad, entre otras muchas cosas que nos definen como seres humanos.
+
+Todas estas críticas no tardaron en llegar a oidos del propio Alan Turing, pionero y abanderado en aquel entonces de la Inteligencia Artificial. Se podría haber esperado
+una respuesta de Turing argumentando que "una máquina podría ser pensante bajo X condiciones" o "Bajo determinado estandar, podríamos decir que son conscientes", pero la verdad
+es que fue aun mas astuto y respondió "En lugar de discutir continuamente sobre el mismo punto, se suele suponer amablemente que el el resto de personas piensa", haciendo
+alusión al hecho de que, constantemente, se le pide a la Inteligencia Artificial estándares de inteligencia iguales o mayores que a los propios seres humanos. 
+
+Las ideas del pensamiento en una computadora han sido fuertemente controversiales en la comunidad científica, y es algo de esperar, ¿Como puede ser que una computadora
+pueda generar algún tipo de idea o pensamiento? En caso de generarlo, ¿Sería realmente una idea o pensamiento?. Resultan preguntas que surgen con relativa facilidad,
+para resolver estas cuestiones, los autores se remontan a ejemplos concretos: "Cuando simulamos una suma por computadora, la consideramos real", "Cuando simulamos una
+partida de ajedrez, la consideramos una partida real". El asunto es el siguiente: No sabemos si es algo que podemos extrapolar a algo tan abstracto como es un pensamiento o
+una idea, mucho menos al mismísimo razonamiento humano, es a dia de hoy, que esto es una incertidumbre.
+
