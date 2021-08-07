@@ -134,8 +134,39 @@ Por ahora podríamos centrarnos en cuestiones un poco mas cercanas a nuestra rea
 el software de IA utilizado en todos, falla al mismo tiempo y produce una cantidad masiva de accidentes y por tanto, de muertes. Quizás estamos hablando del peor escenario, pero
 no resulta tan descabellado pensar en una falla masiva en los sistemas de navegación manejados por una IA.
 
-Transitand nuevamente los caminos de la ciencia ficción, tenemos el gran miedo impuesto por las películas y los libros: La singularidad. Una máquina con una inteligencia
+Transitando nuevamente los caminos de la ciencia ficción, tenemos el gran miedo impuesto por las películas y los libros: La singularidad. Una máquina con una inteligencia
 superior a la humana que evolucione para apoderarse del mundo, creando máquinas iguales o mas inteligentes cada vez, dejando la inteligencia humano muy por detrás y sin
 posibilidad de sobrevivir, bueno, en ese caso supongo que tendremos que ver "Terminator" para solucionar un problema de semejante severidad.
 
+# Notas personales
 
+La Inteligencia Artificial es realmente un tema apasionante, como estudiantes de las ciencias de la computación acostumbramos a basar nuestra lectura en aquello que resulta
+exacto y concreto, pero este resulta un tema transcendental, que abarca cuestiones mucho mas profundas como lo son preguntas del tipo ¿Que es la inteligencia? ¿Que es la conciencia?
+Son preguntas que en lo personal no surgían en mi hace mucho tiempo debido al enfoque pragmatico de los estudios en la facultad. Me sorprendió de sobremanera la mirada
+filosófica y multidisciplinar que brinda el libro, nombrando autores tan famosos como Descartes, célebres por tratar temas como el ser, la conciencia, la inteligencia, entre
+otras cosas, que en este caso nos conciernen. Así como tambien traer a la neurociencia para intentar explicar los diferentes dilemas que se van presentando, principalmente
+a la hora de plantear la IA Fuerte, haciendo relativamente plausible la aparición de semejante logro tecnológico; Porque si, resulta un poco utópico pensar en que en algún 
+momento pudiera ocurrir la singularidad, ese momento del que tantas historias ficticias se han contado, pero la realidad es que el libro plantea ciertos escenarios (como es 
+el caso de reemplazar parte por parte el cerebro humano para descubrir si el ser sigue siendo el mismo luego del proceso) que no se pueden esquivar fácilmente. 
+
+El enfoque es completamente teórico, pero no deja de ser una posibilidad el hecho de que la ciencia avance lo suficiente como para poder lograr experimentos como los descriptos en el libro, llevándome a una conclusión que antes de esta lectura consideraba imposible, si se descifra el funcionamiento concreto de la mente, todos estos escenarios podrían dejar de ser ficticios.
+
+Otro aspecto que me pareció relevante con respecto a la discusión de la IA Fuerte, es la diferenciación entre el cuerpo (cerebro) y la mente. De hecho, es la
+primera vez que encuentro que esto se trate de maneras científicas, sin acudir a supuestos metafísicos y utilizando teorías y planteos concretos a todo momento, y fue quizás
+lo que mas profundo me llegó: ¿Que viene antes? ¿La mente o el cerebro? ¿Es la organización del cerebro en un momento concreto la que genera ideas? ¿Es el cerebro la única
+parte involucrada en proceso de pensar del ser humano?. Todas preguntas que quedaron sin resolver, y que espero algún dia, la ciencia sea capaz de responderlas.
+
+Considero, por supuesto, que en cuanto a cuestiones prácticas, la IA Débil resulta excelente y que no se le debe pedir mas de lo que hace. En el libro se gira mucho en torno
+a la idea de que en este rubro solo nos interesa que la máquina "actue racionalmente", no debemos pedir "conciencia" si no que debemos pedir eficiencia para lograr resolver
+problemas que están fuera de nuestro alcance por motivos evidentes, y es que las máquinas puede procesar millones de operaciones por segundo, cuando los humanos estamos
+limitados en dichos números. Es por eso, que en lo personal, considero que la "Inteligencia Artificial Débil" tiene una finalidad mucho mas concisa y resulta de suma utilidad
+en la práctica, pero no es la inteligencia artificial que cualquier persona puede llegar a imaginar. La persona promedio, espera de la Inteligencia Artificial algo como lo que
+se plantea en la IA Fuerte, siendo esta última la que persigue una máquina con inteligencia humana y no solo algorítmica
+
+Personalmente creo que la IA Fuerte es factible, en tanto y en cuanto otras ciencias avancen en lo suyo, hoy en dia tenemos una serie de trabas de muchos tipos: No conocemos
+prácticamente del funcionamiento de nuestra mente (conocemos unos pocos mecanismos del cerebro), no tenemos la potencia para simular sistemas de semejante complejidad y
+tampoco tenemos la electrónica para experimentar en sujetos reales. En el caso de conocer a fondo los mecanismos mediante los cuales se genera nuestra conciencia, pensamientos
+e ideas, deberíamos ser perfectamente capaces de replicarlo en software por ejemplo, pudiendo replicar uno a uno el sistema de la mente, creando así un ser consciente
+dentro de una computadora o programa. Ahora bien, ¿Como sabríamos si es consciente?, es una buena pregunta, pero nos estaríamos apresurando, ¿Sabemos si alguien mas, aparte de
+nosotros mismos, es consciente? ¿Por que pretenderíamos pedirle mas a una computadora de lo que le pedimos a nuestros pares humanos?. Será el dia en que sepamos empíricamente
+lo que significa ser consciente, si es que algún dia sucede, el día en el cual podremos juzgar a las computadoras, y porque no, a las personas.
