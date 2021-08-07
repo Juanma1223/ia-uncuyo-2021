@@ -64,5 +64,24 @@ Las ideas del pensamiento en una computadora han sido fuertemente controversiale
 pueda generar algún tipo de idea o pensamiento? En caso de generarlo, ¿Sería realmente una idea o pensamiento?. Resultan preguntas que surgen con relativa facilidad,
 para resolver estas cuestiones, los autores se remontan a ejemplos concretos: "Cuando simulamos una suma por computadora, la consideramos real", "Cuando simulamos una
 partida de ajedrez, la consideramos una partida real". El asunto es el siguiente: No sabemos si es algo que podemos extrapolar a algo tan abstracto como es un pensamiento o
-una idea, mucho menos al mismísimo razonamiento humano, es a dia de hoy, que esto es una incertidumbre.
+una idea, mucho menos al mismísimo razonamiento humano.
 
+A lo largo de la historia, diversos filósofos han planteado un problema que es aun mas profundo, ¿Es la mente y el cuerpo uno mismo? Haciendo alusión al hecho de que realmente
+no estamos seguros de que es el estado físico del cerebro lo que impone un estado mental en el ser humano. Puede que esta pregunta parezca escaparse hacia los rubros de la
+metafísica, y es porque, en efecto, así es. Encontramos dos corrientes de pensamiento entre los filósofos: Los _dualistas_, que piensan que los estados mentales (refiriéndose 
+al hecho de que los seres humanos tenemos emociones, deseos, estados de ánimo, etc) se encuentran en un "plano" diferente al físico, por otro lado, tenemos a los "fisicalistas",
+que creen en el hecho de que los estados mentales de una persona vienen definidos por el estado de su cerebro, es decir, de la disposicion interna de este.
+Cabe destacar que esta es la corriente que ha predominado a lo largo de los años y que, para la materia que nos concierne, resulta la opción compatible, ya que en caso de que
+los estados mentales de una persona, como sus pensamientos o sus ideas, vengan definidos por los estados internos de sus cerebros en un momento exacto, nos lleva a pensar
+en la posibilidad de la creación de un "cerebro artificial", pues no hay nada metafísico e intocable en el proceso del pensamiento humano y por tanto, es algo que en caso
+de conocer a detalle su funcionamiento, sería replicable de manera artificial. Estaríamos, posiblemente, hablando de hacer realidad el sueño de crear Inteligencia Artificial 
+Fuerte.
+
+Los autores del libro plantean varios escenarios hipotéticos para cuestionar la posibilidad de la Inteligencia Artificial fuerte, pero hay uno que encontré principalmente
+interesante: "El experimento del reemplazo de cerebro". Se basa en la idea de que hemos llegado a un entendimiento absoluto del funcionamiento del cerebro y de las partes que
+lo componen. Es por esto, que se tomaría un individuo y, mediante una técnica de cirugía milagrosa, se reemplazarían
+paulatinamente cada una de las partes orgánicas por partes artificiales, las cuales funcionan exactamente igual. Entonces surgen la preguntas: ¿El indiviudo responderá igual
+a los estímulos externos? ¿El individuo podrá seguir siendo consciente? La realidad es que estamos hablando de un experimento hipotético, y por tanto no podemos responder
+a ciencia cierta. En caso de ser afirmativo, significa que no es la mente la que precede al cerebro, si no todo lo contrario, es la existencia de un cerebro o sistema
+nervioso central el que está generando los diversos estados mentales, y que además, es un sistema que resulta replicable de manera artificial. Por ahora, solo nos queda
+especular al respecto.
