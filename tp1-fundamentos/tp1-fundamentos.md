@@ -85,3 +85,57 @@ a los estímulos externos? ¿El individuo podrá seguir siendo consciente? La re
 a ciencia cierta. En caso de ser afirmativo, significa que no es la mente la que precede al cerebro, si no todo lo contrario, es la existencia de un cerebro o sistema
 nervioso central el que está generando los diversos estados mentales, y que además, es un sistema que resulta replicable de manera artificial. Por ahora, solo nos queda
 especular al respecto.
+
+# Ética en la Inteligencia Artificial
+
+Los autores plantean 6 grandes problemas éticos:
+
+1) _La gente podría perder su trabajo por culpa de la automatización_
+
+Este resulta uno de los temas mas típicos en las conversaciones cotidianas, "las máquinas van a reemplazar a los seres humanos y nos van a dejar sin trabajo" es una frase que,
+de alguna forma u otra hemos escuchado alguna vez, la realidad es que el libro argumenta en contra de esta creencia popular, afirmando que en cuanto al balance de trabajo
+generado y trabajos reemplazados, resulta positivo para los los puestos generados. Esto se da debido a que gran parte de las herramientas de Inteligencia Artificial están
+dedicadas a dar soporte al ser humano y no al reemplazo completo del mismo.
+
+2) _La gente tendrá demasiado (o muy poco) tiempo de ocio
+
+En este caso, sucedió lo contrario a lo que se esperaba. La preocupación era que la gente estuviera demasiado ociosa mientras mayor fuera el avance de la Inteligencia Artificial,
+sin embargo, sucedió lo contrario. Los sistemas automatizados por IA resultan en una aceleracion de todos los procesos productivos de las empresas, lo que nos lleva a un ritmo
+mas acelerado de trabajo y por tanto, mayor carga horaria, de hecho, todos los datos recopilados en los últimos años apunta a un aumento de la carga horaria y de una conexión
+permanente al trabajo.
+
+3) _Las personas podrían perder su individualidad
+
+La realidad es que hoy en dia, gran parte de los procesos se encuentran automatizados con implementación, en mayor o menor medida, de las técnicas de Inteligencia Artificial.
+Nos encontramos inmersos en una inmensa colectividad, que llamamos internet, cuyos datos son tratados principalmente por grandes empresas dedicadas a mantenernos mirando
+exactamente lo que ellos quieren para masificarnos y vendernmos sus productos. Esto ya está sucediendo, y está sucediendo en parte, gracias a la implementación de la IA para
+tener control sobre colosales cantidades de datos y por tanto, sobre colosales cantidades de gente. Aun así, el hecho es que no es la IA en sí la que produce esto, si no la
+avaricia de aquellas empresas con tales fines, esto se profundiza en el siguiente punto
+
+4) _Los sistemas de IA podrían ser utilizados de maneras maliciosas
+
+Esto es algo no solo del desarrollo de la IA, si no que es algo inherente a la ciencia. Todos los inventos y descubrimientos en mayor o menor medida pueden ser utilizados
+para fines cuestionables, sin ir mas lejos, la fórmula de Einstein, corolario de su teoría de la relatividad permitió a gobiernos (con equipos de científicos) hacer uso
+de las bombas nucleares como armas de destruccion masivas. Es algo con lo que debemos vivir, siempre hubo, hay y habrá gente malintencionada, pero eso no debe ser motivo
+suficiente para evitar los avances científicos. Dicho esto, siempre se puede avanzar con cierta cautela en la ciencia para que el conocimiento no caiga en manos equivocadas
+
+5) _El uso de la IA puede resultar en la pérdida de responsabilidad_
+
+Para tratar esta cuestión, el libro utiliza el ejemplo de un sistema experto en Medicina: Si un médico consulta un sistema experto, aplica el tratamiento en un paciente
+y resulta en una total catástrofe ¿De quien es la culpa? La realidad es que siempre se intenta evitar la utilización de la IA de forma tan tajante, y generalmente este tipo
+de decisiones se relegan a un profesional, en este caso, de la salud. El dia en el cual los sistemas expertos se vuelvan superiores a los profesionales, por supuesto que
+tendrán que tratarse todos los remanentes legales, comenzando por legislar las responsabilidades de los proveedores de los sistemas expertos.
+
+6) _La implementación exitosa de la IA resultará en el fin de la raza humana_
+
+Vamos mas despacio, en la práctica casi cualquier invento podría generar daños colosales en las manos equivocadas. El problema es que ahora, las manos equivocadas podría 
+ser la misma tecnología, esto recuerda un poco a la ciencia ficción, pero ¿Que sucede si la IA Fuerte se hace realidad? Bueno, solo el tiempo lo dirá.
+Por ahora podríamos centrarnos en cuestiones un poco mas cercanas a nuestra realidad actual, supongamos que los autos con piloto automático son un estandar mundial y que además
+el software de IA utilizado en todos, falla al mismo tiempo y produce una cantidad masiva de accidentes y por tanto, de muertes. Quizás estamos hablando del peor escenario, pero
+no resulta tan descabellado pensar en una falla masiva en los sistemas de navegación manejados por una IA.
+
+Transitand nuevamente los caminos de la ciencia ficción, tenemos el gran miedo impuesto por las películas y los libros: La singularidad. Una máquina con una inteligencia
+superior a la humana que evolucione para apoderarse del mundo, creando máquinas iguales o mas inteligentes cada vez, dejando la inteligencia humano muy por detrás y sin
+posibilidad de sobrevivir, bueno, en ese caso supongo que tendremos que ver "Terminator" para solucionar un problema de semejante severidad.
+
+
