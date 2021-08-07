@@ -1,7 +1,6 @@
 # Introducción
 
   Hoy en dia es una realidad, los algoritmos de Inteligencia Artificial nos rodean a todo momento. Resulta un mundo sumamente interesante y genera una gran curiosidad, el asunto
-  
   es que no podemos adentrarnos en el mundo de la Inteligencia Articial sin plantearnos una serie de cuestiones mucho mas elementales, inherentes al mismo ser humano:
   
   ¿Que significa inteligencia? ¿Que hace a un ser humano inteligente? ¿Es un perro inteligente? ¿Puede una máquina ser inteligente?.
