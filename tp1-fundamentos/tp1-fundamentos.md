@@ -173,4 +173,4 @@ lo que significa ser consciente, si es que algún día sucede, el día en el cua
 
 # Mapa mental:
 
-https://drive.google.com/file/d/1JoP7cJG--ymTJFjD9j5Hdc7ye1JPEyhc/view?usp=drivesdk
+[Click para abrir el mapa mental](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp1-fundamentos/AMIA%203%20Capitulo%2026-Map%201.png)
