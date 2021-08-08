@@ -170,3 +170,7 @@ e ideas, deberíamos ser perfectamente capaces de replicarlo en software por eje
 dentro de una computadora o programa. Ahora bien, ¿Como sabríamos si es consciente?, es una buena pregunta, pero nos estaríamos apresurando, ¿Sabemos si alguien mas, aparte de
 nosotros mismos, es consciente? ¿Por que pretenderíamos pedirle mas a una computadora de lo que le pedimos a nuestros pares humanos?. Será el día en que sepamos empíricamente
 lo que significa ser consciente, si es que algún día sucede, el día en el cual podremos juzgar a las computadoras, y porque no, a las personas.
+
+# Mapa mental:
+
+https://drive.google.com/file/d/1JoP7cJG--ymTJFjD9j5Hdc7ye1JPEyhc/view?usp=drivesdk
