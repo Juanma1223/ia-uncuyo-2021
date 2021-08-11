@@ -2,8 +2,8 @@
 
  a- Recomendación de contenido:
 	
-	Este resulta uno de los usos más frecuentes de la inteligencia artificial, ya que lo vemos presente en cualquiera de las plataformas que visitemos, desde Youtube hasta Spotify, como también Netflix. La idea detrás es la de implementar técnicas y algoritmos de Inteligencia Artificial para que estos vayan aprendiendo del contenido que consume el usuario, haciendo posible recomendar contenido similar al que ya se está consumiendo y maximizar la cantidad de tiempo que la persona se encuentra consumiendo contenido en la plataforma, así como también ayudar al usuario a decidir que contenido consumir cuando éste se encuentra indeciso. A cada usuario le corresponde su respectivo conjunto de datos (compuesto por el contenido que éste ha consumido recientemente), es decir, cada cuenta tendrá su propio “sesgo” de contenido.
-	Se utilizan principalmente algoritmos de clasificación, entre los cuales encontramos k-vecinos más cercanos, algunos incluso implementan redes neuronales.
+Este resulta uno de los usos más frecuentes de la inteligencia artificial, ya que lo vemos presente en cualquiera de las plataformas\n que visitemos, desde Youtube hasta Spotify, como también Netflix. La idea detrás es la de implementar técnicas y \n algoritmos de Inteligencia Artificial para que estos vayan aprendiendo del contenido que consume el usuario, haciendo posible recomendar contenido similar al que ya se está consumiendo y maximizar la cantidad de tiempo que la persona se encuentra consumiendo contenido en la plataforma, así como también ayudar al usuario a decidir que contenido consumir cuando éste se encuentra indeciso. A cada usuario le corresponde su respectivo conjunto de datos (compuesto por el contenido que éste ha consumido recientemente), es decir, cada cuenta tendrá su propio “sesgo” de contenido.
+Se utilizan principalmente algoritmos de clasificación, entre los cuales encontramos k-vecinos más cercanos, algunos incluso implementan redes neuronales.
 
 b- Conducción automática en vehículos inteligentes:
 	
