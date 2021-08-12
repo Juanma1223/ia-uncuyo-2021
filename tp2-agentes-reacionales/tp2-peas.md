@@ -1,4 +1,4 @@
-| Syntax      | Description |
-| ----------- | ----------- |
+| Syntax      | Performance | Environment | Actions | Sensors |
+| ----------- | ----------- | ----------- | ------- | ------- | 
 | Header      | Title       |
 | Paragraph   | Text        |
