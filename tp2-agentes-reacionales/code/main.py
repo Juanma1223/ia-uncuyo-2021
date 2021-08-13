@@ -1,8 +1,8 @@
 from environment import Environment
 from agent import Agent
 
-env = Environment(4,4)
-agent = Agent(env)
+env = Environment(4,4,0.1)
+agent = Agent(env,1000)
 
 print("Entorno al inicio")
 env.print_environment()

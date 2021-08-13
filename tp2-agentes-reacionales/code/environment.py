@@ -7,9 +7,14 @@ class Environment:
     __sizeY = 0
 
     #Inicializamos el entorno con suciedad aleatoria y fijamos el tamaño
-    def __init__(self,sizeX,sizeY):
-        #1 es sucio y 0 es limpio
-        self.floor = [ [ randint(0,1) for _ in range(sizeX) ] for _ in range(sizeY) ]
+    def __init__(self,sizeX,sizeY,dirt_rate):
+        #Inicializacion de la lista por comprension
+        self.floor = [ [ 0 for _ in range(sizeX) ] for _ in range(sizeY) ]
+        for i in range(0,sizeX):
+            for j in range(0,sizeY):
+                is_dirty = randint(1,10)
+                if(is_dirty <= dirt_rate*10):
+                    self.floor[i][j] = 1
         self.__sizeX = sizeX
         self.__sizeY = sizeY
 
@@ -47,5 +52,4 @@ class Environment:
             for j in range(0, self.__sizeY):
                 if(self.floor[i][j] == 1):
                     counter += 1
-        return "Porcentaje de 1s en el entorno:" + str(counter / (self.__sizeX*self.__sizeY))
-    
+        return "Porcentaje de suciedad en el entorno: " + str(counter / (self.__sizeX*self.__sizeY) * 100) + "%"

@@ -4,12 +4,12 @@ class Agent:
     currLife = 0
     totalLife = 0
     currCleaned = 0
-    def __init__(self,env):
+    def __init__(self,env,totalLife):
         #Inicializamos el entorno donde se encuentra el agente
         self.__env = env
         #Inicializamos la cantidad de acciones en 1000
-        self.currLife = 1000
-        self.totalLife = 1000
+        self.currLife = totalLife
+        self.totalLife = totalLife
         #Inicializamos la posicion de manera aleatoria
         self.__currX = randint(0, env.get_sizeX())
         self.__currY = randint(0, env.get_sizeY())
@@ -55,7 +55,7 @@ class Agent:
         print("",end="") # no hace nada
 
     def get_performance(self):
-        return "Agent performance: " + str(self.currCleaned)
+        return "Cuadriculas limpiadas: " + str(self.currCleaned)
     
     def think(self): # implementa las acciones a seguir por el agente
         #Sensa el ambiente
