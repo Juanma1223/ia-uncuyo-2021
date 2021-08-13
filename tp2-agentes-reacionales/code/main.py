@@ -1,7 +1,12 @@
 from environment import Environment
 from agent import Agent
 
-env = Environment(4,4,0.1)
+#x = int(input("Tamaño:"))
+x = 128
+print("x:"+ str(x))
+rate = float(input("Ratio suciedad:"))
+
+env = Environment(x,x,rate)
 agent = Agent(env,1000)
 
 print("Entorno al inicio")
