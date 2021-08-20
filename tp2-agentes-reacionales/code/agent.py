@@ -4,6 +4,7 @@ class Agent:
     currLife = 0
     totalLife = 0
     currCleaned = 0
+
     def __init__(self,env,totalLife):
         #Inicializamos el entorno donde se encuentra el agente
         self.__env = env
