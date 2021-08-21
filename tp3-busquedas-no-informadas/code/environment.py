@@ -1,4 +1,5 @@
 from random import randint
+from tree import Node
 
 #Clase que representa el entorno en el que se mueve el agente buscador
 class Environment:
@@ -51,5 +52,22 @@ class Environment:
     def print_environment(self):
         tam = len(self.floor)
         for i in range(0, tam):
-            print(self.floor[i])
+            print(*self.floor[i])
             print("")
+
+    #Imprimimos de manera mas estética el entorno, se ve mejor en terminales nativas de los SOs
+    def print_solution(self,last_node):
+        #Limpiamos el trablero
+        for i in range(0,self.sizeX):
+            for j in range(0,self.sizeY):
+                if(self.floor[i][j] == 2):
+                    self.floor[i][j] = '\u041E'
+                elif(self.floor[i][j] == 1):
+                    self.floor[i][j] = '\u2B1C'
+                else:
+                    self.floor[i][j] = " "
+        #Obtenemos el camino solucion
+        solution = last_node.pathToRoot()
+        for pos in solution:
+            self.floor[pos[0]][pos[1]] = '\u0488'
+        self.print_environment()
