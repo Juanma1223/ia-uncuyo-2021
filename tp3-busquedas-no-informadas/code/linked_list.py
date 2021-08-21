@@ -36,12 +36,21 @@ class LinkedList:
 
     def pop(self):
         retVal = self.head.value
+        if(self.last == self.head):
+            self.head = None
+            self.head = None
+            return retVal
         self.head = self.head.nextNode
         self.head.prevNode = None
         return retVal
 
     def dequeue(self):
         retVal = self.last.value
+        #Caso en el cual solo hay un nodo
+        if(self.last == self.head):
+            self.head = None
+            self.head = None
+            return retVal
         self.last = self.last.prevNode
         self.last.nextNode = None
         return retVal

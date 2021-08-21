@@ -24,6 +24,7 @@ class Environment:
         self.objY = randint(0,sizeY-1)
         #Marcamos el objetivo en el suelo
         self.floor[self.objX][self.objY] = 2
+        print("Objetivo:",self.objX," ",self.objY)
         
 
     def get_sizeX(self):
