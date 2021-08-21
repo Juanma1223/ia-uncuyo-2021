@@ -2,7 +2,7 @@ class Graph:
     adjMatrix = []
 
     #El atributo full representa la inicialización de un grafo completo
-    def __init__(self,nodeQuantity, full=False):
+    def __init__(self, nodeQuantity, full=False):
         #Inicialización de la matriz de adyacencia
         if(full == False):
             self.adjMatrix = [[0 for _ in range(0,nodeQuantity)] for _ in range(0,nodeQuantity)]
