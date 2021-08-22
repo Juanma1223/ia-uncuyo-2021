@@ -81,6 +81,9 @@ class Agent:
                     newNode =  Node(self.right(self.posx,self.posy),currNode)
                     self.env.floor[self.posx+1][self.posy] = 4
                     q.add(newNode)
+        print("")
+        print("")
+        self.env.print_environment()
         self.env.print_solution(initX,initY,solution)
         return solution.pathToRoot()
 
