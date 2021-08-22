@@ -23,7 +23,7 @@ class Environment:
         self.sizeY = sizeY
         self.objX = randint(0,sizeX-1)
         self.objY = randint(0,sizeY-1)
-        #Marcamos el objetivo en el suelo
+        #Marcamos el objetivo en el suelo con un 2
         self.floor[self.objX][self.objY] = 2
         
 
@@ -56,18 +56,19 @@ class Environment:
             print("")
 
     #Imprimimos de manera mas estética el entorno, se ve mejor en terminales nativas de los SOs
-    def print_solution(self,last_node):
+    def print_solution(self,agentX,agentY,last_node):
         #Limpiamos el trablero
         for i in range(0,self.sizeX):
             for j in range(0,self.sizeY):
                 if(self.floor[i][j] == 2):
-                    self.floor[i][j] = '\u041E'
+                    self.floor[i][j] = '\u003F'
                 elif(self.floor[i][j] == 1):
-                    self.floor[i][j] = '\u2B1C'
+                    self.floor[i][j] = '\u0048'
                 else:
                     self.floor[i][j] = " "
         #Obtenemos el camino solucion
         solution = last_node.pathToRoot()
         for pos in solution:
-            self.floor[pos[0]][pos[1]] = '\u0488'
+            self.floor[pos[0]][pos[1]] = '\u006F'
+        self.floor[agentX][agentY] = '\u0040'
         self.print_environment()

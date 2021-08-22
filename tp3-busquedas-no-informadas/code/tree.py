@@ -1,3 +1,4 @@
+#Estructura utilizada para formar el arbol de expansión de los caminos
 class Node:
     parent = None
     children = []
@@ -12,7 +13,7 @@ class Node:
         self.children.append(newNode)
         newNode.parent = self
 
-#Devuelve el camino hasta la raiz a partir de un nodo
+    #Devuelve el camino hasta la raiz a partir de un nodo
     def pathToRoot(self):
         currNode = self
         path = []
