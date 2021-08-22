@@ -83,7 +83,6 @@ class Agent:
                     q.add(newNode)
         print("")
         print("")
-        self.env.print_environment()
         self.env.print_solution(initX,initY,solution)
         return solution.pathToRoot()
 
