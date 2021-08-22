@@ -13,9 +13,12 @@ class Agent:
         self.posy = posy
         self.env = env
 
+#Algoritmo de búsqueda a lo ancho, utilizo 0 para posición blanca, 4 para posicion gris y 3 para posición negra
     def breadth_search(self):
-        found = False
-        #Lista enlazada que funcionará como queue para lugares por visitar
+        #Guardamos las posiciones iniciales para luego imprimirlas
+        initX = self.posx
+        initY = self.posy
+        #Lista enlazada que funcionará como queue para nodos por visitar
         q = LinkedList()
         #Manejamos tuplas para poder almacenar x e y
         newNode = Node((self.posx,self.posy))
@@ -25,7 +28,6 @@ class Agent:
         solution = None
         while q.head != None:  
             currNode = q.dequeue()
-            #self.env.print_environment()
             self.posx = currNode.value[0]
             self.posy = currNode.value[1]
             #Verificamos si alcanzamos el objetivo
@@ -33,7 +35,7 @@ class Agent:
                 solution = currNode
                 break
 
-            #Marcamos esta posición como explorada o negra
+            #Marcamos esta posición como explorada o negra con un 3
             self.env.floor[self.posx][self.posy] = 3
             #Almacenamos nodos de un arbol, formando un arbol de expansion
 
@@ -46,7 +48,7 @@ class Agent:
                         break
                     #Agregamos un nodo al arbol, con nodo padre el nodo actualmente explorado
                     newNode = Node(self.up(self.posx,self.posy),currNode)
-                    #Lo marcamos como ya encolado o gris
+                    #Lo marcamos como ya encolado o gris con un 4
                     self.env.floor[self.posx][self.posy+1] = 4
                     q.add(newNode)
 
@@ -79,7 +81,7 @@ class Agent:
                     newNode =  Node(self.right(self.posx,self.posy),currNode)
                     self.env.floor[self.posx+1][self.posy] = 4
                     q.add(newNode)
-        self.env.print_solution(solution)
+        self.env.print_solution(initX,initY,solution)
         return solution.pathToRoot()
 
 

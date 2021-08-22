@@ -1,3 +1,4 @@
+#Estructura utilizada para formar el arbol de expansión de los caminos
 class Node:
     parent = None
     children = []
