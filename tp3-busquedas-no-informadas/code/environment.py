@@ -50,6 +50,8 @@ class Environment:
             print("",end="")
     
     def print_environment(self):
+        print("Entorno generado:")
+        print("1=obstaculo, 2=objetivo")
         tam = len(self.floor)
         for i in range(0, tam):
             print(*self.floor[i])
@@ -57,6 +59,7 @@ class Environment:
 
     #Imprimimos de manera mas estética el entorno, se ve mejor en terminales nativas de los SOs
     def print_solution(self,agentX,agentY,last_node):
+        tam = len(self.floor)
         #Limpiamos el trablero
         for i in range(0,self.sizeX):
             for j in range(0,self.sizeY):
@@ -71,7 +74,11 @@ class Environment:
         for pos in solution:
             self.floor[pos[0]][pos[1]] = '\u006F'
         self.floor[agentX][agentY] = '\u0040'
-        self.print_environment()
+        print("Solucion:")
+        print("@=Agente, o=Camino, H=Obstaculo, ?=Objetivo")
+        for i in range(0, tam):
+            print(*self.floor[i])
+            print("")
 
     #Contamos la cantidad de estados recorridos
     def totalStates(self):

@@ -18,6 +18,8 @@ class Agent:
 
     #Algoritmo de búsqueda a lo ancho, utilizo 0 para posición blanca, 4 para posicion gris y 3 para posición negra
     def breadthSearch(self,showSolution = False):
+        if(showSolution == True):
+            self.env.print_environment()
         #Guardamos las posiciones iniciales para luego imprimirlas
         initX = self.posx
         initY = self.posy
@@ -94,6 +96,8 @@ class Agent:
 
     #Algoritmo de búsqueda en profundidad limitada, l es la profundidad máxima
     def depthSearch(self,l,showSolution = False):
+        if(showSolution == True):
+            self.env.print_environment()
         initX = self.posx
         initY = self.posy
         #Creamos el nodo raiz del árbol de expansión
@@ -162,6 +166,8 @@ class Agent:
 
     #Algoritmo de búsqueda uniforme, misma implementación que bfs pero haciendo uso de una cola con prioridad 
     def uniformSearch(self,showSolution = False):
+        if(showSolution == True):
+            self.env.print_environment()
         #Guardamos las posiciones iniciales para luego imprimirlas
         initX = self.posx
         initY = self.posy
