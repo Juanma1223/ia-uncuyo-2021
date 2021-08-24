@@ -13,8 +13,8 @@ class Agent:
         self.posy = posy
         self.env = env
 
-#Algoritmo de búsqueda a lo ancho, utilizo 0 para posición blanca, 4 para posicion gris y 3 para posición negra
-    def breadth_search(self):
+    #Algoritmo de búsqueda a lo ancho, utilizo 0 para posición blanca, 4 para posicion gris y 3 para posición negra
+    def breadthSearch(self):
         #Guardamos las posiciones iniciales para luego imprimirlas
         initX = self.posx
         initY = self.posy
@@ -42,60 +42,205 @@ class Agent:
             #Encolamos para explorar la posicion superior
             if(self.up(self.posx,self.posy) != False):
                 #Verificamos que no sea un nodo ya encolado
-                if(self.env.floor[self.posx][self.posy+1] != 4):
-                    if(self.env.floor[self.posx][self.posy+1] == 2):
-                        solution = currNode
-                        break
-                    #Agregamos un nodo al arbol, con nodo padre el nodo actualmente explorado
-                    newNode = Node(self.up(self.posx,self.posy),currNode)
-                    #Lo marcamos como ya encolado o gris con un 4
-                    self.env.floor[self.posx][self.posy+1] = 4
-                    q.add(newNode)
+                if(self.env.floor[self.posx][self.posy+1] == 2):
+                    solution = currNode
+                    break
+                #Agregamos un nodo al arbol, con nodo padre el nodo actualmente explorado
+                newNode = Node(self.up(self.posx,self.posy),currNode)
+                #Lo marcamos como ya encolado o gris con un 4
+                self.env.floor[self.posx][self.posy+1] = 4
+                q.add(newNode)
 
             #Encolamos para explorar la posicion inferior
             if(self.down(self.posx,self.posy) != False):
-                if(self.env.floor[self.posx][self.posy-1] != 4):
-                    if(self.env.floor[self.posx][self.posy-1] == 2):
-                        solution = currNode
-                        break
-                    newNode = Node(self.down(self.posx,self.posy),currNode)
-                    self.env.floor[self.posx][self.posy-1] = 4
-                    q.add(newNode)
+                if(self.env.floor[self.posx][self.posy-1] == 2):
+                    solution = currNode
+                    break
+                newNode = Node(self.down(self.posx,self.posy),currNode)
+                self.env.floor[self.posx][self.posy-1] = 4
+                q.add(newNode)
 
             #Encolamos para explorar la posicion de la izquierda
             if(self.left(self.posx,self.posy) != False):
-                if(self.env.floor[self.posx-1][self.posy] != 4):
-                    if(self.env.floor[self.posx-1][self.posy] == 2):
-                        solution = currNode
-                        break
-                    newNode = Node(self.left(self.posx,self.posy),currNode)
-                    self.env.floor[self.posx-1][self.posy] = 4
-                    q.add(newNode)
+                if(self.env.floor[self.posx-1][self.posy] == 2):
+                    solution = currNode
+                    break
+                newNode = Node(self.left(self.posx,self.posy),currNode)
+                self.env.floor[self.posx-1][self.posy] = 4
+                q.add(newNode)
 
             #Encolamos para explorar la posicion de la derecha
             if(self.right(self.posx,self.posy) != False):
-                if(self.env.floor[self.posx+1][self.posy] != 4):
-                    if(self.env.floor[self.posx+1][self.posy] == 2):
-                        solution = currNode
-                        break
-                    newNode =  Node(self.right(self.posx,self.posy),currNode)
-                    self.env.floor[self.posx+1][self.posy] = 4
-                    q.add(newNode)
+                if(self.env.floor[self.posx+1][self.posy] == 2):
+                    solution = currNode
+                    break
+                newNode =  Node(self.right(self.posx,self.posy),currNode)
+                self.env.floor[self.posx+1][self.posy] = 4
+                q.add(newNode)
         print("")
         print("")
+        #El tercer elemento de la tupla de coordenadas es el peso de la arista
+        #para este algoritmo es irrelevante
         self.env.print_solution(initX,initY,solution)
         return solution.pathToRoot()
 
+    #Algoritmo de búsqueda en profundidad limitada, l es la profundidad máxima
+    def depthSearch(self,l):
+        initX = self.posx
+        initY = self.posy
+        #Creamos el nodo raiz del árbol de expansión
+        root = Node((initX,initY))
+        solution = self.depthSearchR(l,0,root)
+        if(solution != False):
+            self.env.print_solution(initX,initY,solution.parent)
+            return solution.pathToRoot()
+        else:
+            return False
 
-#Conjunto de acciones del agente
+    #l representa la máxima  profundidad, currL representa la profundidad del nodo actual
+    #currNode representa el nodo que se está explorando actualmente
+    def depthSearchR(self,l,currL,currNode):
+        #Se alcanza la profundidad máxima
+        if(currL >= l):
+            return False
+        #Revisamos si se alcanzó el objetivo
+        if(self.env.floor[currNode.value[0]][currNode.value[1]] == 2):
+            return currNode
+        else:
+            solution = False
+            #Actualizamos el estado
+            #self.posx = currNode.value[0]
+            #self.posy = currNode.value[1]
+            #Marcamos el estado como ya explorado
+            self.env.floor[currNode.value[0]][currNode.value[1]] = 3
+            #Si se puede avanzar por arriba, avanzar
+            newPos = self.up(currNode.value[0],currNode.value[1])
+            if(newPos != False):
+                #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
+                #con el estado actual como su padre
+                newNode = Node(newPos,currNode)
+                solution = self.depth_search_r(l,currL+1,newNode)
+                if(solution != False):
+                    return solution
+                
+            newPos = self.down(currNode.value[0],currNode.value[1])
+            if(newPos != False):
+                #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
+                #con el estado actual como su padre
+                newNode = Node(newPos,currNode)
+                solution = self.depth_search_r(l,currL+1,newNode)
+                if(solution != False):
+                    return solution
 
+            newPos = self.left(currNode.value[0],currNode.value[1])
+            if(newPos != False):
+                #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
+                #con el estado actual como su padre
+                newNode = Node(newPos,currNode)
+                solution = self.depth_search_r(l,currL+1,newNode)
+                if(solution != False):
+                    return solution 
+
+            newPos = self.right(currNode.value[0],currNode.value[1])
+            if(newPos != False):
+                #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
+                #con el estado actual como su padre
+                newNode = Node(newPos,currNode)
+                solution = self.depth_search_r(l,currL+1,newNode)
+                if(solution != False):
+                    return solution
+            return False
+
+    #Algoritmo de búsqueda uniforme, misma implementación que bfs pero haciendo uso de una cola con prioridad 
+    def uniformSearch(self):
+        #Guardamos las posiciones iniciales para luego imprimirlas
+        initX = self.posx
+        initY = self.posy
+        #En este caso voy a usar las listas nativas de python por una cuestión de legibilidad
+        q = []
+        #Manejamos tuplas para poder almacenar x e y, ahora también introducimos el peso
+        #Para este caso, el peso siempre será 1 por no ser un problema con ponderación
+        #Este nodo es parte de la clase Tree, no de LinkedList
+        newNode = Node((self.posx,self.posy,1))
+        q.append(newNode)
+        #Agregamos la posición inicial a los nodos explorados con un 3
+        self.env.floor[self.posx][self.posy] = 3
+        solution = None
+        currNode = q.pop(0)
+        while currNode != None:  
+            self.posx = currNode.value[0]
+            self.posy = currNode.value[1]
+            #Verificamos si alcanzamos el objetivo
+            if(self.env.floor[self.posx][self.posy] == 2):
+                solution = currNode
+                break
+
+            #Marcamos esta posición como explorada o negra con un 3
+            self.env.floor[self.posx][self.posy] = 3
+            #Almacenamos nodos de un arbol, formando un arbol de expansion
+
+            #Encolamos para explorar la posicion superior
+            if(self.up(self.posx,self.posy) != False):
+                if(self.env.floor[self.posx][self.posy+1] == 2):
+                    solution = currNode
+                    break
+                #Agregamos un nodo al arbol, con nodo padre el nodo actualmente explorado con su respectivo peso
+                newNode = Node(self.up(self.posx,self.posy),currNode)
+                #Lo marcamos como ya encolado o gris con un 4
+                self.env.floor[self.posx][self.posy+1] = 4
+                q.append(newNode)
+                #Cada vez que encolamos un nodo, debemos ordenar la lista según el peso de las aristas
+                #En este caso es irrelevante pero podría aplicarse a grafos o grillas con ponderación
+                #Usando una función lambda extraemos el peso de la arista
+                q.sort(key=lambda node : node.value[2])
+
+            #Encolamos para explorar la posicion inferior
+            if(self.down(self.posx,self.posy) != False):
+                if(self.env.floor[self.posx][self.posy-1] == 2):
+                    solution = currNode
+                    break
+                newNode = Node(self.down(self.posx,self.posy),currNode)
+                self.env.floor[self.posx][self.posy-1] = 4
+                q.append(newNode)
+                q.sort(key=lambda node : node.value[2])
+
+            #Encolamos para explorar la posicion de la izquierda
+            if(self.left(self.posx,self.posy) != False):
+                if(self.env.floor[self.posx-1][self.posy] == 2):
+                    solution = currNode
+                    break
+                newNode = Node(self.left(self.posx,self.posy),currNode)
+                self.env.floor[self.posx-1][self.posy] = 4
+                q.append(newNode)
+                q.sort(key=lambda node : node.value[2])
+
+            #Encolamos para explorar la posicion de la derecha
+            if(self.right(self.posx,self.posy) != False):
+                if(self.env.floor[self.posx+1][self.posy] == 2):
+                    solution = currNode
+                    break
+                newNode =  Node(self.right(self.posx,self.posy),currNode)
+                self.env.floor[self.posx+1][self.posy] = 4
+                q.append(newNode)
+                q.sort(key=lambda node : node.value[2])
+            currNode = q.pop(0)
+        print("")
+        print("")
+        #En este caso la solución también muestra el peso de cada una de las aristas del camino en el 3er
+        #atributo de la tupla
+        self.env.print_solution(initX,initY,solution)
+        return solution.pathToRoot()
+
+    #Conjunto de acciones del agente
     def up(self,currX,currY):
         if(currY+1) < self.env.get_sizeY():
             #Verificamos si no se ha explorado ya o es un obstaculo
-            if(self.env.floor[currX][currY+1] == 3 or self.env.floor[currX][currY+1] == 1):
+            if(self.env.floor[currX][currY+1] == 3 or self.env.floor[currX][currY+1] == 1 or self.env.floor[currX][currY+1] == 4):
                 return False
             currY += 1
-            return (currX,currY)
+            #Se retorna la posición del siguiente estado y el peso de la arista
+            #En este caso el peso de toda arista es 1
+            return (currX,currY,1)
         else:
             #print("No se puede ir hacia arriba")
             return False
@@ -103,10 +248,11 @@ class Agent:
     def down(self,currX,currY):
             if(currY-1) >= 0:
                 #Verificamos si no se ha explorado ya
-                if(self.env.floor[currX][currY-1] == 3 or self.env.floor[currX][currY-1] == 1):
+                if(self.env.floor[currX][currY-1] == 3 or self.env.floor[currX][currY-1] == 1 or self.env.floor[currX][currY-1] == 4):
                     return False
                 currY -= 1
-                return (currX,currY)
+                #Retorna
+                return (currX,currY,1)
             else:
                 #print("No se puede ir hacia abajo")
                 return False
@@ -114,10 +260,10 @@ class Agent:
     def left(self,currX,currY):
         if(currX-1) >= 0:
             #Verificamos si no se ha explorado ya
-            if(self.env.floor[currX-1][currY] == 3 or self.env.floor[currX-1][currY] == 1):
+            if(self.env.floor[currX-1][currY] == 3 or self.env.floor[currX-1][currY] == 1 or self.env.floor[currX-1][currY] == 4):
                 return False
             currX -= 1
-            return (currX,currY)
+            return (currX,currY,1)
         else:
             #print("No se puede ir hacia la izquierda")
             return False
@@ -125,10 +271,10 @@ class Agent:
     def right(self,currX,currY):
         if(currX+1) < self.env.get_sizeX():
             #Verificamos si no se ha explorado ya
-            if(self.env.floor[currX+1][currY] == 3 or self.env.floor[currX+1][currY] == 1):
+            if(self.env.floor[currX+1][currY] == 3 or self.env.floor[currX+1][currY] == 1 or self.env.floor[currX+1][currY] == 4):
                 return False
             currX += 1
-            return (currX,currY)
+            return (currX,currY,1)
         else:
             #print("No se puede ir hacia la derecha")
             return False

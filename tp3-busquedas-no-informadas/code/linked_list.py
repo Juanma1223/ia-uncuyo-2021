@@ -1,3 +1,4 @@
+#Implementación propia de LinkedList para optimizar algunas tareas
 class Node:
     value = None
     nextNode = None
@@ -54,6 +55,5 @@ class LinkedList:
         self.last = self.last.prevNode
         self.last.nextNode = None
         return retVal
-        
-
+    
 
