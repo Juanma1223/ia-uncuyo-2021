@@ -72,3 +72,12 @@ class Environment:
             self.floor[pos[0]][pos[1]] = '\u006F'
         self.floor[agentX][agentY] = '\u0040'
         self.print_environment()
+
+    #Contamos la cantidad de estados recorridos
+    def totalStates(self):
+        counter = 0
+        for i in range(0,self.sizeX):
+            for j in range(0,self.sizeY):
+                if(self.floor[i][j] == 3):
+                    counter += 1
+        return counter

@@ -1,6 +1,7 @@
 from random import randint
 from environment import Environment
 from agent import Agent
+import statistics
 
 #Funcionamiento de la búsqueda a lo ancho
 envSize = 100
@@ -16,6 +17,6 @@ print("Posicion inicial del agente: ",posx,", ",posy)
 print("@=Agente, o=Camino, H=Obstaculo, ?=Objetivo")
 agent = Agent(posx,posy,env)
 print("Camino hacia el objetivo")
-print(agent.breadthSearch())
+print(agent.breadthSearch(True))
 #print(agent.depthSearch(envSize*5))
 #print(agent.uniformSearch())

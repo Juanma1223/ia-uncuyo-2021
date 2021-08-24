@@ -8,13 +8,16 @@ class Agent:
     #Mantenemos un historial de posiciones recorridas
     explored_set = []
 
-    def __init__(self,posx,posy,env):
+    def __init__(self,posx,posy,env = None):
         self.posx = posx
         self.posy = posy
         self.env = env
 
+    def setEnvironment(self,env):
+        self.env = env
+
     #Algoritmo de búsqueda a lo ancho, utilizo 0 para posición blanca, 4 para posicion gris y 3 para posición negra
-    def breadthSearch(self):
+    def breadthSearch(self,showSolution = False):
         #Guardamos las posiciones iniciales para luego imprimirlas
         initX = self.posx
         initY = self.posy
@@ -77,25 +80,31 @@ class Agent:
                 newNode =  Node(self.right(self.posx,self.posy),currNode)
                 self.env.floor[self.posx+1][self.posy] = 4
                 q.add(newNode)
-        print("")
-        print("")
         #El tercer elemento de la tupla de coordenadas es el peso de la arista
         #para este algoritmo es irrelevante
-        self.env.print_solution(initX,initY,solution)
-        return solution.pathToRoot()
+        if(showSolution == True):
+            print("")
+            print("")
+            self.env.print_solution(initX,initY,solution)
+        #Preguntamos si se encontró una solución
+        if(solution != None):
+            return solution.pathToRoot()
+        else:
+            return []
 
     #Algoritmo de búsqueda en profundidad limitada, l es la profundidad máxima
-    def depthSearch(self,l):
+    def depthSearch(self,l,showSolution = False):
         initX = self.posx
         initY = self.posy
         #Creamos el nodo raiz del árbol de expansión
         root = Node((initX,initY))
         solution = self.depthSearchR(l,0,root)
         if(solution != False):
-            self.env.print_solution(initX,initY,solution.parent)
+            if(showSolution == True):
+                self.env.print_solution(initX,initY,solution.parent)
             return solution.pathToRoot()
         else:
-            return False
+            return []
 
     #l representa la máxima  profundidad, currL representa la profundidad del nodo actual
     #currNode representa el nodo que se está explorando actualmente
@@ -119,7 +128,7 @@ class Agent:
                 #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
                 #con el estado actual como su padre
                 newNode = Node(newPos,currNode)
-                solution = self.depth_search_r(l,currL+1,newNode)
+                solution = self.depthSearchR(l,currL+1,newNode)
                 if(solution != False):
                     return solution
                 
@@ -128,7 +137,7 @@ class Agent:
                 #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
                 #con el estado actual como su padre
                 newNode = Node(newPos,currNode)
-                solution = self.depth_search_r(l,currL+1,newNode)
+                solution = self.depthSearchR(l,currL+1,newNode)
                 if(solution != False):
                     return solution
 
@@ -137,7 +146,7 @@ class Agent:
                 #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
                 #con el estado actual como su padre
                 newNode = Node(newPos,currNode)
-                solution = self.depth_search_r(l,currL+1,newNode)
+                solution = self.depthSearchR(l,currL+1,newNode)
                 if(solution != False):
                     return solution 
 
@@ -146,13 +155,13 @@ class Agent:
                 #Creamos el nodo que representa el nuevo estado del agente y lo agregamos al árbol
                 #con el estado actual como su padre
                 newNode = Node(newPos,currNode)
-                solution = self.depth_search_r(l,currL+1,newNode)
+                solution = self.depthSearchR(l,currL+1,newNode)
                 if(solution != False):
                     return solution
             return False
 
     #Algoritmo de búsqueda uniforme, misma implementación que bfs pero haciendo uso de una cola con prioridad 
-    def uniformSearch(self):
+    def uniformSearch(self,showSolution = False):
         #Guardamos las posiciones iniciales para luego imprimirlas
         initX = self.posx
         initY = self.posy
@@ -223,13 +232,21 @@ class Agent:
                 self.env.floor[self.posx+1][self.posy] = 4
                 q.append(newNode)
                 q.sort(key=lambda node : node.value[2])
-            currNode = q.pop(0)
-        print("")
-        print("")
-        #En este caso la solución también muestra el peso de cada una de las aristas del camino en el 3er
-        #atributo de la tupla
-        self.env.print_solution(initX,initY,solution)
-        return solution.pathToRoot()
+            
+            if(q != []):
+                currNode = q.pop(0)
+            else:
+                #Ya no quedan nodos por recorrer
+                break
+
+        if(showSolution == True):
+            self.env.print_solution(initX,initY,solution)
+        if(solution != None):
+            #En este caso la solución también muestra el peso de cada una de las aristas del camino en el 3er
+            #atributo de la tupla
+            return solution.pathToRoot()
+        else:
+            return []
 
     #Conjunto de acciones del agente
     def up(self,currX,currY):
