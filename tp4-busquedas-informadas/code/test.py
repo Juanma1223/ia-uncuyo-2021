@@ -12,7 +12,7 @@ a = Agent(posx,posy)
 
 resultsUS = []
 for i in range(0,30):
-    newEnv = Environment(100,100,0.2)
+    newEnv = Environment(100,100,0.3)
     a.setEnvironment(newEnv)
     result = a.AStar()
     if(result != []):
