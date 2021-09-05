@@ -41,7 +41,7 @@ env.print_environment()
 #Se calcula el porcentaje de suciedad en el ambiente
 print(env.get_performance())
 #Se calcula el performance del agente aspiradora
-print(agent.get_performance())
+print(rand_agent.get_performance())
 
 #Se calcula la performance del agente aleatorio
 print("Performance del agente aleatorio:",rand_agent.get_performance())
