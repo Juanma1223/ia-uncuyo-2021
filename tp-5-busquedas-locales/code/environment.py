@@ -17,13 +17,22 @@ class Environment:
         print("Posiciones iniciales")
         for i in range(0,self.queensQuant):
             # Inicializamos las reinas
-            newQueen = Queen(i,randint(0,self.queensQuant-1))
+            newQueen = Queen(i,randint(0,self.queensQuant-1),self)
             print(newQueen.getPosition())
             self.queens.append(newQueen)
         # Calculamos costos de las columnas
         for i in range(0,self.queensQuant):
             self.queens[i].calcColumn(self.queens)
         self.currValue = 2*queens
+
+    # Función que calcula todas las reinas atacadas del tablero
+    def calculateAttacked(self):
+        attacked = 0
+        # Obtenemos la posición de cada una de las reinas
+        for queen in self.queens:
+            attacked += queen.currAttacked
+
+        return (attacked/2)
 
     def greedyMove(self):
         # Buscamos el mejor movimiento posible
@@ -44,12 +53,11 @@ class Environment:
         if(bestQueen != None and bestPos <= self.currValue):
             posToMove = bestQueen.getBestPos()
             bestQueen.move((posToMove[0],posToMove[1]))
-            self.recalculate()
             self.currValue = bestPos
-            #Retornamos el valor de la función hacia el que nos movemos
-            return bestPos
-        else:
-            return self.currValue
+        self.recalculate()
+        # Retornamos la cantidad de reinas atacadas en el estado actual
+        return self.calculateAttacked()
+
 
     def annealing_move(self):
         tam = len(self.queens)
@@ -57,36 +65,30 @@ class Environment:
         randNum = randint(0,tam-1)
         currQueen = self.queens[randNum]
         # Elejimos una posición al azar
-        columns = currQueen.getPositions()
-        queenColumn = list(filter(lambda pos : pos[0]==randNum,columns))
-        currPos = queenColumn[randint(0,tam-1)]
-        print(currPos)
+        queenColumn = currQueen.getPositions()
+        currPos = queenColumn[randint(0,tam-2)]
+        # Incremento de la variable tiempo
+        self.t = self.t + 2
         #Verificamos si el valor de la función es menor que el actual
-        self.t = self.t + 0.1
         if(currPos[2] <= self.currValue):
             #Nos movemos hacia el nuevo estado
-            print("Cambio a mejor estado!")
             self.currValue = currPos[2]
             currQueen.move((currPos[0],currPos[1]))
             self.recalculate()
-            return currPos[2]
+            return self.calculateAttacked()
         else:
             # Calculamos la probabilidad de saltar a un estado peor que el actual
             prob = randint(0,100)/100
             div = exp(abs(currPos[2]-self.currValue)/self.t)/100
-            print("div",div)
-            print("prob",prob)
             #print(exp(div))
             if(div > prob):
                 # Nos movemos hacia el nuevo estado
-                print("Cambio random!")
                 self.currValue = currPos[2]
                 currQueen.move((currPos[0],currPos[1]))
                 self.recalculate()
-                # Aca se calcula la función de crecimiento de la variable t
-                return currPos[2]
+                return self.calculateAttacked()
             else:
-                return self.currValue
+                return self.calculateAttacked()
 
     #Recalculamos los costos de cada una de las posiciones
     def recalculate(self):
@@ -94,12 +96,16 @@ class Environment:
         for i in range(0,tam):
             self.queens[i].calcColumn(self.queens)
 
-    def printQueens(self):
+    def printQueens(self,debugPos = None):
         tablero = [ [ "*" for _ in range(0,len(self.queens)) ] for _ in range(0,len(self.queens)) ]
+        #Marcamos la posición actualmente explorada para debuggear
+        if(debugPos != None):
+            tablero[debugPos[0]][debugPos[1]] = "-"
         for i in range(0, len(self.queens)):
             currPos = self.queens[i].getPosition()
             tablero[currPos[0]][currPos[1]] = "o"
         for i in range(0, len(self.queens)):
             for j in range(0, len(self.queens)):
                 print(tablero[i][j],end="")
+
             print("")

@@ -6,19 +6,16 @@ results = []
 '''
 for i in range(0,100):
     currVal = env.greedyMove()
-    if(currVal != False):
-        results.append(currVal)
+    results.append(currVal)
     print("")
     env.printQueens()
+
 '''
-
-for i in range(0,1000):
+for i in range(0,500):
     currVal = env.annealing_move()
-    if(currVal != False):
-        results.append(currVal)
+    results.append(currVal)
     print("")
     env.printQueens()
-
 print("")
 env.printQueens()
 print(results)
