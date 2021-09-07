@@ -36,15 +36,12 @@ class Queen:
         tam = len(queensPos)
         for i in range(0,tam):
             # Las reinas nunca van a coincidir en columnas
-            if(pos[1] == queensPos[i][1]):
-                # Encontramos dos reinas en la misma fila
-                attacked = attacked + 1
             if(pos[0] == queensPos[i][0]):
                 # Encontramos dos reinas en la misma fila
-                attacked = attacked + 1
-            if(abs(pos[0]-queensPos[i][0]) == abs(pos[1]-queensPos[i][1])):
+                attacked = attacked + 2
+            if abs(pos[0]-queensPos[i][0]) == abs(pos[1]-queensPos[i][1]):
                 # Encontramos dos reinas en la misma diagonal
-                attacked = attacked + 1
+                attacked = attacked + 2
         # Calculamos el mejor costo
         if(self.bestPos[2] > attacked):
             self.bestPos = (pos[0],pos[1],attacked)
@@ -53,6 +50,11 @@ class Queen:
 
     def getBestPos(self):
         return self.bestPos
+
+    # Función que retorna las los valores de función de la columna en la 
+    # que se encuentra la reina
+    def getPositions(self):
+        return self.positions
 
     def move(self,pos):
         self.x = pos[0]

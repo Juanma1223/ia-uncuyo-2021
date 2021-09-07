@@ -1,8 +1,9 @@
 from environment import Environment
 
-env = Environment()
+env = Environment(4)
 
-while(env.greedyMove()):
+for i in range(0,1000):
+    env.greedyMove()
     print("")
     env.printQueens()
 print("")
