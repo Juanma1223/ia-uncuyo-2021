@@ -29,6 +29,7 @@ for j in range(0,intentos):
         #env.printQueens()
         HC = HC+1
         timeHistory.append(end-start)
+        results.append(last)
         plt.plot(results)
         plt.title("Variación de la función HC")
         plt.show()
@@ -72,6 +73,7 @@ for j in range(0,intentos):
         #env.printQueens()
         SA = SA + 1
         timeHistory.append(end-start)
+        results.append(last)
         plt.plot(results)
         plt.title("Variación de la función SA")
         plt.show()
