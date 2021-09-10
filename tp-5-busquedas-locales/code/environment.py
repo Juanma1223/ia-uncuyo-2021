@@ -10,15 +10,16 @@ class Environment:
     currValue = 0
     #Valor de filtro estadístico actual
     t = 1
-
+    
     def __init__(self,queens = 8):
         self.queensQuant = queens
+        self.queens = []
         # Inicialización del arreglo de reinas
-        print("Posiciones iniciales")
+        #print("Posiciones iniciales")
         for i in range(0,self.queensQuant):
             # Inicializamos las reinas
             newQueen = Queen(i,randint(0,self.queensQuant-1),self)
-            print(newQueen.getPosition())
+            #print(newQueen.getPosition())
             self.queens.append(newQueen)
         # Calculamos costos de las columnas
         for i in range(0,self.queensQuant):
@@ -30,7 +31,7 @@ class Environment:
         attacked = 0
         # Obtenemos la posición de cada una de las reinas
         for queen in self.queens:
-            attacked += queen.currAttacked
+            attacked += queen.currAttacked-1
 
         return (attacked/2)
 
