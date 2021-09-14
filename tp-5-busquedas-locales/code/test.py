@@ -33,7 +33,7 @@ for j in range(0,intentos):
         plt.plot(results)
         plt.title("Variación de la función HC")
         plt.show()
-
+'''
 if(len(HCStates) >= 2):
     print("Media de tiempo de resolución:", mean(timeHistory))
     print("")
@@ -47,6 +47,8 @@ if(len(HCStates) >= 2):
 else:
     print("No se encontró ninguna solución!")
 
+
+'''
 print("")
 print("###########################################################################")
 print("")
@@ -79,6 +81,7 @@ for j in range(0,intentos):
         plt.show()
         #print(results)
 
+'''
 if(len(SAStates) >= 2):
     print("Media de tiempo de resolución:", mean(timeHistory))
     print("")
@@ -91,3 +94,5 @@ if(len(SAStates) >= 2):
     print("Desviación estandar de estados por resolución:",stdev(SAStates))
 else:
     print("No se encontró ninguna solución!")
+
+'''
