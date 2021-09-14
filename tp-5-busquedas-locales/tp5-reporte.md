@@ -1,3 +1,15 @@
+# Conclusión personal
+
+  En mi caso, la implementación del algoritmo genético resuelve en un caso muy amplio de los casos, es decir, en caso de querer una gran eficacia en el algoritmo y se requiera
+  de una solución óptima sin importar el tiempo de ejecución, sin duda elegiría el algoritmo genético. Al ser consciente de que mi implementación no resulta del todo eficiente,
+  entiendo que se puede lograr una mayor eficiencia en la construccion de algoritmos genéticos y por tanto conseguiriamos tanto mayor eficiencia como mayor eficacia.
+  
+  Por la ineficiencia mencionada anteriormente, según mis implementaciones, el que mejores resultados presenta es el algoritmo de simulating annealing, ya que tiene un
+  porcentaje de resolución relativamente alto, es decir, gira en torno al 30% de soluciones óptimas del total, además, el tiempo de ejecución se encuentra en un órden inferior
+  a los segundos, lo que representa los mejores índices tanto de eficiencia como de eficacia
+
+# Resultados (Mayor claridad en archivo [results_table.csv](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp-5-busquedas-locales/results_table.csv))
+
 # 4 Reinas
 
 ## Resultados con Hill Climbing:
