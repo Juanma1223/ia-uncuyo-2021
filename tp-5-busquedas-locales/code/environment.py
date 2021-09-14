@@ -29,10 +29,9 @@ class Environment:
     # Función que calcula todas las reinas atacadas del tablero
     def calculateAttacked(self):
         attacked = 0
-        # Obtenemos la posición de cada una de las reinas
+        # Obtenemos la cantidad de reinas atacadas por reina
         for queen in self.queens:
             attacked += queen.currAttacked-1
-
         return (attacked/2)
 
     def greedyMove(self):
