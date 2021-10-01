@@ -8,3 +8,4 @@ Desviación estandar: 66.85968322823038
 ## Gráfico de barras:
 
 [Click para abrir gráfico de barras](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp4-busquedas-informadas/barChart.png)
+![image](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp4-busquedas-informadas/barChart.png)
