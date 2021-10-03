@@ -103,6 +103,16 @@ Resultados de las pruebas de 4,8,10,12 y 15 en órden:
 
 
 Backtracking times: [0.12400031089782715, 0.09799957275390625, 1.5820000171661377, 38.57800078392029, 900]
+
 Backtracking states: [333189, 335028, 355273, 685863, 239500800.0]
+
 Forward checking times: [0.0010004043579101562, 0.012001514434814453, 0.013997793197631836, 0.039000749588012695, 0.24900007247924805]
+
 Forward checking states: [8, 121, 223, 484, 1843]
+
+## Imágenes
+
+[img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/backtracking_states.png)
+[img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/backtracking_times.png)
+[img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/forward_checking_states.png)
+[img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/forward_checking_times.png)
