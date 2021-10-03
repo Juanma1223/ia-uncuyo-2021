@@ -2,6 +2,7 @@ from tree import Node
 
 stack = []
 queens_num = 12
+cantStates = 0
 
 # Si se llega a una  profundidad igual a la cantidad de reinas, devoler el camino hacia ella
 
@@ -9,19 +10,20 @@ queens_num = 12
 
 # Solo ingresamos en la pila un nodo si este no entra en conflicto con ningún otro
 
-def dfs():
-    global stack, queens_num
+def dfs(queens_num):
+    global stack, cantStates
     # Raiz del árbol
     root = Node(13,-1,None)
     stack.append(root)
     while(len(stack) > 0):
         currNode = stack.pop(0)
+        cantStates += 1
         # Verificar si llegamos a una solución
         if((currNode.height+1) == queens_num):
             result = currNode.pathToRoot()
             result.pop()
             result.reverse()
-            return result
+            return (result,cantStates)
         # Revisamos las n posiciones de la columna
         for i in range(0,queens_num):
             # Las agregamos a la pila solo en caso de que el check de positivo
@@ -57,5 +59,5 @@ def printQueens(path):
 
         print("")
 
-result = dfs()
-printQueens(result)
+result = dfs(queens_num)
+#printQueens(result[0])

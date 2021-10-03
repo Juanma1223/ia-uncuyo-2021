@@ -96,3 +96,13 @@ b) Gracias al ejercicio anterior, llegamos a la conclusión de que es posible re
 la arco-consistencia de cada una de sus variables, es decir, el algoritmo citado en el ejercicio anterior resulta correcto para todos los
 CSP cuyo grafo de restrcciones pueda ser convertido en un árbol, a pesar de que en un principio parezca que tenemos que lidiar con la
 n-consistencia. 
+
+# Ejercicio 6
+
+Resultados de las pruebas de 4,8,10,12 y 15 en órden:
+
+
+Backtracking times: [0.12400031089782715, 0.09799957275390625, 1.5820000171661377, 38.57800078392029, 900]
+Backtracking states: [333189, 335028, 355273, 685863, 239500800.0]
+Forward checking times: [0.0010004043579101562, 0.012001514434814453, 0.013997793197631836, 0.039000749588012695, 0.24900007247924805]
+Forward checking states: [8, 121, 223, 484, 1843]
