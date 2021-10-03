@@ -112,7 +112,7 @@ Forward checking states: [8, 121, 223, 484, 1843]
 
 ## Imágenes
 
-[!img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/backtracking_states.png)
-[!img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/backtracking_times.png)
-[!img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/forward_checking_states.png)
-[!img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/forward_checking_times.png)
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/backtracking_states.png)
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/backtracking_times.png)
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/forward_checking_states.png)
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp6-csp/plots/forward_checking_times.png)
