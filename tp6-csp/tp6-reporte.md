@@ -67,10 +67,8 @@ en una solución inconsistente y teniendo que volver hacia atrás en nuestro arb
 
 # Ejercicio 3
 
-Para calcular el peor caso de AC-3 se sigue el siguiente razonamiento:
-
-En primer lugar tenemos n variables, con dominios de tamaño d y una cantidad c de restricciones binarias.
-Verificar la arco consistencia de una variable se puede realizar en tiempo O(d^2), eso debemos multiplicarlo por la cantidad de restrcciones (ya que debemos verificar cada restricción para cada variable) y luego por la cantidad de valores del dominio nuevamente, dando como resultado para el peor caso: O(c*(d^3)).
+Por la naturaleza del árbol estructurado, en la cual cada variable se conecta mediante únicamente una restricción, los arcos serán considerados solo una vez, es decir, si tenemos una cantidad E de aristas (arcos del árbol) a revisar y una cantidad D de valores en el dominio de cada variable, podemos llegar a considerar cada uno de los valores
+del dominio por cada uno de los arcos, llegando a una complejidad en el caso peor de O(D*E)
 
 # Ejercicio 5
 
