@@ -70,6 +70,12 @@ en una solución inconsistente y teniendo que volver hacia atrás en nuestro arb
 Por la naturaleza del árbol estructurado, en la cual cada variable se conecta mediante únicamente una restricción, los arcos serán considerados solo una vez, es decir, si tenemos una cantidad E de aristas (arcos del árbol) a revisar y una cantidad D de valores en el dominio de cada variable, podemos llegar a considerar cada uno de los valores
 del dominio por cada uno de los arcos, llegando a una complejidad en el caso peor de O(D*E)
 
+# Ejercicio 4
+
+La idea detrás de la reducción de la complejidad se encuentra en no procesar innecesariamente las aristas que ya resultan consistentes luego de la asignación de un valor,
+es decir, mediante el conocimiento del problema podemos definir valores que sabemos correctos para la consistencia entre los distintos arcos y no encolarlos nuevamente
+para revisar la arco-consistencia entre las variables.
+
 # Ejercicio 5
 
 a)
