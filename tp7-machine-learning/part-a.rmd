@@ -1,0 +1,11 @@
+---
+title: "Parte A"
+output: html_notebook
+---
+```{r}
+
+library(dplyr)
+library(readr)
+
+```
+
