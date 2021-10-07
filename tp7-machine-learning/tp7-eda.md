@@ -2,12 +2,12 @@
 
 ## a) La distribución de cantidad de árboles peligrosos se muestra en el siguiente gráfico:
 
-![img]()
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej2-a.png)
 
 ## b) La sección que resultó ser mas peligrosa es la Residencial Norte
 
-![img]()
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej2-b.png)
 
 ## c) La especie mas peligrosa resultó la Morera
 
-![img]()
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej2-c.png)
