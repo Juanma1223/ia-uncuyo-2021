@@ -4,7 +4,7 @@
 
 ![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej2-a.png)
 
-## b) La sección que resultó ser mas peligrosa es la Residencial Norte
+## b) La sección que resultó ser mas peligrosa es la Residencial Sur
 
 ![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej2-b.png)
 

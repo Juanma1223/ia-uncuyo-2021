@@ -4,8 +4,67 @@ output: html_notebook
 ---
 ```{r}
 
-library(dplyr)
+# Import libraries
+
+library(dplyr) 
 library(readr)
+library(caret)
+library(ggplot2)
+
+
+# Read dataset 
+trees_dataset <- read_csv("arbolado-mza-dataset.csv")
+
+
+trainset <- trees_dataset
+# Índices de la muestra de entrenamiento
+trainIndex <- createDataPartition(as.factor(trainset$inclinacion_peligrosa),p=0.80,list=FALSE)
+data_train <- trainset[ trainIndex, ]
+data_test <- trainset[ -trainIndex, ]
+
+
+# Export to csv
+# write.csv(data_train,"arbolado-publico-mendoza-2021-train.csv")
+# write.csv(data_test,"arbolado-publico-mendoza-2021-validation.csv")
+
+data_train
+
+# Plot distribution
+
+distribution <- data_train %>% group_by(inclinacion_peligrosa) %>% summarise(total=n())
+
+distribution
+
+ggplot(distribution,aes(x=inclinacion_peligrosa,y=total)) +
+  geom_bar(stat="identity")+
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot zone danger distribution
+zone_distribution <- data_train %>% group_by(nombre_seccion) %>% summarise(total=n())
+
+zone_distribution
+
+# Plot distribution
+
+ggplot(zone_distribution,aes(x=nombre_seccion,y=total)) +
+  geom_bar(stat="identity")+
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Residencial norte resulta la zona con una mayor cantidad de árboles peligrosos
+
+# Plot species distribution 
+
+species_distribution <- data_train %>% group_by(inclinacion_peligrosa) %>% group_by(especie) %>% summarise(total=n())
+
+species_distribution
+
+# Plot distribution
+
+ggplot(species_distribution,aes(x=especie,y=total)) +
+  geom_bar(stat="identity")+
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
 
 ```
+
 

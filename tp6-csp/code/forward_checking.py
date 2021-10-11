@@ -1,8 +1,9 @@
 from tree import Node
 from copy import deepcopy
+import time
 
 stack = []
-queens_num = 8
+queens_num = 15
 cantStates = 0
 
 # Inicializamos los dominios en todas las variables
@@ -32,7 +33,7 @@ def dfs(currNode, currDomains, queens_num):
                 return None
             result = dfs(newNode,newDomains,queens_num)
             if(result != None):
-                return (result,cantStates)
+                return result
     return None
 
 
@@ -78,6 +79,9 @@ def printQueens(path):
 
         print("")
 
-#root = Node(13,-1,None)
-#result = dfs(root,dom,queens_num)
-#printQueens(result[0])
+start = time.time()
+root = Node(13,-1,None)
+result = dfs(root,dom,queens_num)
+end = time.time()
+print("Tiempo CSP:",end-start)
+printQueens(result[0])

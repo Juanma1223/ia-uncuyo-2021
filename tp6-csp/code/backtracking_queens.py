@@ -1,7 +1,8 @@
 from tree import Node
+import time
 
 stack = []
-queens_num = 12
+queens_num = 15
 cantStates = 0
 
 # Si se llega a una  profundidad igual a la cantidad de reinas, devoler el camino hacia ella
@@ -59,5 +60,9 @@ def printQueens(path):
 
         print("")
 
+start = time.time()
 result = dfs(queens_num)
-#printQueens(result[0])
+printQueens(result[0])
+end = time.time()
+
+print("Tiempo Backtracking:",end-start)

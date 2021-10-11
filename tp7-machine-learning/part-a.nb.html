@@ -217,17 +217,74 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5saWJyYXJ5KGRwbHlyKVxubGlicmFyeShyZWFkcilcblxuYGBgIn0= -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG4jIEltcG9ydCBsaWJyYXJpZXNcblxubGlicmFyeShkcGx5cikgXG5saWJyYXJ5KHJlYWRyKVxubGlicmFyeShjYXJldClcbmxpYnJhcnkoZ2dwbG90MilcblxuXG4jIFJlYWQgZGF0YXNldCBcbnRyZWVzX2RhdGFzZXQgPC0gcmVhZF9jc3YoXCJhcmJvbGFkby1temEtZGF0YXNldC5jc3ZcIilcblxuXG50cmFpbnNldCA8LSB0cmVlc19kYXRhc2V0XG4jIMONbmRpY2VzIGRlIGxhIG11ZXN0cmEgZGUgZW50cmVuYW1pZW50b1xudHJhaW5JbmRleCA8LSBjcmVhdGVEYXRhUGFydGl0aW9uKGFzLmZhY3Rvcih0cmFpbnNldCRpbmNsaW5hY2lvbl9wZWxpZ3Jvc2EpLHA9MC44MCxsaXN0PUZBTFNFKVxuZGF0YV90cmFpbiA8LSB0cmFpbnNldFsgdHJhaW5JbmRleCwgXVxuZGF0YV90ZXN0IDwtIHRyYWluc2V0WyAtdHJhaW5JbmRleCwgXVxuXG5cbiMgRXhwb3J0IHRvIGNzdlxuIyB3cml0ZS5jc3YoZGF0YV90cmFpbixcImFyYm9sYWRvLXB1YmxpY28tbWVuZG96YS0yMDIxLXRyYWluLmNzdlwiKVxuIyB3cml0ZS5jc3YoZGF0YV90ZXN0LFwiYXJib2xhZG8tcHVibGljby1tZW5kb3phLTIwMjEtdmFsaWRhdGlvbi5jc3ZcIilcblxuZGF0YV90cmFpblxuXG4jIFBsb3QgZGlzdHJpYnV0aW9uXG5cbmRpc3RyaWJ1dGlvbiA8LSBkYXRhX3RyYWluICU+JSBncm91cF9ieShpbmNsaW5hY2lvbl9wZWxpZ3Jvc2EpICU+JSBzdW1tYXJpc2UodG90YWw9bigpKVxuXG5kaXN0cmlidXRpb25cblxuZ2dwbG90KGRpc3RyaWJ1dGlvbixhZXMoeD1pbmNsaW5hY2lvbl9wZWxpZ3Jvc2EseT10b3RhbCkpICtcbiAgZ2VvbV9iYXIoc3RhdD1cImlkZW50aXR5XCIpK1xuICAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA0NSwgaGp1c3QgPSAxKSlcblxuIyBQbG90IHpvbmUgZGFuZ2VyIGRpc3RyaWJ1dGlvblxuem9uZV9kaXN0cmlidXRpb24gPC0gZGF0YV90cmFpbiAlPiUgZ3JvdXBfYnkobm9tYnJlX3NlY2Npb24pICU+JSBzdW1tYXJpc2UodG90YWw9bigpKVxuXG56b25lX2Rpc3RyaWJ1dGlvblxuXG4jIFBsb3QgZGlzdHJpYnV0aW9uXG5cbmdncGxvdCh6b25lX2Rpc3RyaWJ1dGlvbixhZXMoeD1ub21icmVfc2VjY2lvbix5PXRvdGFsKSkgK1xuICBnZW9tX2JhcihzdGF0PVwiaWRlbnRpdHlcIikrXG4gICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDQ1LCBoanVzdCA9IDEpKVxuXG4jIFJlc2lkZW5jaWFsIG5vcnRlIHJlc3VsdGEgbGEgem9uYSBjb24gdW5hIG1heW9yIGNhbnRpZGFkIGRlIMOhcmJvbGVzIHBlbGlncm9zb3NcblxuIyBQbG90IHNwZWNpZXMgZGlzdHJpYnV0aW9uIFxuXG5zcGVjaWVzX2Rpc3RyaWJ1dGlvbiA8LSBkYXRhX3RyYWluICU+JSBncm91cF9ieShpbmNsaW5hY2lvbl9wZWxpZ3Jvc2EpICU+JSBncm91cF9ieShlc3BlY2llKSAlPiUgc3VtbWFyaXNlKHRvdGFsPW4oKSlcblxuc3BlY2llc19kaXN0cmlidXRpb25cblxuIyBQbG90IGRpc3RyaWJ1dGlvblxuXG5nZ3Bsb3Qoc3BlY2llc19kaXN0cmlidXRpb24sYWVzKHg9ZXNwZWNpZSx5PXRvdGFsKSkgK1xuICBnZW9tX2JhcihzdGF0PVwiaWRlbnRpdHlcIikrXG4gICB0aGVtZShheGlzLnRleHQueCA9IGVsZW1lbnRfdGV4dChhbmdsZSA9IDQ1LCBoanVzdCA9IDEpKVxuXG5cbmBgYCJ9 -->
 <pre class="r"><code>
-library(dplyr)
+# Import libraries
+
+library(dplyr) 
 library(readr)
+library(caret)
+library(ggplot2)
+
+
+# Read dataset 
+trees_dataset &lt;- read_csv(&quot;arbolado-mza-dataset.csv&quot;)
+
+
+trainset &lt;- trees_dataset
+# Índices de la muestra de entrenamiento
+trainIndex &lt;- createDataPartition(as.factor(trainset$inclinacion_peligrosa),p=0.80,list=FALSE)
+data_train &lt;- trainset[ trainIndex, ]
+data_test &lt;- trainset[ -trainIndex, ]
+
+
+# Export to csv
+# write.csv(data_train,&quot;arbolado-publico-mendoza-2021-train.csv&quot;)
+# write.csv(data_test,&quot;arbolado-publico-mendoza-2021-validation.csv&quot;)
+
+data_train
+
+# Plot distribution
+
+distribution &lt;- data_train %&gt;% group_by(inclinacion_peligrosa) %&gt;% summarise(total=n())
+
+distribution
+
+ggplot(distribution,aes(x=inclinacion_peligrosa,y=total)) +
+  geom_bar(stat=&quot;identity&quot;)+
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Plot zone danger distribution
+zone_distribution &lt;- data_train %&gt;% group_by(nombre_seccion) %&gt;% summarise(total=n())
+
+zone_distribution
+
+# Plot distribution
+
+ggplot(zone_distribution,aes(x=nombre_seccion,y=total)) +
+  geom_bar(stat=&quot;identity&quot;)+
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Residencial norte resulta la zona con una mayor cantidad de árboles peligrosos
+
+# Plot species distribution 
+
+species_distribution &lt;- data_train %&gt;% group_by(inclinacion_peligrosa) %&gt;% group_by(especie) %&gt;% summarise(total=n())
+
+species_distribution
+
+# Plot distribution
+
+ggplot(species_distribution,aes(x=especie,y=total)) +
+  geom_bar(stat=&quot;identity&quot;)+
+   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlBhcnRlIEEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KYGBge3J9DQoNCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KHJlYWRyKQ0KDQpgYGANCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlBhcnRlIEEiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KYGBge3J9DQoNCiMgSW1wb3J0IGxpYnJhcmllcw0KDQpsaWJyYXJ5KGRwbHlyKSANCmxpYnJhcnkocmVhZHIpDQpsaWJyYXJ5KGNhcmV0KQ0KbGlicmFyeShnZ3Bsb3QyKQ0KDQoNCiMgUmVhZCBkYXRhc2V0IA0KdHJlZXNfZGF0YXNldCA8LSByZWFkX2NzdigiYXJib2xhZG8tbXphLWRhdGFzZXQuY3N2IikNCg0KDQp0cmFpbnNldCA8LSB0cmVlc19kYXRhc2V0DQojIMONbmRpY2VzIGRlIGxhIG11ZXN0cmEgZGUgZW50cmVuYW1pZW50bw0KdHJhaW5JbmRleCA8LSBjcmVhdGVEYXRhUGFydGl0aW9uKGFzLmZhY3Rvcih0cmFpbnNldCRpbmNsaW5hY2lvbl9wZWxpZ3Jvc2EpLHA9MC44MCxsaXN0PUZBTFNFKQ0KZGF0YV90cmFpbiA8LSB0cmFpbnNldFsgdHJhaW5JbmRleCwgXQ0KZGF0YV90ZXN0IDwtIHRyYWluc2V0WyAtdHJhaW5JbmRleCwgXQ0KDQoNCiMgRXhwb3J0IHRvIGNzdg0KIyB3cml0ZS5jc3YoZGF0YV90cmFpbiwiYXJib2xhZG8tcHVibGljby1tZW5kb3phLTIwMjEtdHJhaW4uY3N2IikNCiMgd3JpdGUuY3N2KGRhdGFfdGVzdCwiYXJib2xhZG8tcHVibGljby1tZW5kb3phLTIwMjEtdmFsaWRhdGlvbi5jc3YiKQ0KDQpkYXRhX3RyYWluDQoNCiMgUGxvdCBkaXN0cmlidXRpb24NCg0KZGlzdHJpYnV0aW9uIDwtIGRhdGFfdHJhaW4gJT4lIGdyb3VwX2J5KGluY2xpbmFjaW9uX3BlbGlncm9zYSkgJT4lIHN1bW1hcmlzZSh0b3RhbD1uKCkpDQoNCmRpc3RyaWJ1dGlvbg0KDQpnZ3Bsb3QoZGlzdHJpYnV0aW9uLGFlcyh4PWluY2xpbmFjaW9uX3BlbGlncm9zYSx5PXRvdGFsKSkgKw0KICBnZW9tX2JhcihzdGF0PSJpZGVudGl0eSIpKw0KICAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA0NSwgaGp1c3QgPSAxKSkNCg0KIyBQbG90IHpvbmUgZGFuZ2VyIGRpc3RyaWJ1dGlvbg0Kem9uZV9kaXN0cmlidXRpb24gPC0gZGF0YV90cmFpbiAlPiUgZ3JvdXBfYnkobm9tYnJlX3NlY2Npb24pICU+JSBzdW1tYXJpc2UodG90YWw9bigpKQ0KDQp6b25lX2Rpc3RyaWJ1dGlvbg0KDQojIFBsb3QgZGlzdHJpYnV0aW9uDQoNCmdncGxvdCh6b25lX2Rpc3RyaWJ1dGlvbixhZXMoeD1ub21icmVfc2VjY2lvbix5PXRvdGFsKSkgKw0KICBnZW9tX2JhcihzdGF0PSJpZGVudGl0eSIpKw0KICAgdGhlbWUoYXhpcy50ZXh0LnggPSBlbGVtZW50X3RleHQoYW5nbGUgPSA0NSwgaGp1c3QgPSAxKSkNCg0KIyBSZXNpZGVuY2lhbCBub3J0ZSByZXN1bHRhIGxhIHpvbmEgY29uIHVuYSBtYXlvciBjYW50aWRhZCBkZSDDoXJib2xlcyBwZWxpZ3Jvc29zDQoNCiMgUGxvdCBzcGVjaWVzIGRpc3RyaWJ1dGlvbiANCg0Kc3BlY2llc19kaXN0cmlidXRpb24gPC0gZGF0YV90cmFpbiAlPiUgZ3JvdXBfYnkoaW5jbGluYWNpb25fcGVsaWdyb3NhKSAlPiUgZ3JvdXBfYnkoZXNwZWNpZSkgJT4lIHN1bW1hcmlzZSh0b3RhbD1uKCkpDQoNCnNwZWNpZXNfZGlzdHJpYnV0aW9uDQoNCiMgUGxvdCBkaXN0cmlidXRpb24NCg0KZ2dwbG90KHNwZWNpZXNfZGlzdHJpYnV0aW9uLGFlcyh4PWVzcGVjaWUseT10b3RhbCkpICsNCiAgZ2VvbV9iYXIoc3RhdD0iaWRlbnRpdHkiKSsNCiAgIHRoZW1lKGF4aXMudGV4dC54ID0gZWxlbWVudF90ZXh0KGFuZ2xlID0gNDUsIGhqdXN0ID0gMSkpDQoNCg0KYGBgDQoNCg0K</div>
 
 
 
@@ -274,7 +331,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("part-a.Rmd");
+  window.initializeSourceEmbed("part-a.rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
