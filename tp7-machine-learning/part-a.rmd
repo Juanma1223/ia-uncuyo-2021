@@ -40,7 +40,7 @@ ggplot(distribution,aes(x=inclinacion_peligrosa,y=total)) +
    theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 # Plot zone danger distribution
-zone_distribution <- data_train %>% group_by(nombre_seccion) %>% summarise(total=n())
+zone_distribution <- data_train %>% filter(inclinacion_peligrosa == 1) %>% group_by(nombre_seccion) %>% summarise(total=n())
 
 zone_distribution
 
@@ -54,7 +54,7 @@ ggplot(zone_distribution,aes(x=nombre_seccion,y=total)) +
 
 # Plot species distribution 
 
-species_distribution <- data_train %>% group_by(inclinacion_peligrosa) %>% group_by(especie) %>% summarise(total=n())
+species_distribution <- data_train %>% filter(inclinacion_peligrosa == 1) %>% group_by(especie) %>% summarise(total=n())
 
 species_distribution
 
@@ -67,4 +67,38 @@ ggplot(species_distribution,aes(x=especie,y=total)) +
 
 ```
 
+```{r}
+# Import libraries
 
+library(dplyr) 
+library(readr)
+library(caret)
+library(ggplot2)
+
+# Read dataset 
+treesDataset <- read_csv("arbolado-mza-dataset.csv")
+
+
+trainset <- treesDataset
+
+trainset
+
+circ_arr <- trainset$circ_tronco_cm
+
+hist(circ_arr)
+
+filteredSet <- treesDataset %>% filter(inclinacion_peligrosa == 1) 
+
+filtered_circ <- filteredSet$circ_tronco_cm
+
+hist(filtered_circ)
+
+# Add categorical filter
+
+trainset <- treesDataset %>% mutate(circ_tronco_cm_cat= ifelse(`circ_tronco_cm`<=100,'bajo',
+                                                               ifelse(`circ_tronco_cm`>100 & `circ_tronco_cm` <= 200, 'medio',
+                                                                      ifelse(`circ_tronco_cm` > 200 & `circ_tronco_cm` <= 300, 'alto','muy alto'))))
+
+write.csv(trainset,"arbolado-publico-mendoza-2021-circ_tronco_cm-train.csv")
+
+```
