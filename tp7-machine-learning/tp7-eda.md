@@ -11,3 +11,13 @@
 ## c) La especie mas peligrosa resultó la Morera
 
 ![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej2-c.png)
+
+# Ejercicio 3
+
+## Histograma de frecuencia con la variable circunferencia en cm
+
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej3-a.png)
+
+## Histograma de frecuencia con la variable circunferencia en cm pero habiendo filtrado solo árboles peligrosos
+
+![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej3-b.png)
