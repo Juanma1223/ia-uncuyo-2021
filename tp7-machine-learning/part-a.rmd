@@ -102,3 +102,58 @@ trainset <- treesDataset %>% mutate(circ_tronco_cm_cat= ifelse(`circ_tronco_cm`<
 write.csv(trainset,"arbolado-publico-mendoza-2021-circ_tronco_cm-train.csv")
 
 ```
+
+```{r}
+
+library(dplyr) 
+library(readr)
+
+# Load dataset 
+
+treesDataset <- read_csv("arbolado-mza-dataset.csv")
+
+rows <- nrow(treesDataset)
+
+# Generate random probability
+
+prob_arr <- runif(rows, 0, 1)
+
+# Add column containing probability array to data frame
+
+treesDataset$prediction_prob <- prob_arr
+
+treesDataset
+
+# Assign class
+
+classifiedDataSet <- treesDataset %>% mutate(prediction_class = ifelse(`prediction_prob` >= 0.5, 1 ,0))
+
+classifiedDataSet
+
+# Calculate metrics
+
+truePositive <- classifiedDataSet %>% filter(inclinacion_peligrosa == 1 & prediction_class == 1)
+
+trueNegative <- classifiedDataSet %>% filter(inclinacion_peligrosa == 0 & prediction_class == 0)
+
+falsePositive <- classifiedDataSet %>% filter(inclinacion_peligrosa == 0 & prediction_class == 1)
+
+falseNegative <- classifiedDataSet %>% filter(inclinacion_peligrosa == 1 & prediction_class == 0)
+
+tpCount <- nrow(truePositive)
+
+tnCount <- nrow(trueNegative)
+
+fpCount <- nrow(falsePositive)
+
+fnCount <- nrow(falseNegative)
+
+tpCount
+
+tnCount
+
+fpCount
+
+fnCount
+
+```

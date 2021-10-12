@@ -21,3 +21,12 @@
 ## Histograma de frecuencia con la variable circunferencia en cm pero habiendo filtrado solo árboles peligrosos
 
 ![img](https://github.com/Juanma1223/ia-uncuyo-2021/blob/main/tp7-machine-learning/plots/ej3-b.png)
+
+# Ejercicio 4 (Desarrollo en el notebook de r con nombre part-a.rmd)
+
+## Matriz de confusión
+
+| n = 31912 | Inclinación peligrosa | Inclinación no peligrosa |
+| --------- | --------------------- | ------------------------ |
+| Acertó | 1779 | 14151 |
+| Falló | 14182 | 1800 |
