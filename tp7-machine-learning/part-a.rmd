@@ -173,16 +173,6 @@ rows <- nrow(treesDataset)
 
 rows
 
-# Generate random probability
-
-prob_arr <- runif(rows, 0, 1)
-
-# Add column containing probability array to data frame
-
-treesDataset$prediction_prob <- prob_arr
-
-treesDataset
-
 # Get majority class
 
 majorityClassCount <- treesDataset %>% group_by(inclinacion_peligrosa) %>% summarise(total=n())
