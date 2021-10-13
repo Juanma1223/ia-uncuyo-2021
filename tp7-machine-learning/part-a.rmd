@@ -114,6 +114,8 @@ treesDataset <- read_csv("arbolado-mza-dataset.csv")
 
 rows <- nrow(treesDataset)
 
+rows
+
 # Generate random probability
 
 prob_arr <- runif(rows, 0, 1)
@@ -155,5 +157,71 @@ tnCount
 fpCount
 
 fnCount
+
+```
+
+```{r}
+
+library(dplyr) 
+library(readr)
+
+# Load dataset 
+
+treesDataset <- read_csv("arbolado-mza-dataset.csv")
+
+rows <- nrow(treesDataset)
+
+rows
+
+# Generate random probability
+
+prob_arr <- runif(rows, 0, 1)
+
+# Add column containing probability array to data frame
+
+treesDataset$prediction_prob <- prob_arr
+
+treesDataset
+
+# Get majority class
+
+majorityClassCount <- treesDataset %>% group_by(inclinacion_peligrosa) %>% summarise(total=n())
+
+# Show majority class
+
+majorityClassCount
+
+# Majority class resulted non dangerous, assign it to every tree
+
+classifiedDataSet <- treesDataset %>% mutate(prediction_class = 0)
+
+classifiedDataSet
+
+# Calculate metrics
+
+truePositive <- classifiedDataSet %>% filter(inclinacion_peligrosa == 1 & prediction_class == 1)
+
+trueNegative <- classifiedDataSet %>% filter(inclinacion_peligrosa == 0 & prediction_class == 0)
+
+falsePositive <- classifiedDataSet %>% filter(inclinacion_peligrosa == 0 & prediction_class == 1)
+
+falseNegative <- classifiedDataSet %>% filter(inclinacion_peligrosa == 1 & prediction_class == 0)
+
+tpCount <- nrow(truePositive)
+
+tnCount <- nrow(trueNegative)
+
+fpCount <- nrow(falsePositive)
+
+fnCount <- nrow(falseNegative)
+
+tpCount
+
+tnCount
+
+fpCount
+
+fnCount
+
 
 ```

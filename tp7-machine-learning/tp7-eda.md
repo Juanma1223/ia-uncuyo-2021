@@ -30,3 +30,17 @@
 | --------- | --------------------- | ------------------------ |
 | Acertó | 1779 | 14151 |
 | Falló | 14182 | 1800 |
+
+| n = 31912 | Inclinación peligrosa | Inclinación no peligrosa |
+| --------- | --------------------- | ------------------------ |
+| Positivo | 1779 | 1800 |
+| Negativo | 14182 | 14151 |
+
+# Ejercicio 5 (Desarrollo en el notebook de r con nombre part-a.rmd)
+
+## Asignarle inclinación no peligrosa a todos por ser la clase mayoritaria
+
+| n = 31912 | Inclinación peligrosa | Inclinación no peligrosa |
+| --------- | --------------------- | ------------------------ |
+| Positivo | 0 | 3579 |
+| Negativo | 0 | 28333 |
