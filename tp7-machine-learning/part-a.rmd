@@ -213,5 +213,68 @@ fpCount
 
 fnCount
 
+# Specificity and Sensitivity
+
+sens <- (tpCount/(tpCount+fnCount))
+
+sens
+
+spec <- (tnCount/tnCount+fpCount)
+
+spec 
+
+
+```
+
+```{r}
+# Exercise 7
+
+library(dplyr) 
+library(readr)
+library(rpart)
+library(caret)
+
+# Load dataset 
+
+treesDataset <- read_csv("arbolado-mza-dataset.csv")
+
+treesDataset
+
+# Function in charge of splitting our dataframe into k folds
+create_folds <- function(k,data){
+   # Get row quantity
+   rowsQuan <- nrow(data)
+   # Number of rows in each fold
+   foldsLen <- ceiling(rowsQuan/k)
+   # Split data
+   splittedData <- split(data, sample(rep(1:k,foldsLen)))
+   return(splittedData)
+}
+
+splittedData <- create_folds(10,treesDataset)
+
+trainIndex <- createDataPartition(as.factor(treesDataset$inclinacion_peligrosa),p=0.80,list=FALSE)
+
+
+trainData <- treesDataset[ trainIndex, ]
+
+trainData
+
+testData <- treesDataset[ -trainIndex, ]
+
+testData
+
+testData[,12]
+
+# seleccionamos la clase y las variables que nos interesan
+train_formula<-formula(inclinacion_peligrosa~altura+
+   circ_tronco_cm+
+   lat+long+
+   seccion+
+   especie)
+# generamos el modelo 
+		tree_model<-rpart(train_formula,data=trainData)
+		# obtenemos la predicción
+		p<-predict(tree_model,testData,type='class') 
 
 ```
