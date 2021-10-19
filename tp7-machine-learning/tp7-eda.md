@@ -44,3 +44,17 @@
 | --------- | --------------------- | ------------------------ |
 | Positivo | 0 | 3579 |
 | Negativo | 0 | 28333 |
+
+# Ejercicio 6 
+
+## Specificity y sensitivity del ejercicio 4:
+
+Sensitivity = 1779/(1779+14182) = 0.11145918175
+
+Specificity = 14151/(1800+14151) = 0.88715441038
+
+## Specificity y sensitivity del ejercicio 5:
+
+Sensitivity = 0
+
+Specificity = 1
