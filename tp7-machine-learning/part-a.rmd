@@ -233,6 +233,7 @@ library(dplyr)
 library(readr)
 library(rpart)
 library(caret)
+library(randomForest)
 
 # Load dataset 
 
@@ -251,6 +252,9 @@ create_folds <- function(k,data){
    return(splittedData)
 }
 
+
+treesDataset$inclinacion_peligrosa <- as.factor(treesDataset$inclinacion_peligrosa)
+
 splittedData <- create_folds(10,treesDataset)
 
 trainIndex <- createDataPartition(as.factor(treesDataset$inclinacion_peligrosa),p=0.80,list=FALSE)
@@ -264,17 +268,28 @@ testData <- treesDataset[ -trainIndex, ]
 
 testData
 
-testData[,12]
 
-# seleccionamos la clase y las variables que nos interesan
-train_formula<-formula(inclinacion_peligrosa~altura+
-   circ_tronco_cm+
-   lat+long+
-   seccion+
-   especie)
-# generamos el modelo 
-		tree_model<-rpart(train_formula,data=trainData)
-		# obtenemos la predicción
-		p<-predict(tree_model,testData,type='class') 
+# Transformamos la información para hacer el modelo mas simple
+
+trainData <- treesDataset %>% mutate(circ_tronco_cm_cat= ifelse(`circ_tronco_cm`<=100,'bajo',
+                                                               ifelse(`circ_tronco_cm`>100 & `circ_tronco_cm` <= 200, 'medio',
+                                                                      ifelse(`circ_tronco_cm` > 200 & `circ_tronco_cm` <= 300, 'alto','muy alto'))))
+
+# Sacamos columnas que no aportan información
+
+trainData <- subset(trainData, select=-c(id,ultima_modificacion,seccion,area_seccion,lat,long))
+
+trainData
+
+rf <- randomForest(inclinacion_peligrosa ~ .,data=trainData, importance=TRUE)
+pred <- predict(rf, newData=trainData)
+
+print(rf)
+importance(rf)
+
+
+trainData$prediction <- pred
+
+trainData
 
 ```
