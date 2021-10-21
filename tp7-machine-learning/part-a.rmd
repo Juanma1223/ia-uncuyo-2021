@@ -277,12 +277,20 @@ trainData <- treesDataset %>% mutate(circ_tronco_cm_cat= ifelse(`circ_tronco_cm`
 
 # Sacamos columnas que no aportan información
 
-trainData <- subset(trainData, select=-c(id,ultima_modificacion,seccion,area_seccion,lat,long))
+trainData <- subset(trainData, select=-c(id,ultima_modificacion,diametro_tronco,lat,long))
+
+trainData
+
+positives <- trainData %>% filter(inclinacion_peligrosa == 1)
+negatives <- trainData %>% filter(inclinacion_peligrosa == 0)
+negatives <- negatives[ 1:3578,]
+
+trainData <- rbind(positives,negatives)
 
 trainData
 
 rf <- randomForest(inclinacion_peligrosa ~ .,data=trainData, importance=TRUE)
-pred <- predict(rf, newData=trainData)
+pred <- predict(rf, newData=testData)
 
 print(rf)
 importance(rf)
