@@ -10,114 +10,69 @@ library(readr)
 library(rpart)
 library(caret)
 library(randomForest)
-
-set.seed(11)
-
 # Load dataset 
 
-treesDataset <- read_csv("arbolado-mza-dataset.csv")
-
-treesDataset
-
-
-treesTestSet <- read_csv("arbolado-mza-dataset-test.csv")
-
+set.seed(123)
+treesDataset <- read.csv("C:/Users/sebas/Downloads/arbolado-publico-mendoza/arbolado-mza-dataset.csv")
+treesTestSet <- read.csv("C:/Users/sebas/Downloads/arbolado-publico-mendoza/arbolado-mza-dataset-test.csv")
 
 treesDataset$inclinacion_peligrosa <- as.factor(treesDataset$inclinacion_peligrosa)
+trainIndex <- createDataPartition(as.factor(treesDataset$inclinacion_peligrosa),p=0.80,list=FALSE)
 
-
-# Transformamos la información para hacer el modelo mas simple
-
-trainData <- treesDataset %>% mutate(circ_tronco_cm_cat= ifelse(`circ_tronco_cm`<=100,1,
-                                                               ifelse(`circ_tronco_cm`>100 & `circ_tronco_cm` <= 200, 2,
-                                                                      ifelse(`circ_tronco_cm` > 200 & `circ_tronco_cm` <= 300, 3,4))))
-
-treesTestSet <- treesTestSet %>% mutate(circ_tronco_cm_cat= ifelse(`circ_tronco_cm`<=100,1,
-                                                               ifelse(`circ_tronco_cm`>100 & `circ_tronco_cm` <= 200, 2,
-                                                                      ifelse(`circ_tronco_cm` > 200 & `circ_tronco_cm` <= 300, 3,4))))
-
-# Splitting into testing and training data using bootstraping
-
-rows <- nrow(treesDataset)
-
-trainIndex <- sample(1:rows, replace = TRUE, size = rows*0.2)
-
-trainData <- treesDataset[ -trainIndex, ]
-
-trainData
-
-testData <- treesDataset[ trainIndex, ]
-
-testData
-
-
-trainData$especie <- as.integer(as.factor(trainData$especie))
-trainData$altura <- as.integer(as.factor(trainData$altura))
-trainData$diametro_tronco <- as.integer(as.factor(trainData$diametro_tronco))
-
+trainData <- treesDataset[ trainIndex, ]
+testData <- treesDataset[ -trainIndex, ]
 
 # Save trees ID
-
 treesID <- treesTestSet$id
 
-treesTestSet$especie <- as.integer(as.factor(treesTestSet$especie))
-treesTestSet$altura <- as.integer(as.factor(treesTestSet$altura))
-treesTestSet$diametro_tronco <- as.integer(as.factor(treesTestSet$diametro_tronco))
+
+drop <- names(trainData) %in% c("ultima_modificacion")
+trainData <- trainData[,!drop]
+
+drop <- names(trainData) %in% c("lat")
+trainData <- trainData[,!drop]
+
+drop <- names(trainData) %in% c("long")
+trainData <- trainData[,!drop]
+
+drop <- names(trainData) %in% c("area_seccion")
+trainData <- trainData[,!drop]
 
 
+drop <- names(treesTestSet) %in% c("ultima_modificacion")
+treesTestSet <- treesTestSet[,!drop]
+
+drop <- names(treesTestSet) %in% c("lat")
+treesTestSet <- treesTestSet[,!drop]
+
+drop <- names(treesTestSet) %in% c("long")
+treesTestSet <- treesTestSet[,!drop]
+
+drop <- names(treesTestSet) %in% c("area_seccion")
+treesTestSet <- treesTestSet[,!drop]
 
 positives <- trainData %>% filter(inclinacion_peligrosa == 1)
-
-positives
-
-
 negatives <- trainData %>% filter(inclinacion_peligrosa == 0)
 
-negatives
-
 # Take some random negatives for sample
-
-splitted <- sample(1:nrow(negatives),replace = TRUE, size = nrow(positives))
+splitted <- sample(1:nrow(negatives),replace = F, size = 3800)
 negatives <- negatives[ splitted, ]
-
-
 trainData <- rbind(negatives,positives)
 
 
 # Train model
-
-rf <- randomForest(inclinacion_peligrosa ~ especie + altura + diametro_tronco ,data=trainData, importance=TRUE, ntree=500, mtry=2)
-
-inclinacion_peligrosa <- predict(rf, newdata=testData)
-
+rf <- randomForest(inclinacion_peligrosa ~ altura + especie + diametro_tronco,data=trainData, importance=TRUE, ntree=600, mtry=2)
+inclinacion_peligrosa <- predict(rf, newdata=treesTestSet)
 print(rf)
 importance(rf)
 
-# Testing data
 
-testData$pred <- inclinacion_peligrosa
-
-
-fn <- testData %>% filter(inclinacion_peligrosa == 1 & pred == 0)
-
-fn
-
-fp <- testData %>% filter(inclinacion_peligrosa == 0 & pred == 1)
-
-fp
-
-
-# Formatting for submitting
-
-inclinacion_peligrosa <- predict(rf, newdata=treesTestSet)
-
+# Formatting
 inclinacion_peligrosa <- as.numeric(as.character(inclinacion_peligrosa))
-
 id <- treesID
-
 results <- data.frame(id,inclinacion_peligrosa)
-
 results
+
 
 write.csv(results,"results.csv")
 
