@@ -8,13 +8,13 @@ output: html_notebook
 library(dplyr) 
 library(readr)
 library(rpart)
-library(caret)
 library(randomForest)
+
 # Load dataset 
 
 set.seed(123)
-treesDataset <- read.csv("C:/Users/sebas/Downloads/arbolado-publico-mendoza/arbolado-mza-dataset.csv")
-treesTestSet <- read.csv("C:/Users/sebas/Downloads/arbolado-publico-mendoza/arbolado-mza-dataset-test.csv")
+treesDataset <- read_csv("arbolado-mza-dataset.csv")
+treesTestSet <- read_csv("arbolado-mza-dataset-test.csv")
 
 treesDataset$inclinacion_peligrosa <- as.factor(treesDataset$inclinacion_peligrosa)
 trainIndex <- createDataPartition(as.factor(treesDataset$inclinacion_peligrosa),p=0.80,list=FALSE)
@@ -24,32 +24,6 @@ testData <- treesDataset[ -trainIndex, ]
 
 # Save trees ID
 treesID <- treesTestSet$id
-
-
-drop <- names(trainData) %in% c("ultima_modificacion")
-trainData <- trainData[,!drop]
-
-drop <- names(trainData) %in% c("lat")
-trainData <- trainData[,!drop]
-
-drop <- names(trainData) %in% c("long")
-trainData <- trainData[,!drop]
-
-drop <- names(trainData) %in% c("area_seccion")
-trainData <- trainData[,!drop]
-
-
-drop <- names(treesTestSet) %in% c("ultima_modificacion")
-treesTestSet <- treesTestSet[,!drop]
-
-drop <- names(treesTestSet) %in% c("lat")
-treesTestSet <- treesTestSet[,!drop]
-
-drop <- names(treesTestSet) %in% c("long")
-treesTestSet <- treesTestSet[,!drop]
-
-drop <- names(treesTestSet) %in% c("area_seccion")
-treesTestSet <- treesTestSet[,!drop]
 
 positives <- trainData %>% filter(inclinacion_peligrosa == 1)
 negatives <- trainData %>% filter(inclinacion_peligrosa == 0)
