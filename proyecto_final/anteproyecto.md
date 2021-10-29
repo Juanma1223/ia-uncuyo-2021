@@ -2,6 +2,8 @@
 
 ## Código del proyecto: STSP (Self Taught Snake Player)
 
+## Integrantes: Gastón Cavallo y Juan Manuel Fernandez
+
 ### Introducción:
 
   La idea detrás de este trabajo es la de explorar el mundo del aprendizaje reforzado aplicado al campo de los videojuegos. La realidad es que la forma de aprender a jugar
@@ -20,6 +22,10 @@
   como en la representación de los estados para observar la variación de la performance del agente en el juego, en este caso, puntuación máxima de manzanas que el agente es capaz
   de recolectar. El trabajo estará inspirado y basado en el siguiente artículo: https://towardsdatascience.com/snake-played-by-a-deep-reinforcement-learning-agent-53f2c4331d36,
   en el cual se muestra una implementación del videojuego con un agente basado en Deep Reinforcement Learning.
+  
+  Gracias al artículo citado, tenemos una visión de como se podría plantear el entorno para que el agente sea capaz de aprender, modelando estado del mapa mediante posiciones,
+  tendiendo el agente que decidir entre 4 acciones: Arriba, Izquierda, Derecha y abajo. Estas decisiones las tomará en base a la posición de su cuerpo y si tiene paredes en la 
+  proximidad.
   
   La pregunta que puede surgir es: ¿ Por que no tratar este problema con un simple programa que juegue desde un principio ? La realidad es que resulta viable programar un "bot"
   capaz de jugar snake, pero como todo programa cuyo funcionamiento algorítmico fue diseñado por alguien, jamás será mejor que su creador, como ya se mencionó con anterioridad.
