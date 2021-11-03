@@ -1,7 +1,7 @@
 # Resultados del árbol de decision
 
 ## Árbol resultado del dataset tenis.csv
-![img](resulting_tree.png)
+![img](code/id3/resulting_tree.png)
 
 
 # Funcionamiento de árboles de decision con valores reales
