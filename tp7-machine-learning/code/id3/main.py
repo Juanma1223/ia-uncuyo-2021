@@ -40,7 +40,11 @@ def getValues(attribute,examples):
     return values
 
 def booleanProb(q):
-    print(q)
+    # Kinda hardcoded not gonna lie
+    if(q == 1):
+        q = 0.9999
+    elif(q == 0):
+        q = 0.001
     return -(q*math.log(q,2)+(1-q)*math.log(1-q,2))
 
 def getPositivesNegatives(examples,attribute,value):
@@ -86,9 +90,13 @@ def importance(attributes,examples):
 def decision_tree_learning(examples,attributes,parent_examples):
     examples_quant = sum(1 for _ in examples)
     if(examples_quant == 0):
-        return plurality_value(parent_examples)
+        classification = plurality_value(parent_examples)
+        leaf = Tree(classification)
+        return leaf
     elif(len(attributes) == 0):
-        return plurality_value(examples)
+        classification = plurality_value(examples)
+        leaf = Tree(classification)
+        return leaf
     counter = 0
     for example in examples:
         if(example[4] == "yes"):
@@ -102,19 +110,20 @@ def decision_tree_learning(examples,attributes,parent_examples):
     else:
         attribute = importance(attributes,examples)
         newTree = Tree(attribute)
-        remainingAttributes = copy(attributes)
+        remainingAttributes = attributes.copy()
         remainingAttributes.remove(attribute)
         values = getValues(attribute,examples)
         for value in values:
             # Filter examples and return only those with value vk
             exs = filterExamples(examples,attribute,value)
             subtree = decision_tree_learning(exs, remainingAttributes, examples)
-            newTree.addBranch(subtree,value)
+            newTree.addBranch(subtree,value,newTree)
         return newTree
 
 f = open("code/id3/tennis.csv")
 reader = csv.reader(f)
 attributes = next(reader)
+attributes.remove("play")
 examples = []
 for row in reader:
     examples.append(row)
