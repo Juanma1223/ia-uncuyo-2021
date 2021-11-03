@@ -3,10 +3,6 @@ import csv
 import copy
 import math
 
-f = open("code/id3/tennis.csv")
-examples = csv.reader(f)
-attributes = next(examples)
-
 def plurality_value(examples):
     noCount = 0
     yesCount = 0
@@ -44,11 +40,13 @@ def getValues(attribute,examples):
     return values
 
 def booleanProb(q):
+    print(q)
     return -(q*math.log(q,2)+(1-q)*math.log(1-q,2))
 
 def getPositivesNegatives(examples,attribute,value):
     positives = 0
     negatives = 0
+    filtered = examples
     if(value != ""):
         filtered = filterExamples(examples,attribute,value)
     for example in filtered:
@@ -61,9 +59,9 @@ def getPositivesNegatives(examples,attribute,value):
 def remainder(attribute,examples):
     values = getValues(attribute,examples)
     remainder = 0
+    examplesQuantity = sum(1 for _ in examples)
     for value in values:
         valuePN = getPositivesNegatives(examples,attribute,value)
-        examplesQuantity = sum(1 for _ in examples)
         term1 = (valuePN[0]+valuePN[1])/examplesQuantity
         term2 = booleanProb(valuePN[0]/(valuePN[0]+valuePN[1]))
         remainder = remainder + term1*term2
@@ -96,9 +94,11 @@ def decision_tree_learning(examples,attributes,parent_examples):
         if(example[4] == "yes"):
             counter = counter + 1
     if(counter == examples_quant):
-        return "yes"
+        leaf = Tree("yes")
+        return leaf
     elif(counter == 0):
-        return "no"
+        leaf = Tree("no")
+        return leaf
     else:
         attribute = importance(attributes,examples)
         newTree = Tree(attribute)
@@ -112,6 +112,13 @@ def decision_tree_learning(examples,attributes,parent_examples):
             newTree.addBranch(subtree,value)
         return newTree
 
+f = open("code/id3/tennis.csv")
+reader = csv.reader(f)
+attributes = next(reader)
+examples = []
+for row in reader:
+    examples.append(row)
 dt = decision_tree_learning(examples, attributes, examples)
+dt.printTree()
 
 f.close()
