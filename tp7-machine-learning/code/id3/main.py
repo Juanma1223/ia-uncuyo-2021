@@ -3,7 +3,7 @@ import csv
 import copy
 import math
 
-f = open("code/tennis.csv")
+f = open("code/id3/tennis.csv")
 examples = csv.reader(f)
 attributes = next(examples)
 
@@ -21,6 +21,16 @@ def plurality_value(examples):
         return "yes"
 
 
+# Filter rows where attribute == value
+def filterExamples(examples,attribute,value):
+    global attributes
+    filteredExamples = []
+    attributeIndex = attributes.index(attribute)
+    for example in examples:
+        if(example[attributeIndex] == value):
+            filteredExamples.append(example)
+    return filteredExamples
+
 # Return all posible values for an attribute
 def getValues(attribute,examples):
     global attributes
@@ -33,30 +43,46 @@ def getValues(attribute,examples):
             values.append(currentValue)
     return values
 
+def booleanProb(q):
+    return -(q*math.log(q,2)+(1-q)*math.log(1-q,2))
 
-def valueProbability(attribute,value):
-    return 0
+def getPositivesNegatives(examples,attribute,value):
+    positives = 0
+    negatives = 0
+    if(value != ""):
+        filtered = filterExamples(examples,attribute,value)
+    for example in filtered:
+        if(example[4] == "yes"):
+            positives = positives + 1
+        else:
+            negatives = negatives + 1
+    return (positives,negatives)
+
+def remainder(attribute,examples):
+    values = getValues(attribute,examples)
+    remainder = 0
+    for value in values:
+        valuePN = getPositivesNegatives(examples,attribute,value)
+        examplesQuantity = sum(1 for _ in examples)
+        term1 = (valuePN[0]+valuePN[1])/examplesQuantity
+        term2 = booleanProb(valuePN[0]/(valuePN[0]+valuePN[1]))
+        remainder = remainder + term1*term2
+    return remainder
 
 # Return most important attribute and it's values
 def importance(attributes,examples):
+    maxInfoGain = 0
+    bestAttribute = ""
     for attribute in attributes:
-        values = getValues(attribute,examples)
-        entropy = 0
-        # Calculate entropy
-        for value in values:
-            prob = valueProbability(attribute,value)
-            entropy = entropy + (prob*math.log(1/prob,2))
-
-
-# Filter rows where attribute == value
-def filterExamples(examples,attribute,value):
-    global attributes
-    filteredExamples = []
-    attributeIndex = attributes.index(attribute)
-    for example in examples:
-        if(example[attributeIndex] == value):
-            filteredExamples.append(example)
-    return filteredExamples
+        # Calculate infoGain
+        attributePN = getPositivesNegatives(examples,attribute,"")
+        attributeEntropy = booleanProb(attributePN[0]/(attributePN[0]+attributePN[1]))
+        rem = remainder(attribute,examples)
+        infoGain = attributeEntropy - rem
+        if(infoGain > maxInfoGain):
+            maxInfoGain = infoGain
+            bestAttribute = attribute
+    return bestAttribute
 
 
 def decision_tree_learning(examples,attributes,parent_examples):
@@ -78,13 +104,14 @@ def decision_tree_learning(examples,attributes,parent_examples):
         newTree = Tree(attribute)
         remainingAttributes = copy(attributes)
         remainingAttributes.remove(attribute)
-        for value in attribute.values:
+        values = getValues(attribute,examples)
+        for value in values:
             # Filter examples and return only those with value vk
             exs = filterExamples(examples,attribute,value)
             subtree = decision_tree_learning(exs, remainingAttributes, examples)
             newTree.addBranch(subtree,value)
         return newTree
 
-#dt = Tree(examples, attributes, examples)
+dt = decision_tree_learning(examples, attributes, examples)
 
 f.close()

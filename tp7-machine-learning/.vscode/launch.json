@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "D:/Facultad/3er año/Inteligencia Artificial I/ia-uncuyo-2021/tp7-machine-learning/code/main.py",
+            "program": "D:/Facultad/3er año/Inteligencia Artificial I/ia-uncuyo-2021/tp7-machine-learning/code/id3/main.py",
             "console": "integratedTerminal"
         }
     ]
