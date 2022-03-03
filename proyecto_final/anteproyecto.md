@@ -85,12 +85,12 @@
         3. Llegar a superar una puntuación de 40 en el juego
   
   9.  Revisar los resultados obtenidos y redactar el informe final *[5 días]*
-          1.  Redactar la introducción
-          2.  Resumir el marco teórico
-          3.  Documentar el proceso de diseño
-          4.  Selección de gráficos, métricas, etc
-          5.  Redactar el análisis de resultados
-          6.  Redactar conclusión 
+        1.  Redactar la introducción
+        2.  Resumir el marco teórico
+        3.  Documentar el proceso de diseño
+        4.  Selección de gráficos, métricas, etc
+        5.  Redactar el análisis de resultados
+        6.  Redactar conclusión 
 
   ## Cronograma
   
