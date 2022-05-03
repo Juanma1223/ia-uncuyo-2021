@@ -35,4 +35,9 @@
 
 	La función R representa la recompensa total estimada a la hora de tomar un conjunto de acciones en el futuro (o en el pasado en caso de estar calculando la recompensa de un episodio) y [s0,s1,s2,…] representan los estados en los que el agente va a encontrarse luego de tomar determinadas acciones.
 
-	Esta función resulta ser “inocente”, ya que no toma en cuenta la cercanía de las acciones al momento en el tiempo donde se encuentra el agente, es decir, la recompensa aporta lo mismo ya sea que se tome dentro de 10 unidades de tiempo o en la siguiente, lo que puede ser perjudicial y tomar una decisión inmediata demasiado negativa en la cercanía de tiempo, siendo que el agente se está arriesgando a una estimación realizada sobre una recompensa a largo plazo que puede o no ser correcta. Una analogía podría ser el mundo de las finanzas, si se estima que el bitcoin a 10 años va a costar 100 veces mas, pero hoy en día resulta una pésima inversión, corremos el riesgo de que nuestra predicción sea erronea y perdamos mucho dinero.
+	Esta función resulta ser “inocente”, ya que no toma en cuenta la cercanía de las acciones al momento en el tiempo donde se encuentra el agente, es decir, la recompensa aporta lo mismo ya sea que se tome dentro de 10 unidades de tiempo o en la siguiente, lo que puede ser perjudicial y tomar una decisión inmediata demasiado negativa en la cercanía de tiempo, siendo que el agente se está arriesgando a una estimación realizada sobre una recompensa a largo plazo que puede o no ser correcta. Una analogía podría ser el mundo de las finanzas, si se estima que el bitcoin a 10 años va a costar 100 veces mas, pero hoy en día resulta una pésima inversión, corremos el riesgo de que nuestra predicción sea errónea y perdamos mucho dinero.
+
+2) Recompensa descontada: R([s0,s1,s2,…]) = R(s0)  + a*R(s1) + a^2*R(s2)
+
+	Para el cálculo de esta función se introduce un valor numérico entre 0 y 1 llamado factor de descuento, el cual representa la preferencia que puede tendrá el agente por la recompensa inmediata por sobre la recompensa a largo plazo, evitando así, el problema definido anteriormente.
+
