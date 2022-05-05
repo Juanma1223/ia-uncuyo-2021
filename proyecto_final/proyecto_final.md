@@ -11,6 +11,8 @@
 # Marco teórico
 
 
+## Conceptos base
+
 	Los siguientes conceptos resultan fundamentales para explicación e implementación de todas las técnicas que se utilizaran para resolver el problema, las cuales serán explicadas en orden, comenzando por los conceptos mas teóricos como lo son los los SDP (Sequential Decision Problems por sus siglas en inglés), MDP (Markov Decision Process por sus siglas en inglés), siguiendo por aquellos conceptos cercanos a la implementacion como son el caso del algoritmo de Q-Learning y la utilización de redes neuronales en lo que se denomina DRL (Deep Reinforcement Learning por sus siglas en inglés).
 
 	Uno de los patrones que presentan todos aquellos problemas en los que se requiere de aprendizaje en base a la experiencia es la presencia de un conjunto de acciones que se pueden llegar a tomar, en conjunto con determinados estados en los que se puede llegar a estar según la situación. El desafío resulta de tener que tomar decisiones correctas con respecto a que acción realizar en función del estado en donde nos encontremos y a donde queramos llegar. Esto nos trae inmediatamente a lo que se denomina un SDP, el cual resulta un problema en el cual nuestro personaje (a partir de ahora llamado agente) debe llegar a un estado deseado mediante la realización de un conjunto de acciones ordenadas y elegidas en secuencia sobre un entorno, pero bien ¿Como podemos lograr que nuestro agente tome las decisiones correctas en un entorno? 
@@ -41,3 +43,45 @@
 
 	Para el cálculo de esta función se introduce un valor numérico entre 0 y 1 llamado factor de descuento, el cual representa la preferencia que puede tendrá el agente por la recompensa inmediata por sobre la recompensa a largo plazo, evitando así, el problema definido anteriormente.
 
+
+## Algoritmos
+
+	Cada uno de los conceptos citados anteriormente son los que se utilizan como base para los algoritmos de aprendizaje reforzado en mayor o menor medida. Son varios los algoritmos que se pueden llegar a utilizar para resolver un problema de aprendizaje reforzado, entre ellos se encuentran los siguientes:
+
+### Fuerza Bruta: 
+
+	Este algoritmo resulta el mas básico de todos, busca a través de probar todas las posibles combinaciones para obtener una política óptima, es decir, encontrar una función p(s) = ‘a’, tal que p es la política, ‘s’ el estado actual del agente y ‘a’ es la acción mas óptima que se puede realizar dada la situación actual. Generalmente funciona para problemas extremadamente simples en los cuales la política viene dada por una simple distribución de probabilidad de éxito al tomar cada acción. El algoritmo itera utilizando la ya mencionada “función de utilidad”, que estima la secuencia de acciones mediante la cual el agente maximizará la recompensa obtenida.
+
+### Q-Learning: 
+
+	Basado principalmente en los principios de programación dinámica, Q-Learning es un algoritmo que utiliza un conjunto de funciones para la exploración del entorno, luego, lo “aprende” o “memoriza” utilizando una matriz denominada Q-Table.
+
+	La exploración en Q-Learning apunta a maximizar la recompensa obtenida a cada acción que toma, es decir, el agente intenta maximizar la denominada función “Expected Discounted Return” o Recompensa Descontada (definida con anterioridad en las funciones de utilidad) la cual se define en la siguiente figura
+
+
+(Insertar la imagen en el markdown)
+	https://miro.medium.com/max/778/1*uCvDmywJgMcaW6aYMkqblw.png
+
+Fuente: https://towardsdatascience.com/q-learning-algorithm-from-explanation-to-implementation-cdbeda2ea187
+
+
+	Para maximizar dicha función, el agente debe encontrar una política capaz de tomar decisiones, para lograrlo, se utiliza la Ecuación de Optimalidad de Bellman, la cual luce como se ven en la siguiente figura
+
+
+(Insertar la imagen en markdown)
+	https://miro.medium.com/max/846/1*t9CmhWlgbAqm8Y-fCgiw9w.png
+
+Fuente: https://towardsdatascience.com/q-learning-algorithm-from-explanation-to-implementation-cdbeda2ea187
+
+
+	En la figura se observan una serie de valores, además de la función q(s,a). La función ‘q’ o también llamada Q-Value es la que define que tan positivo es tomar determinada acción para el agente en un estado ‘s’ dado, si observamos la asignación al lado derecho nos encontramos una serie de valores que dictaminan el valor de tomar una acción en determinada situación, siendo Rt+1 la recompensa obtenida por el agente por tomar la acción ‘a’ para el siguiente movimiento, la letra griega ‘gamma’ el factor de descuento y una llamada recursiva a la función q con valores s’ y a’, pidiendo el máximo valor que encontramos con anterioridad en nuestra etapa de ‘exploración’.
+
+	La utilización de la función se entiende aún mejor cuando introducimos el funcionamiento de nuestra Q-Table, matriz la cual tiene unas dimensiones definidas por el tamaño del conjunto de acciones y todos los posibles estados en los que el agente se puede encontrar. Formalmente hablando, dado un conjunto de acciones a = {a1,a2,a3,…, an} y un conjunto de estados en los que puede estar el agente dentro del entorrno s = {s1,s2,s3,…,sm}, nuestra matriz Q-Table tendrá una dimensión de n x m.
+
+	En nuestra Q-Table, es donde se almacena el conocimiento del agente y también donde se guarda el valor de recompensa de cada uno de los episodios, utilizando lo que se llama una función de decaimiento en conjunto con la ecuación de Bellman, para así iterar sobre los episodios del agente dentro del entorno y balancear el uso del conocimiento previo con la exploración del mismo sobre el entorno. La función de decaimiento no es mas que aquella que nos aporta la probabilidad de que el agente explore dado un número de iteraciones o episodios pasados, es decir, a medida que vamos aprendiendo de nuestro entorno nos interesa que nuestro agente explore un poco menos y utilice su conocimiento aprendido, por tanto nuestra función proporciona una probabilidad baja de explorar, en contraparte, si nos encontramos en etapas tempranas de la exploración del entorno, nuestro conocimiento previo sobre el entorno es escaso o nulo y por tanto, queremos que nuestro agente explore y experimente.
+
+	Se dice que Q-Learning se encuentra fuertemente relacionado con la programación dinámica porque nuestra matriz Q-Table recuerda mucho a la utilización de cálculos pasados para ahorrar tiempo de cálculo en el futuro, pues en realidad esta resulta la base del algoritmo. Cada una de las casillas se calcula mediante la igualdad definida en la figura de la ecuación de Bellman en el proceso de exploración, es decir, si al tomar determinada acción conseguimos un valor de recompensa mas alto que el que ya estaba en dicha casilla (que almacenaba el resultado de tomar la misma decisión en algún episodio pasado) lo reemplazamos por la recompensa total acumulada durante el episodio sumada a la recompensa de realizar la acción seleccionada por el agente. En caso de encontrarnos en fases mas avanzadas de aprendizaje, el agente tendrá una alta probabilidad de utilizar el conocimiento ya adquirido y por tanto, se utilizará la ecuación de Bellman para obtener la acción que mejores resultados nos ha dado en determinado estado, es decir, de nuestra matriz Q-Table, elegimos la acción con mayor valor de recompensa para la fila del estado correspondiente.
+
+	Iterando sobre los episodios y utilizando nuestra Q-Table, almacenamos entonces el conocimiento del agente sobre el entorno, resultando en un aprendizaje iterativo.
+
+### Deep Reinforcement Learning: 
