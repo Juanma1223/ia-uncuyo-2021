@@ -1,6 +1,6 @@
 import numpy as np
 import gym
-import snake_env as senv
+import snake_env_q as senv
 
 # env = gym.make("FrozenLake-v1")
 env = senv.Snake()
@@ -8,11 +8,12 @@ n_observations = env.observation_space.n
 n_actions = env.action_space.n
 
 #Initialize the Q-table to 0
-Q_table = np.zeros((n_observations**3,n_actions))
+Q_table = dict()
+# Q_table = np.zeros((n_observations**3,n_actions))
 print(Q_table)
 
 #number of episode we will run
-n_episodes = 1000
+n_episodes = 500
 
 #maximum of iteration per episode
 # max_iter_episode = 100
@@ -53,17 +54,26 @@ for e in range(n_episodes):
         # else
         #     he exploits his knowledge using the bellman equation 
         
-        if np.random.uniform(0,1) < exploration_proba:
+        if np.random.uniform(0,1) < exploration_proba or not isinstance(Q_table.get(current_state),np.zeros(2).__class__):
             action = env.action_space.sample()
         else:
-            action = np.argmax(Q_table[current_state,:])
+            action = np.argmax(Q_table[current_state])
+            # action = np.argmax(Q_table[current_state,:])
         
         # The environment runs the chosen action and returns
         # the next state, a reward and true if the epiosed is ended.
         next_state, reward, done, _ = env.step(action)
+
+        if(not isinstance(Q_table.get(current_state),np.zeros(2).__class__)):
+            Q_table[current_state] = np.zeros(n_actions)
         
         # We update our Q-table using the Q-learning iteration
-        Q_table[current_state, action] = (1-lr) * Q_table[current_state, action] +lr*(reward + gamma*max(Q_table[next_state,:]))
+        if(not isinstance(Q_table.get(next_state),np.zeros(2).__class__)):
+            Q_table[next_state] = np.zeros(n_actions) 
+        Q_table[current_state][action] = (1-lr) * Q_table[current_state][action] +lr*(reward + gamma*Q_table[next_state][action])
+
+
+        # Q_table[current_state, action] = (1-lr) * Q_table[current_state, action] +lr*(reward + gamma*max(Q_table[next_state,:]))
         total_episode_reward = total_episode_reward + reward
         # If the episode is finished, we leave the for loop
         # if done:
@@ -82,3 +92,4 @@ print("Mean reward per thousand episodes")
 for i in range(n_episodes):
     print("life ",(i+1),": mean espiode reward: ",
            np.mean(rewards_per_episode[i:(i+1)])) 
+print(Q_table)
