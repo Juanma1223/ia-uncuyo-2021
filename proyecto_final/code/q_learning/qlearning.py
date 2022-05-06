@@ -47,7 +47,7 @@ for e in range(n_episodes):
     #sum the rewards that the agent gets from the environment
     total_episode_reward = 0
     print('episode ',e)
-    while(not (done)): 
+    while(not done): 
         # we sample a float from a uniform distribution over 0 and 1
         # if the sampled flaot is less than the exploration proba
         #     the agent selects arandom action
@@ -78,18 +78,14 @@ for e in range(n_episodes):
         # If the episode is finished, we leave the for loop
         # if done:
         #     break
-        if reward > 1:
-            print('recomp_tot ',total_episode_reward)
         current_state = next_state
     #We update the exploration proba using exponential decay formula 
     exploration_proba = max(min_exploration_proba, np.exp(-exploration_decreasing_decay*e))
     rewards_per_episode.append(total_episode_reward)
-#TODO
-# imprimir Qtable, esta cambiando para mal?
-# verificar el vector de estados esta asignando bien los valores?
-# modificar el output
-print("Mean reward per thousand episodes")
+
+
+print("Mean reward per  episodes")
 for i in range(n_episodes):
     print("life ",(i+1),": mean espiode reward: ",
-           np.mean(rewards_per_episode[i:(i+1)])) 
+        np.mean(rewards_per_episode[i:(i+1)])) 
 print(Q_table)
