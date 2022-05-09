@@ -334,11 +334,11 @@ class Snake(gym.Env):
                     wall_up, wall_right, wall_down, wall_left, \
                     int(self.snake.direction == 'up'), int(self.snake.direction == 'right'), int(self.snake.direction == 'down'), int(self.snake.direction == 'left')]
         else:
-            state2 = ''+str(int(self.snake.y < self.apple.y))+ str(int(self.snake.x < self.apple.x))+str(int(self.snake.y > self.apple.y))+ str(int(self.snake.x > self.apple.x))+ \
+            state = ''+str(int(self.snake.y < self.apple.y))+ str(int(self.snake.x < self.apple.x))+str(int(self.snake.y > self.apple.y))+ str(int(self.snake.x > self.apple.x))+ \
                     str(int(wall_up or body_up))+ str(int(wall_right or body_right))+ str(int(wall_down or body_down))+ str(int(wall_left or body_left))+ \
                     str(int(self.snake.direction == 'up'))+ str(int(self.snake.direction == 'right'))+ str(int(self.snake.direction == 'down'))+ str(int(self.snake.direction == 'left'))
             # state = ''+str(int(state2[0:4],2))+''+str(int(state2[4:8],2))+''+str(int(state2[8:12],2))
-            state = self.getValueState(int(state2[0:4],2),int(state2[4:8],2),int(state2[8:12],2))
+            # state = self.getValueState(int(state2[0:4],2),int(state2[4:8],2),int(state2[8:12],2))
         # print(state)
         return state
 
