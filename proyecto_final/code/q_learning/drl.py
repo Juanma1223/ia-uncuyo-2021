@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from keras.optimizers import adam_v2
 from plot_script import plot_result
 import time
+import json
 
 
 class DQN:
@@ -79,12 +80,25 @@ class DQN:
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
 
+class data_collected:
+    def __init__(self,episode,reward,time):
+        self.episode = episode
+        self.reward = reward
+        self.time = time
+    
+    def __str__(self) -> str:
+        res = 'Ep : '+str(self.episode)+' | '+str(self.reward)+' puntos en '+str(self.time)+' seg.'
+        return res
+
 
 def train_dqn(episode, env):
 
+    rewards_per_episode = list()
     sum_of_rewards = []
     agent = DQN(env, params)
     for e in range(episode):
+        start = time.time()
+        score_episode = 0
         state = env.reset()
         state = np.reshape(state, (1, env.state_space))
         score = 0
@@ -93,7 +107,7 @@ def train_dqn(episode, env):
             action = agent.act(state)
             # print(action)
             prev_state = state
-            next_state, reward, done, _ = env.step(action)
+            next_state, reward, done, new_score_episode = env.step(action)
             score += reward
             next_state = np.reshape(next_state, (1, env.state_space))
             agent.remember(state, action, reward, next_state, done)
@@ -104,8 +118,13 @@ def train_dqn(episode, env):
                 print(f'final state before dying: {str(prev_state)}')
                 print(f'episode: {e+1}/{episode}, score: {score}')
                 break
+            else:
+                score_episode = new_score_episode
         sum_of_rewards.append(score)
-    return sum_of_rewards
+        end = time.time()
+        dc = data_collected(e,score_episode,end-start)
+        rewards_per_episode.append(dc)
+    return sum_of_rewards, rewards_per_episode
 
 
 if __name__ == '__main__':
@@ -136,8 +155,16 @@ if __name__ == '__main__':
     #     print(env_info)
     #     env = Snake(env_info=env_info)
     env = Snake()
-    sum_of_rewards = train_dqn(ep, env)
+    sum_of_rewards, export = train_dqn(ep, env)
     results[params['name']] = sum_of_rewards
     
     plot_result(results, direct=True, k=20)
     
+    data_dump = dict()
+    for i in range(ep):
+        data_dump [i] = export[i].__dict__
+    out_file = open("./ia-uncuyo-2021/proyecto_final/code/output_drl.json", "w") 
+        
+    json.dump(data_dump, out_file, indent = 2) 
+        
+    out_file.close() 

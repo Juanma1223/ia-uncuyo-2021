@@ -269,7 +269,7 @@ class Snake(gym.Env):
         self.run_game()
         state = self.get_state()
         # time.sleep(0.05)
-        return state, self.reward, self.done, {}
+        return state, self.reward, self.done, self.total
 
 
     def get_state(self):
