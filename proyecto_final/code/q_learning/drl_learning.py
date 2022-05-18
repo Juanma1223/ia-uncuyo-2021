@@ -140,7 +140,7 @@ if __name__ == '__main__':
     params['layer_sizes'] = [128, 128, 128]
 
     results = dict()
-    ep = 2
+    ep = 2000
 
     # for batchsz in [1, 10, 100, 1000]:
     #     print(batchsz)
