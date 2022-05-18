@@ -23,7 +23,7 @@ n_actions = env.action_space.n
 Q_table = dict()
 
 #number of episode we will run
-n_episodes = 10
+n_episodes = 2000
 
 #initialize the exploration probability to 1
 exploration_proba = 1

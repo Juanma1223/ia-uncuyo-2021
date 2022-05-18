@@ -1,4 +1,3 @@
-from multiprocessing.dummy import Array
 import turtle
 import random
 import time
@@ -34,10 +33,8 @@ class Snake(gym.Env):
         self.done = False
         self.seed()
         self.reward = 0
-        # self.action_space = 4
+        self.action_space = 4
         self.state_space = 12
-        self.observation_space = spaces.Discrete(5)
-        self.action_space = spaces.Discrete(4)
 
         self.total, self.maximum = 0, 0
         self.human = human
@@ -269,7 +266,7 @@ class Snake(gym.Env):
         self.run_game()
         state = self.get_state()
         # time.sleep(0.05)
-        return state, self.reward, self.done, self.score
+        return state, self.reward, self.done, self.total
 
 
     def get_state(self):
@@ -334,24 +331,16 @@ class Snake(gym.Env):
                     wall_up, wall_right, wall_down, wall_left, \
                     int(self.snake.direction == 'up'), int(self.snake.direction == 'right'), int(self.snake.direction == 'down'), int(self.snake.direction == 'left')]
         else:
-            state2 = ''+str(int(self.snake.y < self.apple.y))+ str(int(self.snake.x < self.apple.x))+str(int(self.snake.y > self.apple.y))+ str(int(self.snake.x > self.apple.x))+ \
-                    str(int(wall_up or body_up))+ str(int(wall_right or body_right))+ str(int(wall_down or body_down))+ str(int(wall_left or body_left))+ \
-                    str(int(self.snake.direction == 'up'))+ str(int(self.snake.direction == 'right'))+ str(int(self.snake.direction == 'down'))+ str(int(self.snake.direction == 'left'))
-            # state = ''+str(int(state2[0:4],2))+''+str(int(state2[4:8],2))+''+str(int(state2[8:12],2))
-            state = self.getValueState(int(state2[0:4],2),int(state2[4:8],2),int(state2[8:12],2))
+            state = [int(self.snake.y < self.apple.y), int(self.snake.x < self.apple.x), int(self.snake.y > self.apple.y), int(self.snake.x > self.apple.x), \
+                    int(wall_up or body_up), int(wall_right or body_right), int(wall_down or body_down), int(wall_left or body_left), \
+                    int(self.snake.direction == 'up'), int(self.snake.direction == 'right'), int(self.snake.direction == 'down'), int(self.snake.direction == 'left')]
+            
         # print(state)
         return state
 
-   
     def bye(self):
         self.win.bye()
 
-    def getValueState(self,valueAp,valueOb,valueDi):
-        res = valueDi
-        res += (4 - (valueAp % 4)) * 4
-        
-        res += (valueOb % 2) * 16
-        return res
 
 
 if __name__ == '__main__':            
@@ -363,5 +352,9 @@ if __name__ == '__main__':
             env.run_game()
 
     
+
+    
+
+
 
     
