@@ -129,3 +129,47 @@ La primer medida a comparar entre ambas implementaciones será el tiempo que le 
 La segunda métrica comparativa será la cantidad de episodios que le toma a cada agente llegar a una media de 8 manzanas por episodio. El resultado de esta comparativa nos dirá que tanto conocimiento obtiene cada agente de cada una de los episodios que experimenta. En este caso no nos importa la velocidad en cuanto al tiempo si no en cuanto a conocimiento adquirido por cada una de las experiencias pasadas.
 
 La tercera métrica comparativa resulta la puntuación máxima luego de un total de 2000 episodios. Esta medida comparativa nos dirá cual de los 2 llega a una política mas óptima luego y por tanto, a una mejor solución del problema. Para este experimento no nos interesa la velocidad a la que se llega a  una política óptima, si no, que tan óptima esta resulta ser con el paso del tiempo.
+
+## Implementación DRL
+
+Para el caso de la implementación de Deep Reinforcement Learning, obtuvimos el código fuente del artículo https://towardsdatascience.com/snake-played-by-a-deep-reinforcement-learning-agent-53f2c4331d36, en el cual se explica el entorno utilizado para el entrenamiento de un agente mediante el uso de aprendizaje reforzado y redes neuronales para resolver el problema del juego Snake.
+
+El planteo resulta sencillo, se aplica la teoría expuesta en el marco teórico acerca de los Procesos de Decisión de Markov, haciendo uso de un conjunto definido de acciones, estados y recompensas que el agente percibe para poder llevar a cabo su aprendizaje. El entorno se define de la siguiente manera:
+
+### Conjunto de acciones posibles: 
+{
+	arriba,abajo,izquierda,derecha
+}
+
+### Conjunto de estados posibles: 
+
+El estado se representa mediante un número de 12 cifras, en la cual cada una se refleja un subestado particular del entorno que puede llegar a percibir el Snake,
+es decir, la presencia o ausencia de una condición determinada se ve reflejada en la aparición de un 1 o 0 en la posición correspondiente
+
+{
+	0 o 1 en la 1ra posición: La manzana se encuentra por encima del Snake
+	0 o 1 en la 2da posición: La manzana se enceuntra por debajo del Snake
+	0 o 1 en la 3ra posición: La manzana se enceuntra a la izquierda del Snake
+	0 o 1 en la 4ta posición: La manzana se enceuntra a la derecha del Snake
+	0 o 1 en la 1ra posición: Hay un obstáculo abajo del snake
+	0 o 1 en la 1ra posición: Hay un obstáculo encima del snake
+	0 o 1 en la 1ra posición: Hay un obstáculo a la derecha del snake
+	0 o 1 en la 1ra posición: Hay un obstáculo a la izquierda del snake
+	0 o 1 en la 1ra posición: La dirección de la cabeza del Snake apunta hacia arriba
+	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia abajo
+	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia la derecha
+	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia la izquierda
+}
+
+### Conjunto de recompensas:
+
+{
+	El snake come una manzana: +10
+	El snake se acerca a la manzana: +1
+	El snake se alejda de la manzana: -1
+	El snake golpea un obstáculo: -100
+}
+
+El planteamiento resulta como ya fue definido con anterioridad, el número de 12 cifras que representa el estado actual del agente, en conjunto con la recompensa del movimiento actual, es consumido a cada paso por la red neuronal para luego devolver una acción y que esta sea ejecutada por el agente en el entorno determinado. La red neuronal desea maximizar la recompensa obtenida a cada paso, para lograrlo, utiliza una función de optimización encargada de dirigir la política del agente hacia una óptima mediante el ajuste de las variables ocultas dentro de las capas de la red neuronal.
+
+El código utiliza un conjunto de capas de tipo Dense, cada una con un total de 128 variables ocultas o "weights" que utilizan la función de activación de Keras "Relu". también, hace uso de una técnica llamada "Replay" que ayuda considerablemente con el aprendizaje. La técnica Replay se basa en almacenar experiencias pasadas, para posteriormente "rejugarlas" todas a cada paso que da, un paralelismo un poco mas claro es ver la repetición de un partido que ya jugaste antes de jugar el próximo, para así entender tus errores y obtener mas información de cada una de tus decisiones, algo así como un repaso de experiencias pasadas.
