@@ -140,7 +140,7 @@ if __name__ == '__main__':
     params['layer_sizes'] = [128, 128, 128]
 
     results = dict()
-    ep = 2000
+    ep = 600
 
     # for batchsz in [1, 10, 100, 1000]:
     #     print(batchsz)
@@ -162,7 +162,7 @@ if __name__ == '__main__':
     data_dump = dict()
     for i in range(ep):
         data_dump [i] = export[i].__dict__
-    out_file = open("./ia-uncuyo-2021/proyecto_final/code/output_drl.json", "w") 
+    out_file = open("./output_drl.json", "w") 
         
     json.dump(data_dump, out_file, indent = 2) 
         

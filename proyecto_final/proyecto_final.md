@@ -18,7 +18,7 @@ Uno de los patrones que presentan todos aquellos problemas en los que se requier
 
 En primer lugar tenemos que definir un tipo de entorno para nuestro agente, para el total de los casos tratados en el presente informe se tendrán en cuenta entornos completamente determinísticos, los cuales resultan estáticos y no dependen de ningún tipo de azar, es decir, si al agente le está permitido desplazarse hacia arriba en algún tipo de tablero, este podrá el 100% de los casos sin ningún posible impedimento. Nuestro entorno también será definido siempre como completamente observable, es decir que el agente sabe a todo momento en que estado se encuentra, además de saber las posibles acciones que puede llegar a tomar.
 
-Una vez definido el entorno, podemos retomar nuestra pregunta sobre aprendizaje de nuestro agente. El primer acercamiento que posiblemente se nos ocurra como seres humanos es el de la prueba y error, es decir, si queremos aprender sobre cualquier cosa, debemos intentar tomar acciones y ver los resultados para así poder tomar decisiones sobre que acción tomar según el estado en el que nos encontremos, para así, encontrar la secuencia de acciones que nos lleve a conseguir nuestro objetivo, ya sea llegar a alguna posición en particular o golpear correctamente la pelota en algún deporte.
+Una vez definido el entorno, podemos retomar nuestra pregunta sobre aprendizaje de nuestro agente. El primer acercamiento que posiblemente se nos ocurra como seres humanos es el de la prueba y error, es decir, si queremos aprender sobre cualquier cosa, debemos intentar tomar acciones y observar los resultados para así poder tomar decisiones sobre que acción ejecutar según el estado en el que nos encontremos, y de esta forma, encontrar la secuencia de acciones que nos lleve a conseguir nuestro objetivo, ya sea llegar a alguna posición en particular o golpear correctamente la pelota en algún deporte.
 
 El principio que rige el aprendizaje reforzado es el denominado MDP (Markov Decision Process), el cual se define teóricamente mediante un conjunto de acciones denominado: ‘a’, el cual representa el conjunto de acciones realizables por nuestro agente dentro del entorno, un conjunto de estados denominado: ‘s’, el cual contiene todos los posibles estados en los que el agente puede llegar a encontrarse según su situación en el entorno, también, se define el modelo de transición que se representa mediante una función P(s,a) = s’, siendo ‘s’ el estado actual del agente y ‘a’ la acción que el agente toma a continuación, devolviendo “ s’ ” que resulta el nuevo estado en el que el agente se encuentra, por último, se definen las recompensas, estas resultan una parte fundamental dentro del aprendizaje del agente, ya que informan al agente que tan “deseable” resulta una acción tomada y que tan “deseable” resulta estar en un estado específico ( capítulo 17 sección 1 de AIMA ).
 
@@ -124,11 +124,42 @@ Para llevar a cabo la interfaz gráfica, el código obtenido del artículo origi
 
 ## Métricas y comparativas
 
-La primer medida a comparar entre ambas implementaciones será el tiempo que le toma a cada agente llegar a una media mayor a 8 manzanas por episodio. El resultado de esta comparativa revelará que tan eficiente es cada agente durante el aprendizaje, es decir, ¿ Cuantos minutos le toma a un agente ser eficaz ?
+> Este conjunto de comparativas se realizo con los resultados obtenidos despues de ejecutar cada algoritmo (q_learning y drl) a 700 y 600 episodios respectivamente, esto se decidio asi debido a la alta demanda de recursos que exigia el algoritmo y el tiempo que tardaba en realizar dicha tarea. No obstante, desde nuestra perspectiva creemos que esta forma de comparalos no les hace justicia y se requieren multiples puntos de vista para determinar si un algoritmo es superior a otro. Para nuestro analisis decidimos realizar la comparativa igualando la cantidad de episodios
 
-La segunda métrica comparativa será la cantidad de episodios que le toma a cada agente llegar a una media de 8 manzanas por episodio. El resultado de esta comparativa nos dirá que tanto conocimiento obtiene cada agente de cada una de los episodios que experimenta. En este caso no nos importa la velocidad en cuanto al tiempo si no en cuanto a conocimiento adquirido por cada una de las experiencias pasadas.
+La primer medida a comparar entre ambas implementaciones será el tiempo que le toma a cada agente llegar a una media mayor a 7 manzanas. El resultado de esta comparativa revelará que tan eficiente es cada agente durante el aprendizaje, es decir, ¿ Cuantos minutos le toma a un agente ser eficaz ?
+
+> Segun pudimos analizar, el algoritmo de DRL alcanza una media mayor a 7 manzanas antes que el algoritmo de QL con 292 seg frente a 4997
+> 
+![Tiempo hasta la recompensa media de 7](./output/time_mean_until_7.png)
+
+La segunda métrica comparativa será la cantidad de episodios que le toma a cada agente llegar a una media de 7 manzanas. El resultado de esta comparativa nos dirá que tanto conocimiento obtiene cada agente de cada una de los episodios que experimenta. En este caso no nos importa la velocidad en cuanto al tiempo si no en cuanto a conocimiento adquirido por cada una de las experiencias pasadas.
+
+> Segun pudimos analizar, el algoritmo de DRL alcanza una media mayor a 7 manzanas antes que el algoritmo de QL con 17 episodios frente a 660
+> 
+![Cantidad de episodios hasta la recompensa media de 7](./output/ep_mean_until_7.png)
 
 La tercera métrica comparativa resulta la puntuación máxima luego de un total de 2000 episodios. Esta medida comparativa nos dirá cual de los 2 llega a una política mas óptima luego y por tanto, a una mejor solución del problema. Para este experimento no nos interesa la velocidad a la que se llega a  una política óptima, si no, que tan óptima esta resulta ser con el paso del tiempo.
+
+> Segun pudimos analizar nuevamente, el algoritmo de DRL alcanza una puntuacion mayor al algoritmo de QL con 52 puntos frente a 42
+> 
+![Maximas puntuaciones](./output/max_scores.png)
+
+Una metrica posible es la de puntuacion vs tiempo, es decir, cuanto tiempo le tomo al algoritmo alcanzar dicha puntuacion
+> 
+![Puntuacion vs tiempo](./output/score_vs_time.png)
+
+Un analisis adicional que podemos hacer es un diagrama de cajas 
+
+![Diagrama de caja y bigotes para ambos algoritmos](./output/box_plot.png)
+
+## Implementacion QL
+
+Al momento de implementar el algoritmo de QLearning, tomamos los conocimientos que habiamos adquirido e intentamos plasmarlos y amoldarlos de modo que pueda interactuar con el mismo entorno de juego de DRL, frente a esto tuvimos serias dificultades desde la base del algoritmo, ya que DRL tomaba como entrada un arreglo de posiciones y una recompensa y generaba la proxima accion posible, mientras que QL lo hacia plasmando en una tabla de conocimiento dicho aprendizaje en base a la recompensa.
+Lo que hicimos fue separar el problema en 3 etapas, entrada, procesamiento, analisis o salida del algoritmo, de esta forma, podiamos ver la manera de optimizar el algoritmo basado en cada problema
+
+### Entrada: 
+Para optimizar los datos de entrada y evitar confusiones, es decir, que para diferentes estados se produzca una misma entrada y nublar el juicio que tiene el agente, decidimos plasmar la entrada como una tabla hash en donde el estado estaba representado por una cadena de caracteres
+
 
 ## Implementación DRL
 

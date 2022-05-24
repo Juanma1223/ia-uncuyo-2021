@@ -23,7 +23,7 @@ n_actions = env.action_space.n
 Q_table = dict()
 
 #number of episode we will run
-n_episodes = 2000
+n_episodes = 700
 
 #initialize the exploration probability to 1
 exploration_proba = 1
@@ -103,7 +103,7 @@ for i in range(n_episodes):
     # print("life ",(i+1),": mean espiode reward: ",
         # np.mean(rewards_per_episode[i:(i+1)])) 
 print(data_dump)
-out_file = open("./ia-uncuyo-2021/proyecto_final/code/output_q.json", "w") 
+out_file = open("./output_q.json", "w") 
     
 json.dump(data_dump, out_file, indent = 2) 
     
