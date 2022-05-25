@@ -131,26 +131,27 @@ La primer medida a comparar entre ambas implementaciones será el tiempo que le 
 > Segun pudimos analizar, el algoritmo de DRL alcanza una media mayor a 7 manzanas antes que el algoritmo de QL con 292 seg frente a 4997
 > 
 ![Tiempo hasta la recompensa media de 7](./output/time_mean_until_7.png)
+Figura 2.1
 
 La segunda métrica comparativa será la cantidad de episodios que le toma a cada agente llegar a una media de 7 manzanas. El resultado de esta comparativa nos dirá que tanto conocimiento obtiene cada agente de cada una de los episodios que experimenta. En este caso no nos importa la velocidad en cuanto al tiempo si no en cuanto a conocimiento adquirido por cada una de las experiencias pasadas.
 
 > Segun pudimos analizar, el algoritmo de DRL alcanza una media mayor a 7 manzanas antes que el algoritmo de QL con 17 episodios frente a 660
 > 
 ![Cantidad de episodios hasta la recompensa media de 7](./output/ep_mean_until_7.png)
+Figura 2.2
 
 La tercera métrica comparativa resulta la puntuación máxima luego de un total de 2000 episodios. Esta medida comparativa nos dirá cual de los 2 llega a una política mas óptima luego y por tanto, a una mejor solución del problema. Para este experimento no nos interesa la velocidad a la que se llega a  una política óptima, si no, que tan óptima esta resulta ser con el paso del tiempo.
 
-> Segun pudimos analizar nuevamente, el algoritmo de DRL alcanza una puntuacion mayor al algoritmo de QL con 52 puntos frente a 42
+> Segun pudimos analizar nuevamente, el algoritmo de DRL alcanza una puntuacion mayor al algoritmo de QL con 52 puntos frente a 42.
 > 
 ![Maximas puntuaciones](./output/max_scores.png)
+Figura 2.3
 
-Una metrica posible es la de puntuacion vs tiempo, es decir, cuanto tiempo le tomo al algoritmo alcanzar dicha puntuacion
-> 
-![Puntuacion vs tiempo](./output/score_vs_time.png)
 
-Un analisis adicional que podemos hacer es un diagrama de cajas 
+Un analisis adicional que podemos hacer es un diagrama de cajas de las puntuaciones obtenidas por los agentes a lo largo de los 2000 episodios realizados.
 
 ![Diagrama de caja y bigotes para ambos algoritmos](./output/box_plot.png)
+Figura 2.4
 
 
 ## Implementación DRL
@@ -205,3 +206,16 @@ Lo que hicimos fue separar el problema en 3 etapas, entrada, procesamiento, anal
 
 ### Entrada: 
 Para optimizar los datos de entrada y evitar confusiones, es decir, que para diferentes estados se produzca una misma entrada y nublar el juicio que tiene el agente, decidimos plasmar la entrada como una tabla hash en donde el estado estaba representado por una cadena de caracteres
+
+
+# Análisis de resultados
+
+Para el análisis de los resultados que arrojaron nuestros experimentos, se observarán cada una de las figuras obtenidas en la sección anterior, con el fin de darle un sentido teórico a cada uno de los gráficos que estas muestran.
+
+En la figura 2.1 se muestra el tiempo en segundos que le toma a cada agente alcanzar una media de 7 manzanas por episodio. Este gráfico se realizó con el fin de tener una referencia del tiempo que le toma a cada agente lograr una política óptima del entorno donde se desarrolla. La victoria resulta evidente para el agente de Deep Reinforcement Learning, esto, suponemos se debe a la técnica de “Replay”  utilizada por el agente de DRL, ya que le permite obtener una mayor cantidad de información a cada segundo que pasa y cada acción que este realiza, llevándolo a una convergencia mas rápida hacia una política óptima. Esta conclusión deriva del hecho de que el autor original del artículo de referencia de este trabajo escribe lo siguiente “Sin utilizar Replay, luego de 3000 episodios el agente alcanza un máximo de 2 manzanas, y luego de 10000, este alcanza un máximo de 3”, lo que nos lleva a entender que como sospechábamos, sin la utilización de la técnica de repetición de pasos la convergencia de DRL llevaría una cantidad mayor de tiempo. Para llevar la diferencia al terreno matemático, el agente de DRL fue 17 veces mas rápido que aquel que utiliza Q-Learning, es decir, un 94,1% mas veloz.
+
+En la figura 2.2 se muestra la cantidad de episodios que le toma a cada agente alcanzar una media de 7 manzanas. Este gráfico muestra resultados similares al analizado anteriormente, el ritmo de aprendizaje del agente de DRL resulta ser mucho mas veloz que el de Q-Learning, dando como resultado que, a cada paso y episodio, el agente que utiliza DRL recaba mayor información del entorno. Esta diferencia tan abultada, se debe nuevamente a la utilización de la técnica de Replay en el agente de DRL. En números concretos,DRL fue 39 veces mas rápido, es decir, un 97,1% mas veloz
+
+En la figura 2.3 se muestra la puntuación máxima pasados 2000 episodios para cada uno de los agentes. En cada uno de los gráficos anteriores, la diferencia resultaba bastante notoria, sin embargo, para este caso 42 resulta el 80,7% de 52, dando como resultado que solamente hay una diferencia del 20% de puntuación máxima entre ambos agentes, en términos relativos, DRL obtuvo una puntuación que resultó 1,2 veces mayor. Esto se debe a que, si bien DRL alcanza una política óptima con mayor eficiencia, ambos agentes alcanzan un rendimiento similar pasados una cantidad considerable de episodios, resultando finalmente en que ambos agentes logran resolver el problema de manera eficaz, aunque en tiempos distintos.
+
+En la figura 2.4, se observa un diagrama de cajas de las puntuaciones obtenidas a través de los 2000 episodios de cada uno de los agentes. Podemos observar como el gráfico perteneciente a DRL posee  los cuartiles 1 y 3 cercanos al centro de la figura, dándonos a entender que el rendimiento medio del agente resulta ser muy superior a aquel mostrado en Q-Learning, donde se observa que dichos valores están completamente desplazados a la izquierda. También, se observa que las puntuaciones altas en el caso de Q-Learning resultan la excepción mas que la regla, ya que aquellos valores mayores a 28 resultan casos atípicos superando el tercer cuartil. Esto se debe a la naturaleza propia de los algoritmos, DRL funciona mediante el uso de redes neuronales, las cuales son capaces de representar entornos complejos por su flexibilidad, dando como resultado un mejor aprendizaje a largo plazo (siempre y cuando se evite el overfitting), por otro lado, Q-Learning resulta mucho mas rígido en su representación de los datos, lo que lo hace parar de aprender llegado cierto punto de la ejecución, resultando en que el agente no aprenda de ciertas situaciones particulares que se puedan llegar a presentar.
