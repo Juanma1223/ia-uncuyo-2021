@@ -53,18 +53,14 @@ Cada uno de los conceptos citados anteriormente son los que se utilizan como bas
 
 La exploración en Q-Learning apunta a maximizar la recompensa obtenida a cada acción que toma, es decir, el agente intenta maximizar la denominada función “Expected Discounted Return” o Recompensa Descontada (definida con anterioridad en las funciones de utilidad) la cual se define en la siguiente figura
 
-
-(Insertar la imagen en el markdown)
-	https://miro.medium.com/max/778/1*uCvDmywJgMcaW6aYMkqblw.png
+![Formula QLearning](https://miro.medium.com/max/778/1*uCvDmywJgMcaW6aYMkqblw.png)
 
 Fuente: https://towardsdatascience.com/q-learning-algorithm-from-explanation-to-implementation-cdbeda2ea187
 
 
-	Para maximizar dicha función, el agente debe encontrar una política capaz de tomar decisiones, para lograrlo, se utiliza la Ecuación de Optimalidad de Bellman, la cual luce como se ven en la siguiente figura
+Para maximizar dicha función, el agente debe encontrar una política capaz de tomar decisiones, para lograrlo, se utiliza la Ecuación de Optimalidad de Bellman, la cual luce como se ven en la siguiente figura
 
-
-(Insertar la imagen en markdown)
-	https://miro.medium.com/max/846/1*t9CmhWlgbAqm8Y-fCgiw9w.png
+![Ecuacion de Bellman](https://miro.medium.com/max/846/1*t9CmhWlgbAqm8Y-fCgiw9w.png)
 
 Fuente: https://towardsdatascience.com/q-learning-algorithm-from-explanation-to-implementation-cdbeda2ea187
 
@@ -148,6 +144,11 @@ Una metrica posible es la de puntuacion vs tiempo, es decir, cuanto tiempo le to
 > 
 ![Puntuacion vs tiempo](./output/score_vs_time.png)
 
+Otra metrica para analizar es la de tiempo total de ejecucion
+> Donde podemos ver que el tiempo total de ejecucion del agente QL es considerablemente menor al del agente DRL, esto es debido a la simpleza del algoritmo y la necesidad de calculos de cada uno
+
+![Tiempo total](./output/total_time.png)
+
 Un analisis adicional que podemos hacer es un diagrama de cajas 
 
 ![Diagrama de caja y bigotes para ambos algoritmos](./output/box_plot.png)
@@ -157,8 +158,73 @@ Un analisis adicional que podemos hacer es un diagrama de cajas
 Al momento de implementar el algoritmo de QLearning, tomamos los conocimientos que habiamos adquirido e intentamos plasmarlos y amoldarlos de modo que pueda interactuar con el mismo entorno de juego de DRL, frente a esto tuvimos serias dificultades desde la base del algoritmo, ya que DRL tomaba como entrada un arreglo de posiciones y una recompensa y generaba la proxima accion posible, mientras que QL lo hacia plasmando en una tabla de conocimiento dicho aprendizaje en base a la recompensa.
 Lo que hicimos fue separar el problema en 3 etapas, entrada, procesamiento, analisis o salida del algoritmo, de esta forma, podiamos ver la manera de optimizar el algoritmo basado en cada problema
 
+
+### Conjunto de acciones posibles: 
+{
+	arriba,abajo,izquierda,derecha
+}
+
+### Conjunto de estados posibles: 
+
+El estado se representa mediante un número de 12 cifras, en la cual cada una se refleja un subestado particular del entorno que puede llegar a percibir el Snake,
+es decir, la presencia o ausencia de una condición determinada se ve reflejada en la aparición de un 1 o 0 en la posición correspondiente
+
+{
+	0 o 1 en la 1ra posición: La manzana se encuentra por encima del Snake
+	0 o 1 en la 2da posición: La manzana se enceuntra a la derecha del Snake
+	0 o 1 en la 3ra posición: La manzana se enceuntra por debajo del Snake
+	0 o 1 en la 4ta posición: La manzana se enceuntra a la izquierda del Snake
+	0 o 1 en la 5ta posición: Hay un obstáculo por encima del Snake
+	0 o 1 en la 6ta posición: Hay un obstáculo a la derecha del Snake
+	0 o 1 en la 7ma posición: Hay un obstáculo por debajo del Snake
+	0 o 1 en la 8va posición: Hay un obstáculo a la izquierda del Snake
+	0 o 1 en la 9na posición: La dirección de la cabeza del Snake apunta hacia encima 
+	0 o 1 en la 10ma posición: La direccion de la cabeza del Snake apunta hacia derecha 
+	0 o 1 en la 11ava posición: La direccion de la cabeza del Snake apunta hacia debajo 
+	0 o 1 en la 12ava posición: La direccion de la cabeza del Snake apunta hacia izquierda 
+}
+
+### Conjunto de recompensas:
+
+{
+	El snake come una manzana: +10
+	El snake se acerca a la manzana: +1
+	El snake se alejda de la manzana: -1
+	El snake golpea un obstáculo: -100
+}
+
 ### Entrada: 
-Para optimizar los datos de entrada y evitar confusiones, es decir, que para diferentes estados se produzca una misma entrada y nublar el juicio que tiene el agente, decidimos plasmar la entrada como una tabla hash en donde el estado estaba representado por una cadena de caracteres
+Para optimizar los datos de entrada y evitar confusiones, es decir, que para diferentes estados se produzca una misma entrada y nublar el juicio que tiene el agente, decidimos plasmar la entrada como una tabla hash en donde el estado estaba representado por una cadena de caracteres[1], de esta forma, para una accion similar, la respuesta seria la esperada.
+
+[1]: La cadena de caracteres estaba representada por 12 numeros binarios (0 o 1) de los cuales dependiendo de la posicion que ocupaban dentro de la cadena era lo que representaba, es decir:
+
+	[direccion_manzana, direccion_obstaculo, direccion_donde_apunta_el_agente]
+	donde direccion_manzana tenia sus valores como [arriba, derecha, abajo, izquierda]
+ 	direccion_obstaculo tenia sus valores como [arriba, derecha, abajo, izquierda]
+ 	direccion_donde_apunta_el_agente tenia sus valores como [arriba, derecha, abajo, izquierda]
+	entonces un valor quedaria como [1,0,0,0,0,1,0,0,0,0,1,0] si la manzana estaba arriba del agente, el obstaculo, ya sea su cola o una pared, estaba a la derecha y el agente apuntaba hacia abajo
+
+### Procesamiento:
+En el caso de nuestra implementacion QL no tenemos un procesamiento (o forma de elegir el camino mas optimo) mejor que una probabilidad, por lo que se busca un valor entre 0 y 1 en una distribucion uniforme y si ese valor es mayor a la probabilidad de exploracion (previamente establecida) y, ademas, tiene un resultado posible para ese entorno en su tabla de conocimiento, entonces ejecuta una accion de acuerdo al mejor valor que tendremos en el array de posibles acciones para ese estado. Si, en cambio, el valor pedido, no es mayor a la probabilidad de exploracion, entonces ejecuta una accion al azar
+
+	Los valores de la tabla van a tener una forma similar a esta:
+	[100001000010]:[-0.56, 0.24, 1, 0.1]
+	donde el valor almacenado corresponde a la recompensa obtenida cuando se ejecuto la accion correspondiente al indice de la posicion arreglo para el estado del cual es clave de la tabla.
+
+### Analisis o salida del algoritmo
+Al ejecutar una accion, vamos a obtener una recompensa, dicha recompensa la vamos a almacenar en la tabla de conocimiento previamente "parseandola" mediante una formula que estipula que tan certero es ese resultado.
+	
+El valor de afinidad que tenemos para decir si cierta accion fue correcta o no para algun entorno esta dado por la siguiente formula:
+
+$Q\_table[current\_state][action] = (1-\alpha) * Q\_table[current\_state][action] + \alpha * (R + \gamma * Q\_table[next\_state][action])$
+	 
+donde tenemos:
+- current_state : es el valor para representar el estado del entorno actual
+- action : es la accion elegida
+- $\alpha$ : es la taza de aprendizaje
+- R : es la recompensa obtenida tras la ejecucion de dicho movimiento
+- $\gamma$ : es el factor de descuento
+- next_state : es el valor para representar el estado del entorno despues de dicho movimiento
 
 
 ## Implementación DRL
@@ -174,23 +240,24 @@ El planteo resulta sencillo, se aplica la teoría expuesta en el marco teórico 
 
 ### Conjunto de estados posibles: 
 
-El estado se representa mediante un número de 12 cifras, en la cual cada una se refleja un subestado particular del entorno que puede llegar a percibir el Snake,
+El estado se representa mediante un arreglo de 12 cifras, en la cual cada una se refleja un subestado particular del entorno que puede llegar a percibir el Snake,
 es decir, la presencia o ausencia de una condición determinada se ve reflejada en la aparición de un 1 o 0 en la posición correspondiente
 
 {
 	0 o 1 en la 1ra posición: La manzana se encuentra por encima del Snake
-	0 o 1 en la 2da posición: La manzana se enceuntra por debajo del Snake
-	0 o 1 en la 3ra posición: La manzana se enceuntra a la izquierda del Snake
-	0 o 1 en la 4ta posición: La manzana se enceuntra a la derecha del Snake
-	0 o 1 en la 1ra posición: Hay un obstáculo abajo del snake
-	0 o 1 en la 1ra posición: Hay un obstáculo encima del snake
-	0 o 1 en la 1ra posición: Hay un obstáculo a la derecha del snake
-	0 o 1 en la 1ra posición: Hay un obstáculo a la izquierda del snake
-	0 o 1 en la 1ra posición: La dirección de la cabeza del Snake apunta hacia arriba
-	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia abajo
-	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia la derecha
-	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia la izquierda
+	0 o 1 en la 2da posición: La manzana se enceuntra a la derecha del Snake
+	0 o 1 en la 3ra posición: La manzana se enceuntra por debajo del Snake
+	0 o 1 en la 4ta posición: La manzana se enceuntra a la izquierda del Snake
+	0 o 1 en la 5ta posición: Hay un obstáculo por encima del Snake
+	0 o 1 en la 6ta posición: Hay un obstáculo a la derecha del Snake
+	0 o 1 en la 7ma posición: Hay un obstáculo por debajo del Snake
+	0 o 1 en la 8va posición: Hay un obstáculo a la izquierda del Snake
+	0 o 1 en la 9na posición: La dirección de la cabeza del Snake apunta hacia encima 
+	0 o 1 en la 10ma posición: La direccion de la cabeza del Snake apunta hacia derecha 
+	0 o 1 en la 11ava posición: La direccion de la cabeza del Snake apunta hacia debajo 
+	0 o 1 en la 12ava posición: La direccion de la cabeza del Snake apunta hacia izquierda 
 }
+        
 
 ### Conjunto de recompensas:
 
@@ -201,6 +268,6 @@ es decir, la presencia o ausencia de una condición determinada se ve reflejada 
 	El snake golpea un obstáculo: -100
 }
 
-El planteamiento resulta como ya fue definido con anterioridad, el número de 12 cifras que representa el estado actual del agente, en conjunto con la recompensa del movimiento actual, es consumido a cada paso por la red neuronal para luego devolver una acción y que esta sea ejecutada por el agente en el entorno determinado. La red neuronal desea maximizar la recompensa obtenida a cada paso, para lograrlo, utiliza una función de optimización encargada de dirigir la política del agente hacia una óptima mediante el ajuste de las variables ocultas dentro de las capas de la red neuronal.
+El planteamiento resulta como ya fue definido con anterioridad, el arreglo de 12 cifras que representa el estado actual del agente, en conjunto con la recompensa del movimiento actual, es consumido a cada paso por la red neuronal para luego devolver una acción y que esta sea ejecutada por el agente en el entorno determinado. La red neuronal desea maximizar la recompensa obtenida a cada paso, para lograrlo, utiliza una función de optimización encargada de dirigir la política del agente hacia una óptima mediante el ajuste de las variables ocultas dentro de las capas de la red neuronal.
 
 El código utiliza un conjunto de capas de tipo Dense, cada una con un total de 128 variables ocultas o "weights" que utilizan la función de activación de Keras "Relu". también, hace uso de una técnica llamada "Replay" que ayuda considerablemente con el aprendizaje. La técnica Replay se basa en almacenar experiencias pasadas, para posteriormente "rejugarlas" todas a cada paso que da, un paralelismo un poco mas claro es ver la repetición de un partido que ya jugaste antes de jugar el próximo, para así entender tus errores y obtener mas información de cada una de tus decisiones, algo así como un repaso de experiencias pasadas.

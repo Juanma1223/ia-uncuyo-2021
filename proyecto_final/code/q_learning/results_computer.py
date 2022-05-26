@@ -19,11 +19,14 @@ class data_collected:
         res = 'Ep : '+str(self.episode)+' | '+str(self.reward)+' puntos en '+str(self.time)+' seg.'
         return res
 
-def getMaxTime(data : list):
+def getMaxTime(data : list, human=True):
   acc = 0
   for k in range(len(data)):
     acc += data[k].time
-  return getHumanTime(acc)
+  if human:
+    return getHumanTime(acc)
+  else:
+    return acc
 
 def getHumanTime(secs):
   h = secs // 3600
@@ -305,6 +308,27 @@ for tick in ax.yaxis.get_major_ticks():
   tick.label.set_fontsize(14)
 
 plt.title('Max puntuacion de cada algoritmo')
+
+# Tiempo total
+
+print ('Tiempo total: ')
+q_tot_time = getMaxTime(q,False)
+drl_tot_time = getMaxTime(drl,False)
+print('q: '+str(q_tot_time)+' drl: '+str(drl_tot_time))
+
+y = [q_tot_time,drl_tot_time]
+x = ['Q','DRL']
+
+fig, ax = plt.subplots()
+bars = ax.barh(x,y, 1, color=["#FD881A","#1A77FD"])
+for bar in bars:
+  width = bar.get_width() #Previously we got the height
+  label_y_pos = bar.get_y() + bar.get_height() / 2
+  ax.text(width, label_y_pos, s=f'{np.round(width,0)}', va='center')
+for tick in ax.yaxis.get_major_ticks():
+  tick.label.set_fontsize(14)
+
+plt.title('Tiempo total de cada algoritmo (s)')
 
 
 
