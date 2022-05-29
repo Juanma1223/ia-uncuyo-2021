@@ -53,18 +53,14 @@ Cada uno de los conceptos citados anteriormente son los que se utilizan como bas
 
 La exploración en Q-Learning apunta a maximizar la recompensa obtenida a cada acción que toma, es decir, el agente intenta maximizar la denominada función “Expected Discounted Return” o Recompensa Descontada (definida con anterioridad en las funciones de utilidad) la cual se define en la siguiente figura
 
-
-(Insertar la imagen en el markdown)
-	https://miro.medium.com/max/778/1*uCvDmywJgMcaW6aYMkqblw.png
+![Formula QLearning](https://miro.medium.com/max/778/1*uCvDmywJgMcaW6aYMkqblw.png)
 
 Fuente: https://towardsdatascience.com/q-learning-algorithm-from-explanation-to-implementation-cdbeda2ea187
 
 
-	Para maximizar dicha función, el agente debe encontrar una política capaz de tomar decisiones, para lograrlo, se utiliza la Ecuación de Optimalidad de Bellman, la cual luce como se ven en la siguiente figura
+Para maximizar dicha función, el agente debe encontrar una política capaz de tomar decisiones, para lograrlo, se utiliza la Ecuación de Optimalidad de Bellman, la cual luce como se ven en la siguiente figura
 
-
-(Insertar la imagen en markdown)
-	https://miro.medium.com/max/846/1*t9CmhWlgbAqm8Y-fCgiw9w.png
+![Ecuacion de Bellman](https://miro.medium.com/max/846/1*t9CmhWlgbAqm8Y-fCgiw9w.png)
 
 Fuente: https://towardsdatascience.com/q-learning-algorithm-from-explanation-to-implementation-cdbeda2ea187
 
@@ -147,11 +143,87 @@ La tercera métrica comparativa resulta la puntuación máxima luego de un total
 ![Maximas puntuaciones](./output/max_scores.png)
 Figura 2.3
 
+Otra metrica para analizar es la de tiempo total de ejecucion
+> Donde podemos ver que el tiempo total de ejecucion del agente QL es considerablemente menor al del agente DRL, esto es debido a la simpleza del algoritmo y la necesidad de calculos de cada uno
 
-Un analisis adicional que podemos hacer es un diagrama de cajas de las puntuaciones obtenidas por los agentes a lo largo de los 2000 episodios realizados.
+![Tiempo total](./output/total_time.png)
+
+Un analisis adicional que podemos hacer es un diagrama de cajas 
 
 ![Diagrama de caja y bigotes para ambos algoritmos](./output/box_plot.png)
-Figura 2.4
+
+## Implementacion QL
+
+Al momento de implementar el algoritmo de QLearning, tomamos los conocimientos que habiamos adquirido e intentamos plasmarlos y amoldarlos de modo que pueda interactuar con el mismo entorno de juego de DRL, frente a esto tuvimos serias dificultades desde la base del algoritmo, ya que DRL tomaba como entrada un arreglo de posiciones y una recompensa y generaba la proxima accion posible, mientras que QL lo hacia plasmando en una tabla de conocimiento dicho aprendizaje en base a la recompensa.
+Lo que hicimos fue separar el problema en 3 etapas, entrada, procesamiento, analisis o salida del algoritmo, de esta forma, podiamos ver la manera de optimizar el algoritmo basado en cada problema
+
+
+### Conjunto de acciones posibles: 
+{
+	arriba,abajo,izquierda,derecha
+}
+
+### Conjunto de estados posibles: 
+
+El estado se representa mediante un número de 12 cifras, en la cual cada una se refleja un subestado particular del entorno que puede llegar a percibir el Snake,
+es decir, la presencia o ausencia de una condición determinada se ve reflejada en la aparición de un 1 o 0 en la posición correspondiente
+
+{
+	0 o 1 en la 1ra posición: La manzana se encuentra por encima del Snake
+	0 o 1 en la 2da posición: La manzana se enceuntra a la derecha del Snake
+	0 o 1 en la 3ra posición: La manzana se enceuntra por debajo del Snake
+	0 o 1 en la 4ta posición: La manzana se enceuntra a la izquierda del Snake
+	0 o 1 en la 5ta posición: Hay un obstáculo por encima del Snake
+	0 o 1 en la 6ta posición: Hay un obstáculo a la derecha del Snake
+	0 o 1 en la 7ma posición: Hay un obstáculo por debajo del Snake
+	0 o 1 en la 8va posición: Hay un obstáculo a la izquierda del Snake
+	0 o 1 en la 9na posición: La dirección de la cabeza del Snake apunta hacia encima 
+	0 o 1 en la 10ma posición: La direccion de la cabeza del Snake apunta hacia derecha 
+	0 o 1 en la 11ava posición: La direccion de la cabeza del Snake apunta hacia debajo 
+	0 o 1 en la 12ava posición: La direccion de la cabeza del Snake apunta hacia izquierda 
+}
+
+### Conjunto de recompensas:
+
+{
+	El snake come una manzana: +10
+	El snake se acerca a la manzana: +1
+	El snake se alejda de la manzana: -1
+	El snake golpea un obstáculo: -100
+}
+
+### Entrada: 
+Para optimizar los datos de entrada y evitar confusiones, es decir, que para diferentes estados se produzca una misma entrada y nublar el juicio que tiene el agente, decidimos plasmar la entrada como una tabla hash en donde el estado estaba representado por una cadena de caracteres[1], de esta forma, para una accion similar, la respuesta seria la esperada.
+
+[1]: La cadena de caracteres estaba representada por 12 numeros binarios (0 o 1) de los cuales dependiendo de la posicion que ocupaban dentro de la cadena era lo que representaba, es decir:
+
+	[direccion_manzana, direccion_obstaculo, direccion_donde_apunta_el_agente]
+	donde direccion_manzana tenia sus valores como [arriba, derecha, abajo, izquierda]
+ 	direccion_obstaculo tenia sus valores como [arriba, derecha, abajo, izquierda]
+ 	direccion_donde_apunta_el_agente tenia sus valores como [arriba, derecha, abajo, izquierda]
+	entonces un valor quedaria como [1,0,0,0,0,1,0,0,0,0,1,0] si la manzana estaba arriba del agente, el obstaculo, ya sea su cola o una pared, estaba a la derecha y el agente apuntaba hacia abajo
+
+### Procesamiento:
+En el caso de nuestra implementacion QL no tenemos un procesamiento (o forma de elegir el camino mas optimo) mejor que una probabilidad, por lo que se busca un valor entre 0 y 1 en una distribucion uniforme y si ese valor es mayor a la probabilidad de exploracion (previamente establecida) y, ademas, tiene un resultado posible para ese entorno en su tabla de conocimiento, entonces ejecuta una accion de acuerdo al mejor valor que tendremos en el array de posibles acciones para ese estado. Si, en cambio, el valor pedido, no es mayor a la probabilidad de exploracion, entonces ejecuta una accion al azar
+
+	Los valores de la tabla van a tener una forma similar a esta:
+	[100001000010]:[-0.56, 0.24, 1, 0.1]
+	donde el valor almacenado corresponde a la recompensa obtenida cuando se ejecuto la accion correspondiente al indice de la posicion arreglo para el estado del cual es clave de la tabla.
+
+### Analisis o salida del algoritmo
+Al ejecutar una accion, vamos a obtener una recompensa, dicha recompensa la vamos a almacenar en la tabla de conocimiento previamente "parseandola" mediante una formula que estipula que tan certero es ese resultado.
+	
+El valor de afinidad que tenemos para decir si cierta accion fue correcta o no para algun entorno esta dado por la siguiente formula:
+
+$Q\_table[current\_state][action] = (1-\alpha) * Q\_table[current\_state][action] + \alpha * (R + \gamma * Q\_table[next\_state][action])$
+	 
+donde tenemos:
+- current_state : es el valor para representar el estado del entorno actual
+- action : es la accion elegida
+- $\alpha$ : es la taza de aprendizaje
+- R : es la recompensa obtenida tras la ejecucion de dicho movimiento
+- $\gamma$ : es el factor de descuento
+- next_state : es el valor para representar el estado del entorno despues de dicho movimiento
 
 
 ## Implementación DRL
@@ -167,23 +239,24 @@ El planteo resulta sencillo, se aplica la teoría expuesta en el marco teórico 
 
 ### Conjunto de estados posibles: 
 
-El estado se representa mediante un número de 12 cifras, en la cual cada una se refleja un subestado particular del entorno que puede llegar a percibir el Snake,
+El estado se representa mediante un arreglo de 12 cifras, en la cual cada una se refleja un subestado particular del entorno que puede llegar a percibir el Snake,
 es decir, la presencia o ausencia de una condición determinada se ve reflejada en la aparición de un 1 o 0 en la posición correspondiente
 
 {
 	0 o 1 en la 1ra posición: La manzana se encuentra por encima del Snake
-	0 o 1 en la 2da posición: La manzana se enceuntra por debajo del Snake
-	0 o 1 en la 3ra posición: La manzana se enceuntra a la izquierda del Snake
-	0 o 1 en la 4ta posición: La manzana se enceuntra a la derecha del Snake
-	0 o 1 en la 1ra posición: Hay un obstáculo abajo del snake
-	0 o 1 en la 1ra posición: Hay un obstáculo encima del snake
-	0 o 1 en la 1ra posición: Hay un obstáculo a la derecha del snake
-	0 o 1 en la 1ra posición: Hay un obstáculo a la izquierda del snake
-	0 o 1 en la 1ra posición: La dirección de la cabeza del Snake apunta hacia arriba
-	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia abajo
-	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia la derecha
-	0 o 1 en la 1ra posición: La direccion de la cabeza del Snake apunta hacia la izquierda
+	0 o 1 en la 2da posición: La manzana se enceuntra a la derecha del Snake
+	0 o 1 en la 3ra posición: La manzana se enceuntra por debajo del Snake
+	0 o 1 en la 4ta posición: La manzana se enceuntra a la izquierda del Snake
+	0 o 1 en la 5ta posición: Hay un obstáculo por encima del Snake
+	0 o 1 en la 6ta posición: Hay un obstáculo a la derecha del Snake
+	0 o 1 en la 7ma posición: Hay un obstáculo por debajo del Snake
+	0 o 1 en la 8va posición: Hay un obstáculo a la izquierda del Snake
+	0 o 1 en la 9na posición: La dirección de la cabeza del Snake apunta hacia encima 
+	0 o 1 en la 10ma posición: La direccion de la cabeza del Snake apunta hacia derecha 
+	0 o 1 en la 11ava posición: La direccion de la cabeza del Snake apunta hacia debajo 
+	0 o 1 en la 12ava posición: La direccion de la cabeza del Snake apunta hacia izquierda 
 }
+        
 
 ### Conjunto de recompensas:
 
@@ -194,7 +267,7 @@ es decir, la presencia o ausencia de una condición determinada se ve reflejada 
 	El snake golpea un obstáculo: -100
 }
 
-El planteamiento resulta como ya fue definido con anterioridad, el número de 12 cifras que representa el estado actual del agente, en conjunto con la recompensa del movimiento actual, es consumido a cada paso por la red neuronal para luego devolver una acción y que esta sea ejecutada por el agente en el entorno determinado. La red neuronal desea maximizar la recompensa obtenida a cada paso, para lograrlo, utiliza una función de optimización encargada de dirigir la política del agente hacia una óptima mediante el ajuste de las variables ocultas dentro de las capas de la red neuronal.
+El planteamiento resulta como ya fue definido con anterioridad, el arreglo de 12 cifras que representa el estado actual del agente, en conjunto con la recompensa del movimiento actual, es consumido a cada paso por la red neuronal para luego devolver una acción y que esta sea ejecutada por el agente en el entorno determinado. La red neuronal desea maximizar la recompensa obtenida a cada paso, para lograrlo, utiliza una función de optimización encargada de dirigir la política del agente hacia una óptima mediante el ajuste de las variables ocultas dentro de las capas de la red neuronal.
 
 El código utiliza un conjunto de capas de tipo Dense, cada una con un total de 128 variables ocultas o "weights" que utilizan la función de activación de Keras "Relu". también, hace uso de una técnica llamada "Replay" que ayuda considerablemente con el aprendizaje. La técnica Replay se basa en almacenar experiencias pasadas, para posteriormente "rejugarlas" todas a cada paso que da, un paralelismo un poco mas claro es ver la repetición de un partido que ya jugaste antes de jugar el próximo, para así entender tus errores y obtener mas información de cada una de tus decisiones, algo así como un repaso de experiencias pasadas.
 
@@ -219,6 +292,16 @@ En la figura 2.2 se muestra la cantidad de episodios que le toma a cada agente a
 En la figura 2.3 se muestra la puntuación máxima pasados 2000 episodios para cada uno de los agentes. En cada uno de los gráficos anteriores, la diferencia resultaba bastante notoria, sin embargo, para este caso 42 resulta el 80,7% de 52, dando como resultado que solamente hay una diferencia del 20% de puntuación máxima entre ambos agentes, en términos relativos, DRL obtuvo una puntuación que resultó 1,2 veces mayor. Esto se debe a que, si bien DRL alcanza una política óptima con mayor eficiencia, ambos agentes alcanzan un rendimiento similar pasados una cantidad considerable de episodios, resultando finalmente en que ambos agentes logran resolver el problema de manera eficaz, aunque en tiempos distintos.
 
 En la figura 2.4, se observa un diagrama de cajas de las puntuaciones obtenidas a través de los 2000 episodios de cada uno de los agentes. Podemos observar como el gráfico perteneciente a DRL posee  los cuartiles 1 y 3 cercanos al centro de la figura, dándonos a entender que el rendimiento medio del agente resulta ser muy superior a aquel mostrado en Q-Learning, donde se observa que dichos valores están completamente desplazados a la izquierda. También, se observa que las puntuaciones altas en el caso de Q-Learning resultan la excepción mas que la regla, ya que aquellos valores mayores a 28 resultan casos atípicos superando el tercer cuartil. Esto se debe a la naturaleza propia de los algoritmos, DRL funciona mediante el uso de redes neuronales, las cuales son capaces de representar entornos complejos por su flexibilidad, dando como resultado un mejor aprendizaje a largo plazo (siempre y cuando se evite el overfitting), por otro lado, Q-Learning resulta mucho mas rígido en su representación de los datos, lo que lo hace parar de aprender llegado cierto punto de la ejecución, resultando en que el agente no aprenda de ciertas situaciones particulares que se puedan llegar a presentar.
+
+# Conclusiones
+
+Luego de haber realizado una serie de pruebas, obtenido métricas y comparado cada uno de los agentes, nos encontramos en posición de responder a las preguntas inicialmente planteadas en nuestras hipótesis. Para comenzar, nuestras expectativas con respecto a la velocidad de convergencia de cada uno de los algoritmos resultó no ser acertada, ya que el agente que utiliza DRL demostró ser muy superior con respecto a la eficiencia para obtener una política óptima. Sin embargo, esto no se debe únicamente al algoritmo per sé, si no mas bien a la inclusión de la técnica de Replay, la cual hace que un algoritmo que converge lentamente sea mucho mas eficiente. Sin la utilización de dicha técnica, es Q-Learning quien supera con creces a DRL, en palabras del propio autor del artículo original de la implementación de DRL, "pasados 10000 episodios el agente solo obtuvo un máximo de 3 manzanas", mientras que Q-Learning obtuvo una puntuación de 42 luego de 600.
+
+Continuando con nuestras hipótesis, otro de los comportamientos esperados fue que el agente de DRL obtuviera una puntuación superior a medida que pase el tiempo. Si bien la diferencia pasados 600 episodios no resultó tan notoria entre las puntuaciones máximas de cada uno de los agentes, el agente que implementa DRL obtuvo una puntación máxima de 52 mientras que aquel que utiliza Q-Learning obtuvo 42, dando como resultado una mayor adaptación por parte del algoritmo de DRL al entorno. Sospechamos que mientras mas pase el tiempo, mayor será esa diferencia, ya que el autor del artículo original (https://towardsdatascience.com/snake-played-by-a-deep-reinforcement-learning-agent-53f2c4331d36) afirma que el agente obtuvo una puntuación máxima de 60 manzanas y se estima que Q-Learning deje de aprender pasado determinado tiempo por su limitación en la representación de la información (una simple tabla). Esta afirmación se sutenta en la falta de progreso del agente de Q-Learning pasados los 500 episodios, donde en 100 episodios no logró sobrepasar el máximo obtenido con anterioridad.
+
+Finalmente, se confirmó que ambos agentes pudieron superar con creces las 10 maanzanas obtenidas, demostrando que ambos algoritmos son aptos para resolver el problema. Ambos fueron capaces de desempeñarse con éxito en un entorno desconocido y generar políticas óptimas, entendiendo las reglas de juego y que acciones tomar a cada momento para llegar a cumplir el objetivo.
+
+Como adicional, hay determinadas pruebas que podrían realizarse para mejorar el desempeño de cada uno de los agentes, en primer lugar se podría intentar una implementación de Replay para el agente de Q-Learning, lo que debería mejorar drásticamente la eficiencia del mismo. Por otro lado, se podría introducir el uso de redes convolusionales al algoritmo de DRL, ya que el agente no solo percibiría las posiciones de los objetos en el tablero, si no que podría tener una visión completa del tablero, siendo capaz de analizar una imágen con la información completa del tablero o cuadrilla y no una mera representación parcial mediante posiciones relativas, siendo esta última la implementación actual. Cada una estas opciones de mejora resultan un paso a seguir en la investigación y resolución del juego del Snake, siendo posible en futuras investigaciones.
 
 # Bibliografía y fuentes
 
