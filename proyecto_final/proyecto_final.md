@@ -219,3 +219,21 @@ En la figura 2.2 se muestra la cantidad de episodios que le toma a cada agente a
 En la figura 2.3 se muestra la puntuación máxima pasados 2000 episodios para cada uno de los agentes. En cada uno de los gráficos anteriores, la diferencia resultaba bastante notoria, sin embargo, para este caso 42 resulta el 80,7% de 52, dando como resultado que solamente hay una diferencia del 20% de puntuación máxima entre ambos agentes, en términos relativos, DRL obtuvo una puntuación que resultó 1,2 veces mayor. Esto se debe a que, si bien DRL alcanza una política óptima con mayor eficiencia, ambos agentes alcanzan un rendimiento similar pasados una cantidad considerable de episodios, resultando finalmente en que ambos agentes logran resolver el problema de manera eficaz, aunque en tiempos distintos.
 
 En la figura 2.4, se observa un diagrama de cajas de las puntuaciones obtenidas a través de los 2000 episodios de cada uno de los agentes. Podemos observar como el gráfico perteneciente a DRL posee  los cuartiles 1 y 3 cercanos al centro de la figura, dándonos a entender que el rendimiento medio del agente resulta ser muy superior a aquel mostrado en Q-Learning, donde se observa que dichos valores están completamente desplazados a la izquierda. También, se observa que las puntuaciones altas en el caso de Q-Learning resultan la excepción mas que la regla, ya que aquellos valores mayores a 28 resultan casos atípicos superando el tercer cuartil. Esto se debe a la naturaleza propia de los algoritmos, DRL funciona mediante el uso de redes neuronales, las cuales son capaces de representar entornos complejos por su flexibilidad, dando como resultado un mejor aprendizaje a largo plazo (siempre y cuando se evite el overfitting), por otro lado, Q-Learning resulta mucho mas rígido en su representación de los datos, lo que lo hace parar de aprender llegado cierto punto de la ejecución, resultando en que el agente no aprenda de ciertas situaciones particulares que se puedan llegar a presentar.
+
+# Bibliografía y fuentes
+
+https://en.wikipedia.org/wiki/Markov_decision_process
+
+https://aamrani1999.medium.com/a-gentle-introduction-to-reinforcement-learning-d26cba6455f7
+
+https://towardsdatascience.com/q-learning-algorithm-from-explanation-to-implementation-cdbeda2ea187
+
+https://es.wikipedia.org/wiki/Ecuaci%C3%B3n_de_Bellman
+
+https://es.wikipedia.org/wiki/Q-learning
+
+https://towardsdatascience.com/snake-played-by-a-deep-reinforcement-learning-agent-53f2c4331d36
+
+https://www.simplilearn.com/tutorials/machine-learning-tutorial/what-is-q-learning
+
+Artificial Intelligente: A Modern Approach
