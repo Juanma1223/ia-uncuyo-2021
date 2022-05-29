@@ -236,4 +236,4 @@ https://towardsdatascience.com/snake-played-by-a-deep-reinforcement-learning-age
 
 https://www.simplilearn.com/tutorials/machine-learning-tutorial/what-is-q-learning
 
-Artificial Intelligente: A Modern Approach
+Artificial Intelligence: A Modern Approach
