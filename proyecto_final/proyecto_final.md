@@ -156,7 +156,7 @@ Otra metrica para analizar es la de tiempo total de ejecucion, en la que compara
 ![Tiempo total](./output/total_time.png)
 
 ### Diagrama de caja y bigotes para ambos algoritmos
-Un analisis adicional que podemos hacer es un diagrama de cajas 
+En la figura 2.4, se observa un diagrama de cajas de las puntuaciones obtenidas a través de los 600 episodios de cada uno de los agentes. Cada uno de los valores del diagrama de cajas representa la puntuacion obtenida en un episodio en concreto. 
 
 ![Diagrama de caja y bigotes para ambos algoritmos](./output/box_plot.png)
 
@@ -280,15 +280,6 @@ El planteamiento resulta como ya fue definido con anterioridad, el arreglo de 12
 El código utiliza un conjunto de capas de tipo Dense, cada una con un total de 128 variables ocultas o "weights" que utilizan la función de activación de Keras "Relu". también, hace uso de una técnica llamada "Replay" que ayuda considerablemente con el aprendizaje. La técnica Replay se basa en almacenar experiencias pasadas, para posteriormente "rejugarlas" todas a cada paso que da, un paralelismo un poco mas claro es ver la repetición de un partido que ya jugaste antes de jugar el próximo, para así entender tus errores y obtener mas información de cada una de tus decisiones, algo así como un repaso de experiencias pasadas.
 
 
-## Implementacion QL
-
-Al momento de implementar el algoritmo de QLearning, tomamos los conocimientos que habiamos adquirido e intentamos plasmarlos y amoldarlos de modo que pueda interactuar con el mismo entorno de juego de DRL, frente a esto tuvimos serias dificultades desde la base del algoritmo, ya que DRL tomaba como entrada un arreglo de posiciones y una recompensa y generaba la proxima accion posible, mientras que QL lo hacia plasmando en una tabla de conocimiento dicho aprendizaje en base a la recompensa.
-Lo que hicimos fue separar el problema en 3 etapas, entrada, procesamiento, analisis o salida del algoritmo, de esta forma, podiamos ver la manera de optimizar el algoritmo basado en cada problema
-
-### Entrada: 
-Para optimizar los datos de entrada y evitar confusiones, es decir, que para diferentes estados se produzca una misma entrada y nublar el juicio que tiene el agente, decidimos plasmar la entrada como una tabla hash en donde el estado estaba representado por una cadena de caracteres
-
-
 # Análisis de resultados
 
 Para el análisis de los resultados que arrojaron nuestros experimentos, se observarán cada una de las figuras obtenidas en la sección anterior, con el fin de darle un sentido teórico a cada uno de los gráficos que estas muestran.
@@ -297,9 +288,9 @@ En la figura 2.1 se muestra el tiempo en segundos que le toma a cada agente alca
 
 En la figura 2.2 se muestra la cantidad de episodios que le toma a cada agente alcanzar una media de 7 manzanas. Este gráfico muestra resultados similares al analizado anteriormente, el ritmo de aprendizaje del agente de DRL resulta ser mucho mas veloz que el de Q-Learning, dando como resultado que, a cada paso y episodio, el agente que utiliza DRL recaba mayor información del entorno. Esta diferencia tan abultada, se debe nuevamente a la utilización de la técnica de Replay en el agente de DRL. En números concretos,DRL fue 39 veces mas rápido, es decir, un 97,1% mas veloz
 
-En la figura 2.3 se muestra la puntuación máxima pasados 2000 episodios para cada uno de los agentes. En cada uno de los gráficos anteriores, la diferencia resultaba bastante notoria, sin embargo, para este caso 42 resulta el 80,7% de 52, dando como resultado que solamente hay una diferencia del 20% de puntuación máxima entre ambos agentes, en términos relativos, DRL obtuvo una puntuación que resultó 1,2 veces mayor. Esto se debe a que, si bien DRL alcanza una política óptima con mayor eficiencia, ambos agentes alcanzan un rendimiento similar pasados una cantidad considerable de episodios, resultando finalmente en que ambos agentes logran resolver el problema de manera eficaz, aunque en tiempos distintos.
+En la figura 2.3 se muestra la puntuación máxima pasados 600 episodios para cada uno de los agentes. En cada uno de los gráficos anteriores, la diferencia resultaba bastante notoria, sin embargo, para este caso 42 resulta el 80,7% de 52, dando como resultado que solamente hay una diferencia del 20% de puntuación máxima entre ambos agentes, en términos relativos, DRL obtuvo una puntuación que resultó 1,2 veces mayor. Esto se debe a que, si bien DRL alcanza una política óptima con mayor eficiencia, ambos agentes alcanzan un rendimiento similar pasados una cantidad considerable de episodios, resultando finalmente en que ambos agentes logran resolver el problema de manera eficaz, aunque en tiempos distintos.
 
-En la figura 2.4, se observa un diagrama de cajas de las puntuaciones obtenidas a través de los 2000 episodios de cada uno de los agentes. Podemos observar como el gráfico perteneciente a DRL posee  los cuartiles 1 y 3 cercanos al centro de la figura, dándonos a entender que el rendimiento medio del agente resulta ser muy superior a aquel mostrado en Q-Learning, donde se observa que dichos valores están completamente desplazados a la izquierda. También, se observa que las puntuaciones altas en el caso de Q-Learning resultan la excepción mas que la regla, ya que aquellos valores mayores a 28 resultan casos atípicos superando el tercer cuartil. Esto se debe a la naturaleza propia de los algoritmos, DRL funciona mediante el uso de redes neuronales, las cuales son capaces de representar entornos complejos por su flexibilidad, dando como resultado un mejor aprendizaje a largo plazo (siempre y cuando se evite el overfitting), por otro lado, Q-Learning resulta mucho mas rígido en su representación de los datos, lo que lo hace parar de aprender llegado cierto punto de la ejecución, resultando en que el agente no aprenda de ciertas situaciones particulares que se puedan llegar a presentar.
+Con respecto a la figura 2.4, podemos observar como el gráfico perteneciente a DRL posee  los cuartiles 1 y 3 cercanos al centro de la figura, dándonos a entender que el rendimiento medio del agente resulta ser muy superior a aquel mostrado en Q-Learning, donde se observa que dichos valores están completamente desplazados a la izquierda. También, se observa que las puntuaciones altas en el caso de Q-Learning resultan la excepción mas que la regla, ya que aquellos valores mayores a 28 resultan casos atípicos superando el tercer cuartil. Esto se debe a la naturaleza propia de los algoritmos, DRL funciona mediante el uso de redes neuronales, las cuales son capaces de representar entornos complejos por su flexibilidad, dando como resultado un mejor aprendizaje a largo plazo (siempre y cuando se evite el overfitting), por otro lado, Q-Learning resulta mucho mas rígido en su representación de los datos, lo que lo hace parar de aprender llegado cierto punto de la ejecución, resultando en que el agente no aprenda de ciertas situaciones particulares que se puedan llegar a presentar.
 
 # Conclusiones
 
