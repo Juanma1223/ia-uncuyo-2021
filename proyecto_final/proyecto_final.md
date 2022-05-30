@@ -104,7 +104,7 @@ Es por lo mencionado anteriormente, que la primer hipótesis resulta que **la co
 
 Basado también en nuestro conocimiento acerca de como cada uno de los algoritmos guarda su representación de la información, entendemos que las redes neuronales poseen una mayor capacidad de aprendizaje que la Q-Table que utiliza Q-Learning. Esto se debe a que nuestra red neuronal podrá tener una representación tan compleja y profunda del conocimiento como nosotros queramos, definido a través de la cantidad de variables ocultas y capas que se utilicen a lo largo de la red. Es por esto mismo que nuestra segunda hipótesis resulta que **mientras mas tiempo de entrenamiento los agentes lleven a cabo, aquel que utilice redes neuronales será el que mayor puntuación obtenga**
 
-En cuanto a los resultados esperados de los experimentos, **se estima que ambos agentes superen los 10 puntos dentro del entorno del juego pasados una cantidad arbitraria de episodios**, el cual resulta un desempeño que no puede ser producto del azar, si no de un algoritmo capaz de aprender de su entorno.
+En cuanto a los resultados esperados de los experimentos, **se espera que ambos agentes superen los 10 puntos dentro del entorno del juego pasados una cantidad arbitraria de episodios**, el cual resulta un desempeño que no puede ser producto del azar, si no de un algoritmo capaz de aprender de su entorno. Esta estimacion se obtiene de un calculo probabilistico, un agente aleatorio tiene un 0.25 de probabilidad de tomar la acción correcta para acercarse al objetivo a cada paso, suponiendo que la manzana esté a 4 cuadrículas tiene una probabilidad total de 0.25 x 0.25 x 0.25 x 0.25 = 0.0039 solo para alcanzar un objetivo, luego, suponiendo que todas las manzanas sucesivas estuvieran a 4 posiciones de distancia, la probabilidad de que el agente elija acciones correctas para tomar las 10 manzanas en una sucesión es de 0.25 ^ 40 =  8.271 x 10 ^ (-25), es decir, en un caso bastante común en el que se pueda encontrar el agente la probabilidad es inmensamente pequeña de que éste llegue a una puntuación de 10
 
 ## Condiciones de prueba
 
@@ -122,32 +122,40 @@ Para llevar a cabo la interfaz gráfica, el código obtenido del artículo origi
 
 > Este conjunto de comparativas se realizo con los resultados obtenidos despues de ejecutar cada algoritmo (q_learning y drl) a 700 y 600 episodios respectivamente, esto se decidio asi debido a la alta demanda de recursos que exigia el algoritmo y el tiempo que tardaba en realizar dicha tarea. No obstante, desde nuestra perspectiva creemos que esta forma de comparalos no les hace justicia y se requieren multiples puntos de vista para determinar si un algoritmo es superior a otro. Para nuestro analisis decidimos realizar la comparativa igualando la cantidad de episodios
 
-La primer medida a comparar entre ambas implementaciones será el tiempo que le toma a cada agente llegar a una media mayor a 7 manzanas. El resultado de esta comparativa revelará que tan eficiente es cada agente durante el aprendizaje, es decir, ¿ Cuantos minutos le toma a un agente ser eficaz ?
+> Otro punto a tener en cuenta es que cuando nos referimos a la **media es un promedio de las puntuaciones por episodio**, por ej, cuando hablamos de "Tiempo transcurrido hasta la recompensa media de 7", nos referimos a la sumatoria de tiempo desde que comenzo el algoritmo hasta que el promedio de las recompensas obtenidas alcanza 7
 
-> Segun pudimos analizar, el algoritmo de DRL alcanza una media mayor a 7 manzanas antes que el algoritmo de QL con 292 seg frente a 4997
+
+### Tiempo transcurrido en segundos hasta obtener una recompensa media de 7
+La primer medida a comparar entre ambas implementaciones será el tiempo que le toma a cada agente llegar a una puntuacion media mayor a 7 manzanas. El resultado de esta comparativa revelará que tan eficiente es cada agente durante el aprendizaje, es decir, ¿ Cuantos segundos le toma a un agente ser eficaz ?
+
+> Segun pudimos analizar, el algoritmo de DRL alcanza una media mayor a 7 manzanas antes que el algoritmo de QL con 292 seg frente a 4997 seg
 > 
-![Tiempo hasta la recompensa media de 7](./output/time_mean_until_7.png)
+![Tiempo transcurrido hasta obtener una recompensa media de 7 (s)](./output/time_mean_until_7.png)
 Figura 2.1
 
-La segunda métrica comparativa será la cantidad de episodios que le toma a cada agente llegar a una media de 7 manzanas. El resultado de esta comparativa nos dirá que tanto conocimiento obtiene cada agente de cada una de los episodios que experimenta. En este caso no nos importa la velocidad en cuanto al tiempo si no en cuanto a conocimiento adquirido por cada una de las experiencias pasadas.
+### Cantidad de episodios hasta la recompensa media de 7
+La segunda métrica comparativa será la cantidad de episodios que le toma a cada agente llegar a una recompensa media de 7 manzanas. El resultado de esta comparativa nos dirá que tanto conocimiento obtiene cada agente de cada una de los episodios que experimenta. En este caso no nos importa la velocidad en cuanto al tiempo si no en cuanto a conocimiento adquirido por cada una de las experiencias pasadas.
 
 > Segun pudimos analizar, el algoritmo de DRL alcanza una media mayor a 7 manzanas antes que el algoritmo de QL con 17 episodios frente a 660
 > 
 ![Cantidad de episodios hasta la recompensa media de 7](./output/ep_mean_until_7.png)
 Figura 2.2
 
-La tercera métrica comparativa resulta la puntuación máxima luego de un total de 2000 episodios. Esta medida comparativa nos dirá cual de los 2 llega a una política mas óptima luego y por tanto, a una mejor solución del problema. Para este experimento no nos interesa la velocidad a la que se llega a  una política óptima, si no, que tan óptima esta resulta ser con el paso del tiempo.
+### Maximas puntuaciones
+La tercera métrica comparativa resulta la puntuación máxima luego de un total de 600 episodios. Esta medida comparativa nos dirá cual de los 2 llega a una política mas óptima luego y por tanto, a una mejor solución del problema. Para este experimento no nos interesa la velocidad a la que se llega a  una política óptima, si no, que tan óptima esta resulta ser con el paso del tiempo.
 
 > Segun pudimos analizar nuevamente, el algoritmo de DRL alcanza una puntuacion mayor al algoritmo de QL con 52 puntos frente a 42.
 > 
 ![Maximas puntuaciones](./output/max_scores.png)
 Figura 2.3
 
-Otra metrica para analizar es la de tiempo total de ejecucion
+### Tiempo total de ejecucion
+Otra metrica para analizar es la de tiempo total de ejecucion, en la que comparamos cuanto tiempo le toma a cada agente resolver los 600 episodios
 > Donde podemos ver que el tiempo total de ejecucion del agente QL es considerablemente menor al del agente DRL, esto es debido a la simpleza del algoritmo y la necesidad de calculos de cada uno
 
 ![Tiempo total](./output/total_time.png)
 
+### Diagrama de caja y bigotes para ambos algoritmos
 Un analisis adicional que podemos hacer es un diagrama de cajas 
 
 ![Diagrama de caja y bigotes para ambos algoritmos](./output/box_plot.png)

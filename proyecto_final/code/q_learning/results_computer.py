@@ -236,7 +236,7 @@ for patch, color in zip(bp['boxes'], colors):
 ax.set_yticklabels(['Q', 'DRL'])
  
 # Adding title
-plt.title("Box plot for both algorithms")
+plt.title("Diagrama de cajas y bigotes para las puntuaciones de cada algoritmo")
  
 # Removing top axes and right axes
 # ticks
@@ -265,12 +265,12 @@ for bar in bars:
 for tick in ax.yaxis.get_major_ticks():
   tick.label.set_fontsize(14)
 
-plt.title('Tiempo hasta la media de 7')
+plt.title('Tiempo transcurrido hasta obtener una recompensa media de 7 (s)')
 
 
 # Episodios hasta la media de 7
 
-print ('Episodios hasta la media de 7: ')
+print ('Episodios hasta obtener una recompensa media de 7: ')
 q_ep = epToMean(q,7)
 drl_ep = epToMean(drl,7)
 print('q: '+str(q_ep)+' drl: '+str(drl_ep))
@@ -287,7 +287,7 @@ for bar in bars:
 for tick in ax.yaxis.get_major_ticks():
   tick.label.set_fontsize(14)
 
-plt.title('Episodios hasta la media de 7')
+plt.title('Episodios hasta obtener una recompensa media de 7')
 
 # Max puntuacion
 
