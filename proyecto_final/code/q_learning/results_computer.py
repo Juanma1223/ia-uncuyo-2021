@@ -261,7 +261,7 @@ bars = ax.barh(x,y, 0.1, color=["#FD881A","#1A77FD"])
 for bar in bars:
   width = bar.get_width() #Previously we got the height
   label_y_pos = bar.get_y() + bar.get_height() / 2
-  ax.text(width, label_y_pos, s=f'{np.round(width,0)}', va='center')
+  ax.text(width, label_y_pos, s=f'{np.round(width,0)}'+' s', va='center')
 for tick in ax.yaxis.get_major_ticks():
   tick.label.set_fontsize(14)
 
@@ -279,11 +279,11 @@ y = [q_ep,drl_ep]
 x = ['Q','DRL']
 
 fig, ax = plt.subplots()
-bars = ax.barh(x,y, 1, color=["#FD881A","#1A77FD"])
+bars = ax.barh(x,y, 0.1, color=["#FD881A","#1A77FD"])
 for bar in bars:
   width = bar.get_width() #Previously we got the height
   label_y_pos = bar.get_y() + bar.get_height() / 2
-  ax.text(width, label_y_pos, s=f'{np.round(width,0)}', va='center')
+  ax.text(width, label_y_pos, s=f'{np.round(width,0)}'+' ep', va='center')
 for tick in ax.yaxis.get_major_ticks():
   tick.label.set_fontsize(14)
 
@@ -299,11 +299,11 @@ y = [max_q,max_drl]
 x = ['Q','DRL']
 
 fig, ax = plt.subplots()
-bars = ax.barh(x,y, 1, color=["#FD881A","#1A77FD"])
+bars = ax.barh(x,y, 0.1, color=["#FD881A","#1A77FD"])
 for bar in bars:
   width = bar.get_width() #Previously we got the height
   label_y_pos = bar.get_y() + bar.get_height() / 2
-  ax.text(width, label_y_pos, s=f'{np.round(width,0)}', va='center')
+  ax.text(width, label_y_pos, s=f'{np.round(width,0)}'+' puntos', va='center')
 for tick in ax.yaxis.get_major_ticks():
   tick.label.set_fontsize(14)
 
@@ -320,11 +320,11 @@ y = [q_tot_time,drl_tot_time]
 x = ['Q','DRL']
 
 fig, ax = plt.subplots()
-bars = ax.barh(x,y, 1, color=["#FD881A","#1A77FD"])
+bars = ax.barh(x,y, 0.1, color=["#FD881A","#1A77FD"])
 for bar in bars:
   width = bar.get_width() #Previously we got the height
   label_y_pos = bar.get_y() + bar.get_height() / 2
-  ax.text(width, label_y_pos, s=f'{np.round(width,0)}', va='center')
+  ax.text(width, label_y_pos, s=f'{np.round(width,0)}'+' s', va='center')
 for tick in ax.yaxis.get_major_ticks():
   tick.label.set_fontsize(14)
 
